@@ -1,33 +1,75 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="houseFarm">
-            <h2><span jhiTranslate="opgappApp.houseFarm.detail.title">House Farm</span> {{houseFarm.id}}</h2>
+            <h2><span>{{houseFarm.name}}</span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="opgappApp.houseFarm.name">Name</span></dt>
+                <dt><span>Licensed and verified</span></dt>
                 <dd>
-                    <span>{{houseFarm.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="opgappApp.houseFarm.hasLicense">Has License</span></dt>
-                <dd>
-                    <span>{{houseFarm.hasLicense}}</span>
+                    <span>{{houseFarm.hasLicense ? 'Yes' : 'No'}}</span>
                 </dd>
                 <dt><span jhiTranslate="opgappApp.houseFarm.dateFounded">Date Founded</span></dt>
                 <dd>
-                    <span>{{houseFarm.dateFounded}}</span>
+                    <span>{{houseFarm.dateFounded | date: 'dd/MM/yyyy'}}</span>
                 </dd>
                 <dt><span jhiTranslate="opgappApp.houseFarm.contactNumber">Contact Number</span></dt>
                 <dd>
                     <span>{{houseFarm.contactNumber}}</span>
                 </dd>
-                <dt><span jhiTranslate="opgappApp.houseFarm.location">Location</span></dt>
+                <dt>Location</span></dt>
                 <dd>
                     <div *ngIf="houseFarm.location">
-                        <a [routerLink]="['/location', houseFarm.location?.id, 'view']">{{houseFarm.location?.id}}</a>
+                        {{houseFarm.location.streetAddress}}, {{houseFarm.location?.postalCode}}, {{houseFarm.location?.city}}
                     </div>
                 </dd>
             </dl>
+
+            <div class="alert alert-warning" *ngIf="houseFarm.products?.length === 0">
+                <span jhiTranslate="opgappApp.product.home.notFound">No products found</span>
+            </div>
+            <div class="table-responsive" *ngIf="houseFarm.products?.length > 0">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><span jhiTranslate="opgappApp.product.name">Name</span></th>
+                        <th><span jhiTranslate="opgappApp.product.price">Price</span></th>
+                        <th><span jhiTranslate="opgappApp.product.availableAmountInLiters">Available Amount In Liters</span></th>
+                        <th><span jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span></th>
+                        <th><span>Available</span></th>
+                        <th><span jhiTranslate="opgappApp.product.productType">Product Type</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let product of houseFarm.products ;trackBy: trackId" [routerLink]="['/product', product.id, 'view' ]">
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.availableAmountInLiters}}</td>
+                        <td>{{product.availableAmountInKilograms}}</td>
+                        <td>{{product.isAvailable ? 'Yes' : 'No'}}</td>
+                        <td jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}</td>
+                        <td class="text-right" *jhiHasAnyAuthority="'ROLE_OWNER'" *ngIf="houseFarm.user.id = ">
+                            <div class="btn-group">
+                                <button type="submit"
+                                        [routerLink]="['/product', product.id, 'edit']"
+                                        class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                                <button type="submit"
+                                        [routerLink]="['/', 'product', { outlets: { popup: product.id + '/delete'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="'times'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <button type="submit"
                     (click)="previousState()"

@@ -1,7 +1,8 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="opgappApp.houseFarm.home.title">House Farms</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-house-farm" [routerLink]="['/house-farm/new']">
+        <button *jhiHasAnyAuthority="'ROLE_OWNER'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-house-farm"
+                [routerLink]="['/house-farm/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="opgappApp.houseFarm.home.createLabel">
             Create new House Farm
@@ -17,7 +18,6 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="opgappApp.houseFarm.name">Name</span></th>
             <th><span jhiTranslate="opgappApp.houseFarm.hasLicense">Has License</span></th>
             <th><span jhiTranslate="opgappApp.houseFarm.dateFounded">Date Founded</span></th>
@@ -28,14 +28,13 @@
             </thead>
             <tbody>
             <tr *ngFor="let houseFarm of houseFarms ;trackBy: trackId">
-                <td><a [routerLink]="['/house-farm', houseFarm.id, 'view' ]">{{houseFarm.id}}</a></td>
-                <td>{{houseFarm.name}}</td>
+                <b><td>{{houseFarm.name}}</td></b>
                 <td>{{houseFarm.hasLicense}}</td>
                 <td>{{houseFarm.dateFounded | date:'mediumDate'}}</td>
                 <td>{{houseFarm.contactNumber}}</td>
                 <td>
                     <div *ngIf="houseFarm.location">
-                        <a [routerLink]="['../location', houseFarm.location?.id, 'view' ]" >{{houseFarm.location?.id}}</a>
+                        <a [routerLink]="['../location', houseFarm.location?.id, 'view' ]" >{{houseFarm.location?.city}}</a>
                     </div>
                 </td>
                 <td class="text-right">

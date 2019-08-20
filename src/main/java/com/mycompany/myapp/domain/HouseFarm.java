@@ -1,6 +1,7 @@
 package com.mycompany.myapp.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 
@@ -40,13 +41,17 @@ public class HouseFarm implements Serializable {
     @JoinColumn(unique = true)
     private Location location;
 
-    @OneToMany(mappedBy = "houseFarm")
+    @OneToMany(mappedBy = "houseFarm", fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Product> products = new HashSet<>();
 
     @OneToMany(mappedBy = "houseFarm")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Order> orders = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -198,5 +203,13 @@ public class HouseFarm implements Serializable {
             ", dateFounded='" + getDateFounded() + "'" +
             ", contactNumber='" + getContactNumber() + "'" +
             "}";
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

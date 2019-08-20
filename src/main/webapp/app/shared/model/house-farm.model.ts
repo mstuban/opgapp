@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { ILocation } from 'app/shared/model/location.model';
 import { IProduct } from 'app/shared/model/product.model';
 import { IOrder } from 'app/shared/model/order.model';
+import {IUser} from "app/core";
 
 export interface IHouseFarm {
   id?: number;
@@ -12,6 +13,7 @@ export interface IHouseFarm {
   location?: ILocation;
   products?: IProduct[];
   orders?: IOrder[];
+  user?: IUser;
 }
 
 export class HouseFarm implements IHouseFarm {
