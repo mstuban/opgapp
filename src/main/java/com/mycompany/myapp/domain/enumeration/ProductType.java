@@ -1,0 +1,8 @@
+package com.mycompany.myapp.domain.enumeration;
+
+/**
+ * The ProductType enumeration.
+ */
+public enum ProductType {
+    MEAT, CHEESE, DAIRY, SEAFOOD, HONEY_AND_JAM, PASTA_AND_FLOUR, OIL_AND_VINEGAR, BREAD_AND_GRAINS, FRUIT_AND_VEGETABLES, NON_ALCOHOLIC_DRINKS, ALCOHOLIC_DRINKS, SWEETS, HERBS_TEAS_AND_SPICES, GIFT_AND_SOUVENIRS
+}

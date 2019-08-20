@@ -1,0 +1,10 @@
+{
+  "opgappApp": {
+    "OrderStatus": {
+      "null": "",
+      "IN_CREATION": "IN_CREATION",
+      "PAID": "PAID",
+      "IN_DELIVERY": "IN_DELIVERY"
+    }
+  }
+}

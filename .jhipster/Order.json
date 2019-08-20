@@ -1,0 +1,48 @@
+{
+    "name": "Order",
+    "fields": [
+        {
+            "fieldName": "number",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateSubmitted",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "totalPrice",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "orderStatus",
+            "fieldType": "OrderStatus",
+            "fieldValues": "IN_CREATION,PAID,IN_DELIVERY"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "product",
+            "otherEntityRelationshipName": "order",
+            "relationshipName": "product"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "houseFarm",
+            "otherEntityRelationshipName": "order",
+            "relationshipName": "houseFarm",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190820101854",
+    "entityTableName": "order",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "opgapp"
+    ]
+}

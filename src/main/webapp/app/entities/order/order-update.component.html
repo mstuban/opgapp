@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-order-heading" jhiTranslate="opgappApp.order.home.createOrEditLabel">Create or edit a Order</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.order.number" for="field_number">Number</label>
+                    <input type="text" class="form-control" name="number" id="field_number"
+                           formControlName="number"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.order.dateSubmitted" for="field_dateSubmitted">Date Submitted</label>
+                    <div class="input-group">
+                        <input id="field_dateSubmitted" type="text" class="form-control" name="dateSubmitted" ngbDatepicker  #dateSubmittedDp="ngbDatepicker" formControlName="dateSubmitted"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateSubmittedDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.order.totalPrice" for="field_totalPrice">Total Price</label>
+                    <input type="number" class="form-control" name="totalPrice" id="field_totalPrice"
+                           formControlName="totalPrice"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.order.orderStatus" for="field_orderStatus">Order Status</label>
+                    <select class="form-control" name="orderStatus" formControlName="orderStatus" id="field_orderStatus">
+                        <option value="IN_CREATION">{{'opgappApp.OrderStatus.IN_CREATION' | translate}}</option>
+                        <option value="PAID">{{'opgappApp.OrderStatus.PAID' | translate}}</option>
+                        <option value="IN_DELIVERY">{{'opgappApp.OrderStatus.IN_DELIVERY' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.order.houseFarm" for="field_houseFarm">House Farm</label>
+                    <select class="form-control" id="field_houseFarm" name="houseFarm" formControlName="houseFarm">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="houseFarmOption.id === editForm.get('houseFarm').value?.id ? editForm.get('houseFarm').value : houseFarmOption" *ngFor="let houseFarmOption of housefarms; trackBy: trackHouseFarmById">{{houseFarmOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

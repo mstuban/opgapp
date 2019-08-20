@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-product-heading" jhiTranslate="opgappApp.product.home.createOrEditLabel">Create or edit a Product</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.product.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.product.imageUrl" for="field_imageUrl">Image Url</label>
+                    <input type="text" class="form-control" name="imageUrl" id="field_imageUrl"
+                           formControlName="imageUrl"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.product.price" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                           formControlName="price"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.product.availableAmountInLiters" for="field_availableAmountInLiters">Available Amount In Liters</label>
+                    <input type="number" class="form-control" name="availableAmountInLiters" id="field_availableAmountInLiters"
+                           formControlName="availableAmountInLiters"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.product.availableAmountInKilograms" for="field_availableAmountInKilograms">Available Amount In Kilograms</label>
+                    <input type="number" class="form-control" name="availableAmountInKilograms" id="field_availableAmountInKilograms"
+                           formControlName="availableAmountInKilograms"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.product.isAvailable" for="field_isAvailable">Is Available</label>
+                    <input type="checkbox" class="form-control" name="isAvailable" id="field_isAvailable"
+                           formControlName="isAvailable"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.product.productType" for="field_productType">Product Type</label>
+                    <select class="form-control" name="productType" formControlName="productType" id="field_productType">
+                        <option value="MEAT">{{'opgappApp.ProductType.MEAT' | translate}}</option>
+                        <option value="CHEESE">{{'opgappApp.ProductType.CHEESE' | translate}}</option>
+                        <option value="DAIRY">{{'opgappApp.ProductType.DAIRY' | translate}}</option>
+                        <option value="SEAFOOD">{{'opgappApp.ProductType.SEAFOOD' | translate}}</option>
+                        <option value="HONEY_AND_JAM">{{'opgappApp.ProductType.HONEY_AND_JAM' | translate}}</option>
+                        <option value="PASTA_AND_FLOUR">{{'opgappApp.ProductType.PASTA_AND_FLOUR' | translate}}</option>
+                        <option value="OIL_AND_VINEGAR">{{'opgappApp.ProductType.OIL_AND_VINEGAR' | translate}}</option>
+                        <option value="BREAD_AND_GRAINS">{{'opgappApp.ProductType.BREAD_AND_GRAINS' | translate}}</option>
+                        <option value="FRUIT_AND_VEGETABLES">{{'opgappApp.ProductType.FRUIT_AND_VEGETABLES' | translate}}</option>
+                        <option value="NON_ALCOHOLIC_DRINKS">{{'opgappApp.ProductType.NON_ALCOHOLIC_DRINKS' | translate}}</option>
+                        <option value="ALCOHOLIC_DRINKS">{{'opgappApp.ProductType.ALCOHOLIC_DRINKS' | translate}}</option>
+                        <option value="SWEETS">{{'opgappApp.ProductType.SWEETS' | translate}}</option>
+                        <option value="HERBS_TEAS_AND_SPICES">{{'opgappApp.ProductType.HERBS_TEAS_AND_SPICES' | translate}}</option>
+                        <option value="GIFT_AND_SOUVENIRS">{{'opgappApp.ProductType.GIFT_AND_SOUVENIRS' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.product.houseFarm" for="field_houseFarm">House Farm</label>
+                    <select class="form-control" id="field_houseFarm" name="houseFarm" formControlName="houseFarm">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="houseFarmOption.id === editForm.get('houseFarm').value?.id ? editForm.get('houseFarm').value : houseFarmOption" *ngFor="let houseFarmOption of housefarms; trackBy: trackHouseFarmById">{{houseFarmOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.product.order" for="field_order">Order</label>
+                    <select class="form-control" id="field_order" name="order" formControlName="order">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="orderOption.id === editForm.get('order').value?.id ? editForm.get('order').value : orderOption" *ngFor="let orderOption of orders; trackBy: trackOrderById">{{orderOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

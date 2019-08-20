@@ -1,0 +1,10 @@
+id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;created_by;last_modified_by
+1;system;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;System;System;system@localhost;;true;en;system;system
+2;anonymous;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Anonymous;User;anonymous@localhost;;true;en;system;system
+3;stubanmar;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Marko;Stuban;marko.stuban@mail.com;;true;en;system;system
+4;bundalomir;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Miro;Bundalo;miro.bundalo@mail.com;;true;en;system;system
+5;buljansim;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Sime;Buljan;sime.buljan@mail.com;;true;en;system;system
+6;zubcicgian;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Gianfranco;Zubcic;gianfranco.zubcic@mail.com;;true;en;system;system
+7;budinscakstj;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Stjepan;Budinscak;stjepan.budinscak@mail.com;;true;en;system;system
+8;skoromir;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Miroslav;Skoro;miroslav.skoro@mail.com;;true;en;system;system
+9;buyer;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Zeljko;Pervan;zeljko.pervan@mail.com;;true;en;system;system

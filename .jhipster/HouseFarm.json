@@ -1,0 +1,54 @@
+{
+    "name": "HouseFarm",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hasLicense",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "dateFounded",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "contactNumber",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "location",
+            "otherEntityRelationshipName": "houseFarm",
+            "relationshipName": "location",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "product",
+            "otherEntityRelationshipName": "houseFarm",
+            "relationshipName": "product"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "order",
+            "otherEntityRelationshipName": "houseFarm",
+            "relationshipName": "order"
+        }
+    ],
+    "changelogDate": "20190820101848",
+    "entityTableName": "house_farm",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "opgapp"
+    ]
+}

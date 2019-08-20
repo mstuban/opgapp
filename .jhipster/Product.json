@@ -1,0 +1,67 @@
+{
+    "name": "Product",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imageUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "availableAmountInLiters",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "availableAmountInKilograms",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "isAvailable",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "productType",
+            "fieldType": "ProductType",
+            "fieldValues": "MEAT,CHEESE,DAIRY,SEAFOOD,HONEY_AND_JAM,PASTA_AND_FLOUR,OIL_AND_VINEGAR,BREAD_AND_GRAINS,FRUIT_AND_VEGETABLES,NON_ALCOHOLIC_DRINKS,ALCOHOLIC_DRINKS,SWEETS,HERBS_TEAS_AND_SPICES,GIFT_AND_SOUVENIRS"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "rating",
+            "otherEntityRelationshipName": "product",
+            "relationshipName": "rating"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "houseFarm",
+            "otherEntityRelationshipName": "product",
+            "relationshipName": "houseFarm",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "order",
+            "otherEntityRelationshipName": "product",
+            "relationshipName": "order",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190820101849",
+    "entityTableName": "product",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "opgapp"
+    ]
+}

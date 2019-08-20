@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-house-farm-heading" jhiTranslate="opgappApp.houseFarm.home.createOrEditLabel">Create or edit a House Farm</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.houseFarm.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.houseFarm.hasLicense" for="field_hasLicense">Has License</label>
+                    <input type="checkbox" class="form-control" name="hasLicense" id="field_hasLicense"
+                           formControlName="hasLicense"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.houseFarm.dateFounded" for="field_dateFounded">Date Founded</label>
+                    <div class="input-group">
+                        <input id="field_dateFounded" type="text" class="form-control" name="dateFounded" ngbDatepicker  #dateFoundedDp="ngbDatepicker" formControlName="dateFounded"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateFoundedDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.houseFarm.contactNumber" for="field_contactNumber">Contact Number</label>
+                    <input type="text" class="form-control" name="contactNumber" id="field_contactNumber"
+                           formControlName="contactNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="opgappApp.houseFarm.location" for="field_location">Location</label>
+                    <select class="form-control" id="field_location" name="location" formControlName="location">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="locationOption.id === editForm.get('location').value?.id ? editForm.get('location').value : locationOption" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

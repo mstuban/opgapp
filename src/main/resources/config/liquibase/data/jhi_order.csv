@@ -1,0 +1,4 @@
+id;number;date_submitted;total_price;order_status;user_id;house_farm_id
+1;1;2019-08-18;97951;IN_DELIVERY;9;4
+2;2;2019-08-19;4805;PAID;9;3
+3;3;2019-08-19;93343;PAID;9;5

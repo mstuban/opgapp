@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="product">
+            <h2><span jhiTranslate="opgappApp.product.detail.title">Product</span> {{product.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="opgappApp.product.name">Name</span></dt>
+                <dd>
+                    <span>{{product.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="opgappApp.product.imageUrl">Image Url</span></dt>
+                <dd>
+                    <span>{{product.imageUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="opgappApp.product.price">Price</span></dt>
+                <dd>
+                    <span>{{product.price}}</span>
+                </dd>
+                <dt><span jhiTranslate="opgappApp.product.availableAmountInLiters">Available Amount In Liters</span></dt>
+                <dd>
+                    <span>{{product.availableAmountInLiters}}</span>
+                </dd>
+                <dt><span jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span></dt>
+                <dd>
+                    <span>{{product.availableAmountInKilograms}}</span>
+                </dd>
+                <dt><span jhiTranslate="opgappApp.product.isAvailable">Is Available</span></dt>
+                <dd>
+                    <span>{{product.isAvailable}}</span>
+                </dd>
+                <dt><span jhiTranslate="opgappApp.product.productType">Product Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}</span>
+                </dd>
+                <dt><span jhiTranslate="opgappApp.product.houseFarm">House Farm</span></dt>
+                <dd>
+                    <div *ngIf="product.houseFarm">
+                        <a [routerLink]="['/house-farm', product.houseFarm?.id, 'view']">{{product.houseFarm?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="opgappApp.product.order">Order</span></dt>
+                <dd>
+                    <div *ngIf="product.order">
+                        <a [routerLink]="['/order', product.order?.id, 'view']">{{product.order?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product', product.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
