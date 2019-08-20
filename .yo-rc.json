@@ -1,7 +1,7 @@
 {
   "generator-jhipster": {
     "databaseType": "sql",
-    "devDatabaseType": "h2Disk",
+    "devDatabaseType": "postgres",
     "enableHibernateCache": true,
     "enableSwaggerCodegen": false,
     "enableTranslation": true,
@@ -34,7 +34,7 @@
     "useSass": true,
     "jwtSecretKey": "Mjk1MTRhNTA3NmQ2YzgxMDcyYTVkZjcwNzdiN2YyYzM1Zjc4MzYwZDlkODAzMjA2ZjJiNWE2N2IzZjQwMGU4ZTFmZTVmYWM4MjFhMTFkNzMwMDY0MzhmMmM1MTg4YjA0ZmUzMzA3MjNjY2IzNWM3Y2RjOGMzMjFhOWZkYmJkMjQ=",
     "clientTheme": "none",
-    "entitySuffix": "",
+    "entitySuffix": "",c
     "dtoSuffix": "DTO",
     "otherModules": []
   },
@@ -45,6 +45,8 @@
     "Location",
     "Region",
     "Country",
-    "Order"
+    "Order",
+    "User",
+    "Authority"
   ]
 }

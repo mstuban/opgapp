@@ -7,7 +7,6 @@ import { OpgappSharedModule } from 'app/shared';
 
 import {
   adminState,
-  AuditsComponent,
   UserMgmtComponent,
   UserMgmtDetailComponent,
   UserMgmtUpdateComponent,
@@ -27,7 +26,6 @@ import {
     RouterModule.forChild(adminState)
   ],
   declarations: [
-    AuditsComponent,
     UserMgmtComponent,
     UserMgmtDetailComponent,
     UserMgmtUpdateComponent,

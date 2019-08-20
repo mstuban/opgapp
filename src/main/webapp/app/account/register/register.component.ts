@@ -1,12 +1,11 @@
-import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiLanguageService } from 'ng-jhipster';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
+import {FormBuilder, Validators} from '@angular/forms';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared';
-import { LoginModalService } from 'app/core';
-import { Register } from './register.service';
+import {EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE} from 'app/shared';
+import {LoginModalService} from 'app/core';
+import {Register} from './register.service';
 
 @Component({
   selector: 'jhi-register',
@@ -28,13 +27,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   });
 
   constructor(
-    private languageService: JhiLanguageService,
     private loginModalService: LoginModalService,
     private registerService: Register,
     private elementRef: ElementRef,
     private renderer: Renderer,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.success = false;
@@ -52,20 +51,17 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     if (password !== this.registerForm.get(['confirmPassword']).value) {
       this.doNotMatch = 'ERROR';
     } else {
-      registerAccount = { ...registerAccount, login, email, password };
+      registerAccount = {...registerAccount, login, email, password};
       this.doNotMatch = null;
       this.error = null;
       this.errorUserExists = null;
       this.errorEmailExists = null;
-      this.languageService.getCurrent().then(langKey => {
-        registerAccount = { ...registerAccount, langKey };
-        this.registerService.save(registerAccount).subscribe(
-          () => {
-            this.success = true;
-          },
-          response => this.processError(response)
-        );
-      });
+      this.registerService.save(registerAccount).subscribe(
+        () => {
+          this.success = true;
+        },
+        response => this.processError(response)
+      );
     }
   }
 

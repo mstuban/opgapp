@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
@@ -13,7 +12,7 @@ export class AccountService {
   private authenticated = false;
   private authenticationState = new Subject<any>();
 
-  constructor(private languageService: JhiLanguageService, private sessionStorage: SessionStorageService, private http: HttpClient) {}
+  constructor(private sessionStorage: SessionStorageService, private http: HttpClient) {}
 
   fetch(): Observable<HttpResponse<Account>> {
     return this.http.get<Account>(SERVER_API_URL + 'api/account', { observe: 'response' });
@@ -77,12 +76,6 @@ export class AccountService {
         if (account) {
           this.userIdentity = account;
           this.authenticated = true;
-          // After retrieve the account info, the language will be changed to
-          // the user's preferred language configured in the account setting
-          if (this.userIdentity.langKey) {
-            const langKey = this.sessionStorage.retrieve('locale') || this.userIdentity.langKey;
-            this.languageService.changeLanguage(langKey);
-          }
         } else {
           this.userIdentity = null;
           this.authenticated = false;

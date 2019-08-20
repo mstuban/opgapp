@@ -23,9 +23,9 @@ spring:
   profiles:
     active: dev
     include:
-      - swagger
-      # Uncomment to activate TLS for the dev profile
-      #- tls
+    - swagger
+    # Uncomment to activate TLS for the dev profile
+    #- tls
   devtools:
     restart:
       enabled: true
@@ -47,8 +47,7 @@ spring:
     console:
       enabled: false
   jpa:
-    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-    database: H2
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     properties:
       hibernate.id.new_generator_mappings: true
@@ -60,10 +59,22 @@ spring:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: smtp.gmail.com
+    port: 587
+    username: stuban.marko@gmail.com
+    password: MarkoS3998
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:

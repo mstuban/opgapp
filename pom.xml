@@ -557,7 +557,7 @@
                     <configuration>
                         <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                         <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
-                        <driver>org.h2.Driver</driver>
+                        <driver>org.postgresql.Driver</driver>
                         <url>jdbc:postgresql://localhost:5432/opgapp</url>
                         <defaultSchemaName></defaultSchemaName>
                         <username>opgapp</username>
@@ -575,6 +575,7 @@
                         </dependency>
                         <dependency>
                             <groupId>org.javassist</groupId>
+
                             <artifactId>javassist</artifactId>
                             <version>${javassist.version}</version>
                         </dependency>
