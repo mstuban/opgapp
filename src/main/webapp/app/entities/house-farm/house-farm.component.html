@@ -1,13 +1,15 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="opgappApp.houseFarm.home.title">House Farms</span>
-        <button *jhiHasAnyAuthority="'ROLE_OWNER'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-house-farm"
-                [routerLink]="['/house-farm/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="opgappApp.houseFarm.home.createLabel">
-            Create new House Farm
-            </span>
-        </button>
+        <span *ngIf="!userAlreadyHasFarm">
+            <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-house-farm"
+                    [routerLink]="['/house-farm/new']">
+                <fa-icon [icon]="'plus'"></fa-icon>
+                <span *jhiHasAnyAuthority="'ROLE_OWNER'">
+                            Create new House Farm
+                </span>
+            </button>
+        </span>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
@@ -19,7 +21,8 @@
             <thead>
             <tr>
             <th><span jhiTranslate="opgappApp.houseFarm.name">Name</span></th>
-            <th><span jhiTranslate="opgappApp.houseFarm.hasLicense">Has License</span></th>
+            <th><span>Owner</span></th>
+            <th><span jhiTranslate="opgappApp.houseFarm.hasLicense">Licensed</span></th>
             <th><span jhiTranslate="opgappApp.houseFarm.dateFounded">Date Founded</span></th>
             <th><span jhiTranslate="opgappApp.houseFarm.contactNumber">Contact Number</span></th>
             <th><span jhiTranslate="opgappApp.houseFarm.location">Location</span></th>
@@ -28,13 +31,14 @@
             </thead>
             <tbody>
             <tr *ngFor="let houseFarm of houseFarms ;trackBy: trackId">
-                <b><td>{{houseFarm.name}}</td></b>
-                <td>{{houseFarm.hasLicense}}</td>
+                <td><h6>{{houseFarm.name}}</h6></td>
+                <td><h6 *ngIf="houseFarm.user">{{houseFarm.user.firstName + ' ' + houseFarm.user.lastName}}</h6></td>
+                <td>{{houseFarm.hasLicense ? "Yes" : "No"}}</td>
                 <td>{{houseFarm.dateFounded | date:'mediumDate'}}</td>
                 <td>{{houseFarm.contactNumber}}</td>
                 <td>
                     <div *ngIf="houseFarm.location">
-                        <a [routerLink]="['../location', houseFarm.location?.id, 'view' ]" >{{houseFarm.location?.city}}</a>
+                        {{houseFarm.location.streetAddress}}, {{houseFarm.location?.postalCode}}, {{houseFarm.location?.city}}
                     </div>
                 </td>
                 <td class="text-right">
@@ -45,20 +49,23 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/house-farm', houseFarm.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'house-farm', { outlets: { popup: houseFarm.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+
+                        <span *ngIf="currentAccount && houseFarm.user">
+                            <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                                    [routerLink]="['/house-farm', houseFarm.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                            <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                                    [routerLink]="['/', 'house-farm', { outlets: { popup: houseFarm.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </span>
                     </div>
                 </td>
             </tr>

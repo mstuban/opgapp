@@ -30,7 +30,7 @@ export class RatingResolve implements Resolve<IRating> {
 
 export const ratingRoute: Routes = [
   {
-    path: '',
+    path: ':productId',
     component: RatingComponent,
     data: {
       authorities: ['ROLE_USER'],
@@ -51,7 +51,7 @@ export const ratingRoute: Routes = [
     canActivate: [UserRouteAccessService]
   },
   {
-    path: 'new',
+    path: ':productId/new',
     component: RatingUpdateComponent,
     resolve: {
       rating: RatingResolve

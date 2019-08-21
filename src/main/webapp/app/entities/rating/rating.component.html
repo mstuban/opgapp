@@ -1,39 +1,37 @@
-<div>
+<div *ngIf="product">
     <h2 id="page-heading">
-        <span jhiTranslate="opgappApp.rating.home.title">Ratings</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rating" [routerLink]="['/rating/new']">
+        <span>Ratings for {{product.name}} ({{product.houseFarm.name}})</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rating"
+                [routerLink]="['/rating', product.id, 'new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="opgappApp.rating.home.createLabel">
-            Create new Rating
+            <span>
+            Add a new Rating
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="alert alert-warning" *ngIf="ratings?.length === 0">
-        <span jhiTranslate="opgappApp.rating.home.notFound">No ratings found</span>
+    <div class="alert alert-warning" *ngIf="product.ratings?.length === 0">
+        <span>No ratings found</span>
     </div>
-    <div class="table-responsive" *ngIf="ratings?.length > 0">
-        <table class="table table-striped">
+    <div *ngIf="product.ratings?.length > 0">
+        <ul class="list-group">
+            <li class="list-group-item col-md-3" *ngFor="let rating of product.ratings ;trackBy: trackId">
+                <h6>{{rating.user.firstName + ' ' + rating.user.lastName}}</h6>
+                {{rating.comment}} ({{rating.stars}} stars)
+            </li>
+        </ul>
+<!--        <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="opgappApp.rating.stars">Stars</span></th>
-            <th><span jhiTranslate="opgappApp.rating.comment">Comment</span></th>
-            <th><span jhiTranslate="opgappApp.rating.product">Product</span></th>
-            <th></th>
+                <th><span jhiTranslate="opgappApp.rating.stars">Stars</span></th>
+                <th><span jhiTranslate="opgappApp.rating.comment">Comment</span></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let rating of ratings ;trackBy: trackId">
-                <td><a [routerLink]="['/rating', rating.id, 'view' ]">{{rating.id}}</a></td>
+            <tr *ngFor="let rating of product.ratings ;trackBy: trackId">
                 <td>{{rating.stars}}</td>
                 <td>{{rating.comment}}</td>
-                <td>
-                    <div *ngIf="rating.product">
-                        <a [routerLink]="['../product', rating.product?.id, 'view' ]" >{{rating.product?.id}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
@@ -60,6 +58,6 @@
                 </td>
             </tr>
             </tbody>
-        </table>
+        </table>-->
     </div>
 </div>

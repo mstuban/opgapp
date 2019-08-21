@@ -51,7 +51,7 @@ export const productRoute: Routes = [
     canActivate: [UserRouteAccessService]
   },
   {
-    path: 'new',
+    path: ':houseFarmId/new',
     component: ProductUpdateComponent,
     resolve: {
       product: ProductResolve

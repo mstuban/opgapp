@@ -26,6 +26,7 @@ export class ProductDeleteDialogComponent {
         name: 'productListModification',
         content: 'Deleted an product'
       });
+      debugger
       this.activeModal.dismiss(true);
     });
   }

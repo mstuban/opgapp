@@ -91,6 +91,14 @@ Generic styles
 
 .footer {
   border-top: 1px solid rgba(0, 0, 0, 0.125);
+  position: relative;
+  bottom: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footer p {
+  text-align: center;
 }
 
 .hand,

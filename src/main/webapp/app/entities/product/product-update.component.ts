@@ -7,7 +7,7 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IProduct, Product } from 'app/shared/model/product.model';
 import { ProductService } from './product.service';
-import { IHouseFarm } from 'app/shared/model/house-farm.model';
+import {HouseFarm, IHouseFarm} from 'app/shared/model/house-farm.model';
 import { HouseFarmService } from 'app/entities/house-farm';
 import { IOrder } from 'app/shared/model/order.model';
 import { OrderService } from 'app/entities/order';
@@ -20,6 +20,8 @@ export class ProductUpdateComponent implements OnInit {
   isSaving: boolean;
 
   housefarms: IHouseFarm[];
+
+  houseFarm: IHouseFarm;
 
   orders: IOrder[];
 
@@ -42,7 +44,8 @@ export class ProductUpdateComponent implements OnInit {
     protected houseFarmService: HouseFarmService,
     protected orderService: OrderService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -64,6 +67,16 @@ export class ProductUpdateComponent implements OnInit {
         map((response: HttpResponse<IOrder[]>) => response.body)
       )
       .subscribe((res: IOrder[]) => (this.orders = res), (res: HttpErrorResponse) => this.onError(res.message));
+
+    this.houseFarmService.find(this.route.snapshot.params['houseFarmId']).pipe(
+      filter((response: HttpResponse<HouseFarm>) => response.ok),
+      map((product: HttpResponse<HouseFarm>) => product.body)
+    ).subscribe(
+      houseFarm => {
+        this.houseFarm = houseFarm;
+      }
+    );
+
   }
 
   updateForm(product: IProduct) {
@@ -106,8 +119,7 @@ export class ProductUpdateComponent implements OnInit {
       availableAmountInKilograms: this.editForm.get(['availableAmountInKilograms']).value,
       isAvailable: this.editForm.get(['isAvailable']).value,
       productType: this.editForm.get(['productType']).value,
-      houseFarm: this.editForm.get(['houseFarm']).value,
-      order: this.editForm.get(['order']).value
+      houseFarm: this.houseFarm
     };
     return entity;
   }

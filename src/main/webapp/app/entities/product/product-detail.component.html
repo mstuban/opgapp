@@ -1,7 +1,8 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="product">
-            <h2><span jhiTranslate="opgappApp.product.detail.title">Product</span> {{product.id}}</h2>
+            <h2><span>{{product.name}}</span>
+            </h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -9,55 +10,69 @@
                 <dd>
                     <span>{{product.name}}</span>
                 </dd>
-                <dt><span jhiTranslate="opgappApp.product.imageUrl">Image Url</span></dt>
-                <dd>
-                    <span>{{product.imageUrl}}</span>
-                </dd>
                 <dt><span jhiTranslate="opgappApp.product.price">Price</span></dt>
                 <dd>
-                    <span>{{product.price}}</span>
+                    <span>{{product.price}} kn</span>
                 </dd>
-                <dt><span jhiTranslate="opgappApp.product.availableAmountInLiters">Available Amount In Liters</span></dt>
+                <dt><span jhiTranslate="opgappApp.product.availableAmountInLiters">Available Amount In Liters</span>
+                </dt>
                 <dd>
                     <span>{{product.availableAmountInLiters}}</span>
                 </dd>
-                <dt><span jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span></dt>
+                <dt><span
+                    jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span>
+                </dt>
                 <dd>
                     <span>{{product.availableAmountInKilograms}}</span>
                 </dd>
-                <dt><span jhiTranslate="opgappApp.product.isAvailable">Is Available</span></dt>
+                <dt><span>In Stock</span></dt>
                 <dd>
-                    <span>{{product.isAvailable}}</span>
+                    <span>{{product.isAvailable ? "Yes" : "No"}}</span>
                 </dd>
                 <dt><span jhiTranslate="opgappApp.product.productType">Product Type</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}</span>
-                </dd>
-                <dt><span jhiTranslate="opgappApp.product.houseFarm">House Farm</span></dt>
-                <dd>
-                    <div *ngIf="product.houseFarm">
-                        <a [routerLink]="['/house-farm', product.houseFarm?.id, 'view']">{{product.houseFarm?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="opgappApp.product.order">Order</span></dt>
-                <dd>
-                    <div *ngIf="product.order">
-                        <a [routerLink]="['/order', product.order?.id, 'view']">{{product.order?.id}}</a>
-                    </div>
+                    <span
+                        jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}</span>
                 </dd>
             </dl>
+            <h2 id="page-heading">
+                <span>Ratings </span>
+            </h2>
+            <hr>
+            <jhi-alert></jhi-alert>
+            <br/>
+            <div class="alert alert-warning" *ngIf="product.ratings?.length === 0">
+                <span>No ratings found</span>
+            </div>
+            <div *ngIf="product.ratings?.length > 0">
+                <ul class="list-group">
+                    <li class="list-group-item col-md-3" *ngFor="let rating of product.ratings ;trackBy: trackId">
+                        <h6 *ngIf="rating.user">{{rating.user.firstName + ' ' + rating.user.lastName}}</h6>
+                        {{rating.comment}} ({{rating.stars}} stars)
+                    </li>
+                </ul>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
+                <button type="submit"
+                        (click)="previousState()"
+                        class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                </button>
 
-            <button type="button"
-                    [routerLink]="['/product', product.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+                <span *ngIf="product.houseFarm &&  product.houseFarm.user && currentAccount">
+                    <button type="button" *ngIf="product.houseFarm.user.id === currentAccount.id"
+                            [routerLink]="['/product', product.id, 'edit']"
+                            class="btn btn-primary">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span
+                        jhiTranslate="entity.action.edit"> Edit</span>
+                    </button>
+
+                    <button type="button" *ngIf="product.houseFarm.user.id !== currentAccount.id"
+                            [routerLink]="['/rating', product.id, 'new']"
+                            class="btn btn-danger">
+                        <fa-icon [icon]="'heart'"></fa-icon>&nbsp;<span> Add rating</span>
+                    </button>
+                </span>
+            </div>
         </div>
     </div>
 </div>

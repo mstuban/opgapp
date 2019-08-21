@@ -7,6 +7,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IRating } from 'app/shared/model/rating.model';
 import { AccountService } from 'app/core';
 import { RatingService } from './rating.service';
+import {IProduct} from "app/shared/model/product.model";
 
 @Component({
   selector: 'jhi-rating',
@@ -16,6 +17,7 @@ export class RatingComponent implements OnInit, OnDestroy {
   ratings: IRating[];
   currentAccount: any;
   eventSubscriber: Subscription;
+  product: IProduct;
 
   constructor(
     protected ratingService: RatingService,

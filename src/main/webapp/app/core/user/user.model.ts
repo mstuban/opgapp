@@ -1,3 +1,6 @@
+import {IRating} from "app/shared/model/rating.model";
+import {IHouseFarm} from "app/shared/model/house-farm.model";
+
 export interface IUser {
   id?: any;
   login?: string;
@@ -7,11 +10,13 @@ export interface IUser {
   activated?: boolean;
   langKey?: string;
   authorities?: any[];
+  ratings?: IRating[];
   createdBy?: string;
   createdDate?: Date;
   lastModifiedBy?: string;
   lastModifiedDate?: Date;
   password?: string;
+  houseFarm?: IHouseFarm;
 }
 
 export class User implements IUser {
@@ -28,8 +33,9 @@ export class User implements IUser {
     public createdDate?: Date,
     public lastModifiedBy?: string,
     public lastModifiedDate?: Date,
-    public password?: string
-  ) {
+    public password?: string,
+    public houseFarm?: IHouseFarm
+) {
     this.id = id ? id : null;
     this.login = login ? login : null;
     this.firstName = firstName ? firstName : null;
@@ -43,5 +49,6 @@ export class User implements IUser {
     this.lastModifiedBy = lastModifiedBy ? lastModifiedBy : null;
     this.lastModifiedDate = lastModifiedDate ? lastModifiedDate : null;
     this.password = password ? password : null;
+    this.houseFarm = houseFarm ? houseFarm : null;
   }
 }

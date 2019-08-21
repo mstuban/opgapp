@@ -6,6 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * A Rating.
@@ -28,9 +30,16 @@ public class Rating implements Serializable {
     @Column(name = "comment")
     private String comment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("ratings")
     private Product product;
+
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("ratings")
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -104,5 +113,21 @@ public class Rating implements Serializable {
             ", stars=" + getStars() +
             ", comment='" + getComment() + "'" +
             "}";
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }

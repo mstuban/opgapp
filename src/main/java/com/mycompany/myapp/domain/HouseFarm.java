@@ -41,11 +41,11 @@ public class HouseFarm implements Serializable {
     @JoinColumn(unique = true)
     private Location location;
 
-    @OneToMany(mappedBy = "houseFarm", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "houseFarm", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Product> products = new HashSet<>();
 
-    @OneToMany(mappedBy = "houseFarm")
+    @OneToMany(mappedBy = "houseFarm", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Order> orders = new HashSet<>();
 

@@ -7,8 +7,9 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IRating, Rating } from 'app/shared/model/rating.model';
 import { RatingService } from './rating.service';
-import { IProduct } from 'app/shared/model/product.model';
+import {IProduct, Product} from 'app/shared/model/product.model';
 import { ProductService } from 'app/entities/product';
+import {AccountService} from "app/core";
 
 @Component({
   selector: 'jhi-rating-update',
@@ -18,6 +19,8 @@ export class RatingUpdateComponent implements OnInit {
   isSaving: boolean;
 
   products: IProduct[];
+  product: IProduct;
+  currentAccount: any;
 
   editForm = this.fb.group({
     id: [],
@@ -30,9 +33,10 @@ export class RatingUpdateComponent implements OnInit {
     protected jhiAlertService: JhiAlertService,
     protected ratingService: RatingService,
     protected productService: ProductService,
+    private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.isSaving = false;
@@ -46,6 +50,19 @@ export class RatingUpdateComponent implements OnInit {
         map((response: HttpResponse<IProduct[]>) => response.body)
       )
       .subscribe((res: IProduct[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
+
+    this.productService.find(this.route.snapshot.params['productId']).pipe(
+      filter((response: HttpResponse<Product>) => response.ok),
+      map((product: HttpResponse<Product>) => product.body)
+    ).subscribe(
+      product => {
+        this.product = product;
+      }
+    );
+
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
   }
 
   updateForm(rating: IRating) {
@@ -77,7 +94,8 @@ export class RatingUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       stars: this.editForm.get(['stars']).value,
       comment: this.editForm.get(['comment']).value,
-      product: this.editForm.get(['product']).value
+      product: this.product,
+      user: this.currentAccount
     };
     return entity;
   }

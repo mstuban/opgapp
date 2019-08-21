@@ -25,8 +25,9 @@ export class HouseFarm implements IHouseFarm {
     public contactNumber?: string,
     public location?: ILocation,
     public products?: IProduct[],
-    public orders?: IOrder[]
-  ) {
+    public orders?: IOrder[],
+    user?: IUser
+) {
     this.hasLicense = this.hasLicense || false;
   }
 }

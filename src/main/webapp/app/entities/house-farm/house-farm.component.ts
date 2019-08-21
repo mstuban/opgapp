@@ -16,6 +16,7 @@ export class HouseFarmComponent implements OnInit, OnDestroy {
   houseFarms: IHouseFarm[];
   currentAccount: any;
   eventSubscriber: Subscription;
+  userAlreadyHasFarm: boolean;
 
   constructor(
     protected houseFarmService: HouseFarmService,
@@ -25,6 +26,7 @@ export class HouseFarmComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
+    this.userAlreadyHasFarm = false;
     this.houseFarmService
       .query()
       .pipe(
@@ -34,6 +36,14 @@ export class HouseFarmComponent implements OnInit, OnDestroy {
       .subscribe(
         (res: IHouseFarm[]) => {
           this.houseFarms = res;
+
+          this.houseFarms.forEach(houseFarm =>
+            {
+              if (houseFarm.user.id === this.currentAccount.id) {
+                this.userAlreadyHasFarm = true;
+              }
+            }
+          );
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
@@ -43,6 +53,7 @@ export class HouseFarmComponent implements OnInit, OnDestroy {
     this.loadAll();
     this.accountService.identity().then(account => {
       this.currentAccount = account;
+      debugger
     });
     this.registerChangeInHouseFarms();
   }

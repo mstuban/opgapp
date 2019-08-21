@@ -23,6 +23,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="date_created" type="date">
+                <constraints nullable="true" />
+            </column>
+
             <column name="product_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -51,6 +55,7 @@
                   tableName="rating">
             <column name="id" type="numeric"/>
             <column name="stars" type="numeric"/>
+            <column name="date_created" type="date"/>
             <column name="product_id" type="numeric"/>
             <column name="user_id" type="numeric"/>
         </loadData>

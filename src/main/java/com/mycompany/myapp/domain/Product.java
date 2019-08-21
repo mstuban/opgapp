@@ -48,7 +48,7 @@ public class Product implements Serializable {
     @Column(name = "product_type")
     private ProductType productType;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Rating> ratings = new HashSet<>();
 

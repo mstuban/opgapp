@@ -10,6 +10,7 @@ import { IHouseFarm, HouseFarm } from 'app/shared/model/house-farm.model';
 import { HouseFarmService } from './house-farm.service';
 import { ILocation } from 'app/shared/model/location.model';
 import { LocationService } from 'app/entities/location';
+import {AccountService} from "app/core";
 
 @Component({
   selector: 'jhi-house-farm-update',
@@ -20,6 +21,7 @@ export class HouseFarmUpdateComponent implements OnInit {
 
   locations: ILocation[];
   dateFoundedDp: any;
+  currentAccount: any;
 
   editForm = this.fb.group({
     id: [],
@@ -35,7 +37,8 @@ export class HouseFarmUpdateComponent implements OnInit {
     protected houseFarmService: HouseFarmService,
     protected locationService: LocationService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected accountService: AccountService
   ) {}
 
   ngOnInit() {
@@ -68,6 +71,10 @@ export class HouseFarmUpdateComponent implements OnInit {
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
   }
 
   updateForm(houseFarm: IHouseFarm) {
@@ -77,7 +84,8 @@ export class HouseFarmUpdateComponent implements OnInit {
       hasLicense: houseFarm.hasLicense,
       dateFounded: houseFarm.dateFounded,
       contactNumber: houseFarm.contactNumber,
-      location: houseFarm.location
+      location: houseFarm.location,
+      user: this.currentAccount
     });
   }
 
@@ -103,7 +111,8 @@ export class HouseFarmUpdateComponent implements OnInit {
       hasLicense: this.editForm.get(['hasLicense']).value,
       dateFounded: this.editForm.get(['dateFounded']).value,
       contactNumber: this.editForm.get(['contactNumber']).value,
-      location: this.editForm.get(['location']).value
+      location: this.editForm.get(['location']).value,
+      user: this.currentAccount
     };
     return entity;
   }

@@ -20,50 +20,67 @@
                 <dt>Location</span></dt>
                 <dd>
                     <div *ngIf="houseFarm.location">
-                        {{houseFarm.location.streetAddress}}, {{houseFarm.location?.postalCode}}, {{houseFarm.location?.city}}
+                        {{houseFarm.location.streetAddress}}, {{houseFarm.location?.postalCode}},
+                        {{houseFarm.location?.city}}
                     </div>
                 </dd>
             </dl>
 
+            <br/>
             <div class="alert alert-warning" *ngIf="houseFarm.products?.length === 0">
                 <span jhiTranslate="opgappApp.product.home.notFound">No products found</span>
             </div>
             <div class="table-responsive" *ngIf="houseFarm.products?.length > 0">
+                <h4><span>Products available:</span></h4>
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th><span jhiTranslate="opgappApp.product.name">Name</span></th>
                         <th><span jhiTranslate="opgappApp.product.price">Price</span></th>
-                        <th><span jhiTranslate="opgappApp.product.availableAmountInLiters">Available Amount In Liters</span></th>
-                        <th><span jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span></th>
+                        <th><span
+                            jhiTranslate="opgappApp.product.availableAmountInLiters">Available Amount In Liters</span>
+                        </th>
+                        <th><span jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span>
+                        </th>
                         <th><span>Available</span></th>
                         <th><span jhiTranslate="opgappApp.product.productType">Product Type</span></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let product of houseFarm.products ;trackBy: trackId" [routerLink]="['/product', product.id, 'view' ]">
+                    <tr *ngFor="let product of houseFarm.products ;trackBy: trackId">
                         <td>{{product.name}}</td>
-                        <td>{{product.price}}</td>
+                        <td>{{product.price}} kn</td>
                         <td>{{product.availableAmountInLiters}}</td>
                         <td>{{product.availableAmountInKilograms}}</td>
                         <td>{{product.isAvailable ? 'Yes' : 'No'}}</td>
-                        <td jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}</td>
-                        <td class="text-right" *jhiHasAnyAuthority="'ROLE_OWNER'" *ngIf="houseFarm.user.id = ">
+                        <td jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}
+                        </td>
+                        <td class="text-right" *jhiHasAnyAuthority="'ROLE_OWNER'">
                             <div class="btn-group">
                                 <button type="submit"
-                                        [routerLink]="['/product', product.id, 'edit']"
-                                        class="btn btn-primary btn-sm">
-                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                        [routerLink]="['/product', product.id, 'view' ]"
+                                        class="btn btn-info btn-sm">
+                                    <fa-icon [icon]="'eye'"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                                 </button>
-                                <button type="submit"
-                                        [routerLink]="['/', 'product', { outlets: { popup: product.id + '/delete'} }]"
-                                        replaceUrl="true"
-                                        queryParamsHandling="merge"
-                                        class="btn btn-danger btn-sm">
-                                    <fa-icon [icon]="'times'"></fa-icon>
-                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                                </button>
+
+                                <span *ngIf="houseFarm.user && currentAccount">
+                                    <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                                            [routerLink]="['/product', product.id, 'edit']"
+                                            class="btn btn-primary btn-sm">
+                                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                    </button>
+                                    <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                                            [routerLink]="['/', 'product', { outlets: { popup: product.id + '/delete'} }]"
+                                            replaceUrl="true"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-danger btn-sm">
+                                        <fa-icon [icon]="'times'"></fa-icon>
+                                        <span class="d-none d-md-inline"
+                                              jhiTranslate="entity.action.delete">Delete</span>
+                                    </button>
+                                </span>
                             </div>
                         </td>
                     </tr>
@@ -71,6 +88,7 @@
                 </table>
             </div>
 
+            <span *ngIf="houseFarm.user && currentAccount">
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
@@ -82,6 +100,16 @@
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
+
+            <button *ngIf="currentAccount.id === houseFarm.user.id" id="jh-create-entity"
+                    class="btn btn-primary float-right jh-create-entity create-product" [routerLink]="['/product',
+                     houseFarm.id, 'new']">
+                <fa-icon [icon]="'plus'"></fa-icon>
+                <span jhiTranslate="opgappApp.product.home.createLabel">
+            Create new Product
+            </span>
+            </button>
+                </span>
         </div>
     </div>
 </div>
