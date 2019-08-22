@@ -1,0 +1,21 @@
+{
+  "opgappApp": {
+    "ProductType": {
+      "null": "",
+      "MEAT": "Meso",
+      "CHEESE": "Sir",
+      "DAIRY": "Mliječni proizvodi",
+      "SEAFOOD": "Morska hrana",
+      "HONEY_AND_JAM": "Med, džem, marmelade",
+      "PASTA_AND_FLOUR": "Tjestenina i brašno",
+      "OIL_AND_VINEGAR": "Ulje i ocat",
+      "BREAD_AND_GRAINS": "Kruh i pekarski proizvodi",
+      "FRUIT_AND_VEGETABLES": "Voće i povrće",
+      "NON_ALCOHOLIC_DRINKS": "Bezalkoholna pića",
+      "ALCOHOLIC_DRINKS": "Alkoholna pića",
+      "SWEETS": "Slastice",
+      "HERBS_TEAS_AND_SPICES": "Bilje, čajevi i začini",
+      "GIFT_AND_SOUVENIRS": "Pokloni i suveniri"
+    }
+  }
+}

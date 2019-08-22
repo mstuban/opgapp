@@ -31,6 +31,6 @@ export class MockLanguageHelper extends SpyObject {
   constructor() {
     super(JhiLanguageHelper);
 
-    this.getAllSpy = this.spy('getAll').andReturn(Promise.resolve(['en', 'fr']));
+    this.getAllSpy = this.spy('getAll').andReturn(Promise.resolve(['en', 'hr']));
   }
 }

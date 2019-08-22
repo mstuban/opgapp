@@ -1,4 +1,5 @@
 package com.mycompany.myapp.domain;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
@@ -15,7 +16,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "house_farm")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class HouseFarm implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,7 +41,8 @@ public class HouseFarm implements Serializable {
     @JoinColumn(unique = true)
     private Location location;
 
-    @OneToMany(mappedBy = "houseFarm", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = {"houseFarm"})
+    @OneToMany(mappedBy = "houseFarm", fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Product> products = new HashSet<>();
 

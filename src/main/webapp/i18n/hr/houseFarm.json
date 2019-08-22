@@ -1,0 +1,28 @@
+{
+  "opgappApp": {
+    "houseFarm": {
+      "home": {
+        "title": "Obiteljska poljoprivredna gospodarstva",
+        "createLabel": "Kreiraj svoj OPG",
+        "createOrEditLabel": "Kreiraj ili uredi OPG",
+        "notFound": "OPG nije pronađen"
+      },
+      "created": "Novi OPG je kreiran s identifikatorom {{ param }}",
+      "updated": "Promijenjen je OPG s identifikatorom {{ param }}",
+      "deleted": "Promijenjen je OPG s identifikatorom {{ param }}",
+      "delete": {
+        "question": "Jeste li sigurni da želite izbrisati OPG s identifikatorom {{ id }}?"
+      },
+      "detail": {
+        "title": "OPG"
+      },
+      "name": "Ime",
+      "hasLicense": "Licenciran",
+      "dateFounded": "Datum osnivanja",
+      "contactNumber": "Kontakt broj",
+      "location": "Lokacija",
+      "product": "Proizvod",
+      "order": "Narudžba"
+    }
+  }
+}

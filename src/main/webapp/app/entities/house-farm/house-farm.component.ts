@@ -53,9 +53,9 @@ export class HouseFarmComponent implements OnInit, OnDestroy {
     this.loadAll();
     this.accountService.identity().then(account => {
       this.currentAccount = account;
-      debugger
     });
     this.registerChangeInHouseFarms();
+    this.registerChangeInProducts();
   }
 
   ngOnDestroy() {
@@ -68,6 +68,10 @@ export class HouseFarmComponent implements OnInit, OnDestroy {
 
   registerChangeInHouseFarms() {
     this.eventSubscriber = this.eventManager.subscribe('houseFarmListModification', response => this.loadAll());
+  }
+
+  registerChangeInProducts() {
+    this.eventSubscriber = this.eventManager.subscribe('productListModification', response => this.loadAll());
   }
 
   protected onError(errorMessage: string) {

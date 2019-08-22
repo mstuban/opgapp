@@ -1,0 +1,24 @@
+{
+  "opgappApp": {
+    "rating": {
+      "home": {
+        "title": "Ocjene",
+        "createLabel": "Dodaj ocjenu",
+        "createOrEditLabel": "Dodaj ocjenu",
+        "notFound": "Još nema ocjena!"
+      },
+      "created": "Dodali ste ocjenu!",
+      "updated": "Promjenili ste ocjenu!",
+      "deleted": "Izbrisali ste ocjenu!",
+      "delete": {
+        "question": "Jeste li sigurni da želite izbrisati ocjenu?"
+      },
+      "detail": {
+        "title": "Ocjena"
+      },
+      "stars": "Broj zvijezda",
+      "comment": "Komentar",
+      "product": "Proizvod"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "opgappApp": {
+    "product": {
+      "home": {
+        "title": "Proizvodi",
+        "createLabel": "Dodaj proizvod",
+        "createOrEditLabel": "Dodaj ili uredi proizvod",
+        "notFound": "Nema proizvoda"
+      },
+      "created": "Novi proizvod je keiran s identifikatorom {{ param }}",
+      "updated": "Proizvod je promijenjen s identifikatorom {{ param }}",
+      "deleted": "Proizvod je izbrisan s identifikatorom {{ param }}",
+      "delete": {
+        "question": "Jeste li sigurni da želite izbrisati proizvod {{ id }}?"
+      },
+      "detail": {
+        "title": "Proizvod"
+      },
+      "name": "Naziv",
+      "imageUrl": "Slika",
+      "price": "Cijena",
+      "availableAmountInLiters": "Količina u litrama",
+      "availableAmountInKilograms": "Količina u kilogramima",
+      "isAvailable": "Dostupno",
+      "productType": "Tip proizvoda",
+      "rating": "Ocjena",
+      "houseFarm": "Obiteljsko poljoprivredno gospodarstvo",
+      "order": "Narudžba"
+    }
+  }
+}

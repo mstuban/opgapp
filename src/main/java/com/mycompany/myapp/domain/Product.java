@@ -16,7 +16,6 @@ import com.mycompany.myapp.domain.enumeration.ProductType;
  */
 @Entity
 @Table(name = "product")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,8 +51,8 @@ public class Product implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Rating> ratings = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties("products")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value = "products", allowSetters = true)
     private HouseFarm houseFarm;
 
     @ManyToOne

@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "rating")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Rating implements Serializable {
 
     private static final long serialVersionUID = 1L;

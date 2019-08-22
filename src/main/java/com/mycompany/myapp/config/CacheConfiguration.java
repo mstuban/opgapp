@@ -7,7 +7,6 @@ import org.ehcache.jsr107.Eh107Configuration;
 
 import org.hibernate.cache.jcache.ConfigSettings;
 import io.github.jhipster.config.JHipsterProperties;
-
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
@@ -38,12 +37,12 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
-            createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_LOGIN_CACHE);
+           createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_LOGIN_CACHE);
             createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_EMAIL_CACHE);
             createCache(cm, com.mycompany.myapp.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Authority.class.getName());
             createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
-            createCache(cm, com.mycompany.myapp.domain.HouseFarm.class.getName());
+            /*createCache(cm, com.mycompany.myapp.domain.HouseFarm.class.getName());
             createCache(cm, com.mycompany.myapp.domain.HouseFarm.class.getName() + ".products");
             createCache(cm, com.mycompany.myapp.domain.HouseFarm.class.getName() + ".orders");
             createCache(cm, com.mycompany.myapp.domain.Product.class.getName());
@@ -53,7 +52,7 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.Region.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Country.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Order.class.getName());
-            createCache(cm, com.mycompany.myapp.domain.Order.class.getName() + ".products");
+            createCache(cm, com.mycompany.myapp.domain.Order.class.getName() + ".products");*/
             // jhipster-needle-ehcache-add-entry
         };
     }

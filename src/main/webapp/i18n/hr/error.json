@@ -1,0 +1,14 @@
+{
+  "error": {
+    "title": "Greška!",
+    "http": {
+      "400": "Greška u zahtjevu.",
+      "403": "Niste autorizirani da biste vidjeli ovu stranicu",
+      "404": "Ova stranica ne postoji.",
+      "405": "HTTP verzija koju ste koristili nije podržana.",
+      "500": "Greška na serveru."
+    },
+    "concurrencyFailure": "Drugi korisnik je mjenjao iste informacije koje ste Vi upravo mijenjali. Vaše zadnje promjene će se poništiti.",
+    "validation": "Greška validacije na serveru"
+  }
+}

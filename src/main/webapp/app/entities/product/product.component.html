@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="opgappApp.product.home.title">Products</span>
+        <span jhiTranslate="opgappApp.product.home.title">All available products</span>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
@@ -10,26 +10,23 @@
     <div class="table-responsive" *ngIf="products?.length > 0">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="opgappApp.product.name">Name</span></th>
-            <th><span jhiTranslate="opgappApp.product.imageUrl">Image Url</span></th>
-            <th><span jhiTranslate="opgappApp.product.price">Price</span></th>
-            <th><span jhiTranslate="opgappApp.product.availableAmountInLiters">Available Amount In Liters</span></th>
-            <th><span jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span></th>
-            <th><span>In Stock</span></th>
-            <th><span jhiTranslate="opgappApp.product.productType">Product Type</span></th>
-            <th><span jhiTranslate="opgappApp.product.houseFarm">House Farm</span></th>
-            <th></th>
-            </tr>
+                <tr jhiSort>
+                    <th jhiSortBy="name"><span jhiTranslate="opgappApp.product.name">Name</span></th>
+                    <th jhiSortBy="price"><span jhiTranslate="opgappApp.product.price">Price</span></th>
+                    <th jhiSortBy="isAvailable"><span jhiTranslate="opgappApp.product.isAvailable">In Stock</span></th>
+                    <th jhiSortBy="product"><span jhiTranslate="opgappApp.product.productType">Product Type</span></th>
+                    <th><span jhiTranslate="opgappApp.product.houseFarm">House Farm</span></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
             <tr *ngFor="let product of products ;trackBy: trackId">
                 <td><h6>{{product.name}}</h6></td>
-                <td>{{product.imageUrl}}</td>
-                <td>{{product.price}}</td>
-                <td>{{product.availableAmountInLiters}}</td>
-                <td>{{product.availableAmountInKilograms}}</td>
-                <td>{{product.isAvailable ? "Yes" : "No"}}</td>
+                <td>{{product.price}} kn</td>
+                <td>
+                    <fa-icon *ngIf="product.isAvailable" [icon]="'check-square'"></fa-icon>
+                    <fa-icon *ngIf="!product.isAvailable" [icon]="'ban'"></fa-icon>
+                </td>
                 <td jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}</td>
                 <td>
                     <div *ngIf="product.houseFarm">

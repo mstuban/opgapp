@@ -25,9 +25,12 @@
                 <dd>
                     <span>{{product.availableAmountInKilograms}}</span>
                 </dd>
-                <dt><span>In Stock</span></dt>
+                <dt><span jhiTranslate="opgappApp.product.isAvailable">In Stock</span></dt>
                 <dd>
-                    <span>{{product.isAvailable ? "Yes" : "No"}}</span>
+                    <span>
+                        <fa-icon *ngIf="product.isAvailable" [icon]="'check-square'"></fa-icon>
+                        <fa-icon *ngIf="!product.isAvailable" [icon]="'ban'"></fa-icon>
+                    </span>
                 </dd>
                 <dt><span jhiTranslate="opgappApp.product.productType">Product Type</span></dt>
                 <dd>
@@ -36,7 +39,7 @@
                 </dd>
             </dl>
             <h2 id="page-heading">
-                <span>Ratings </span>
+                <span jhiTranslate="opgappApp.rating.home.title"></span>
             </h2>
             <hr>
             <jhi-alert></jhi-alert>
@@ -51,16 +54,16 @@
                         {{rating.comment}} ({{rating.stars}} stars)
                     </li>
                 </ul>
-
+            </div>
+            <br/>
+            <span *ngIf="product.houseFarm &&  product.houseFarm.user && currentAccount">
                 <button type="submit"
                         (click)="previousState()"
                         class="btn btn-info">
-                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
                 </button>
-
-                <span *ngIf="product.houseFarm &&  product.houseFarm.user && currentAccount">
                     <button type="button" *ngIf="product.houseFarm.user.id === currentAccount.id"
-                            [routerLink]="['/product', product.id, 'edit']"
+                            [routerLink]="['/product', product.houseFarm.id, product.id, 'edit']"
                             class="btn btn-primary">
                         <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span
                         jhiTranslate="entity.action.edit"> Edit</span>
@@ -69,10 +72,9 @@
                     <button type="button" *ngIf="product.houseFarm.user.id !== currentAccount.id"
                             [routerLink]="['/rating', product.id, 'new']"
                             class="btn btn-danger">
-                        <fa-icon [icon]="'heart'"></fa-icon>&nbsp;<span> Add rating</span>
+                        <fa-icon [icon]="'heart'"></fa-icon>&nbsp;<span jhiTranslate="opgappApp.rating.home.createLabel"> Add rating</span>
                     </button>
                 </span>
-            </div>
         </div>
     </div>
 </div>

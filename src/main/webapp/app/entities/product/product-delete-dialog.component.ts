@@ -26,7 +26,6 @@ export class ProductDeleteDialogComponent {
         name: 'productListModification',
         content: 'Deleted an product'
       });
-      debugger
       this.activeModal.dismiss(true);
     });
   }
@@ -48,11 +47,11 @@ export class ProductDeletePopupComponent implements OnInit, OnDestroy {
         this.ngbModalRef.componentInstance.product = product;
         this.ngbModalRef.result.then(
           result => {
-            this.router.navigate(['/product', { outlets: { popup: null } }]);
+            this.router.navigate(['/house-farm/' + product.houseFarm.id + '/view', { outlets: { popup: null } }]);
             this.ngbModalRef = null;
           },
           reason => {
-            this.router.navigate(['/product', { outlets: { popup: null } }]);
+            this.router.navigate(['/house-farm/' + product.houseFarm.id + '/view', { outlets: { popup: null } }]);
             this.ngbModalRef = null;
           }
         );

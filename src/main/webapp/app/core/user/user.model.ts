@@ -1,4 +1,4 @@
-import {IRating} from "app/shared/model/rating.model";
+import {IRating} from 'app/shared/model/rating.model';
 import {IHouseFarm} from "app/shared/model/house-farm.model";
 
 export interface IUser {

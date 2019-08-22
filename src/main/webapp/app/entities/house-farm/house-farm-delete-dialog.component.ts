@@ -47,11 +47,11 @@ export class HouseFarmDeletePopupComponent implements OnInit, OnDestroy {
         this.ngbModalRef.componentInstance.houseFarm = houseFarm;
         this.ngbModalRef.result.then(
           result => {
-            this.router.navigate(['/house-farm', { outlets: { popup: null } }]);
+            this.router.navigate(['/house-farm']);
             this.ngbModalRef = null;
           },
           reason => {
-            this.router.navigate(['/house-farm', { outlets: { popup: null } }]);
+            this.router.navigate(['/house-farm']);
             this.ngbModalRef = null;
           }
         );

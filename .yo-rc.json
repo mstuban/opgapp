@@ -34,7 +34,7 @@
     "useSass": true,
     "jwtSecretKey": "Mjk1MTRhNTA3NmQ2YzgxMDcyYTVkZjcwNzdiN2YyYzM1Zjc4MzYwZDlkODAzMjA2ZjJiNWE2N2IzZjQwMGU4ZTFmZTVmYWM4MjFhMTFkNzMwMDY0MzhmMmM1MTg4YjA0ZmUzMzA3MjNjY2IzNWM3Y2RjOGMzMjFhOWZkYmJkMjQ=",
     "clientTheme": "none",
-    "entitySuffix": "",c
+    "entitySuffix": "",
     "dtoSuffix": "DTO",
     "otherModules": []
   },

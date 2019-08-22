@@ -1,0 +1,19 @@
+{
+  "login": {
+    "title": "Prijava",
+    "form": {
+      "password": "Lozinka",
+      "password.placeholder": "Vaša lozinka",
+      "rememberme": "Zapamti me",
+      "button": "Prijava"
+    },
+    "messages": {
+      "error": {
+        "authentication": "<strong>Greška kod prijave!</strong> Provjerite Vaše podatke."
+      }
+    },
+    "password": {
+      "forgot": "Jeste li zaboravili lozinku?"
+    }
+  }
+}

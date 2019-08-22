@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { JhiAlertService } from 'ng-jhipster';
-import { IProduct, Product } from 'app/shared/model/product.model';
-import { ProductService } from './product.service';
+import {Component, OnInit} from '@angular/core';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
+import {JhiAlertService} from 'ng-jhipster';
+import {IProduct, Product} from 'app/shared/model/product.model';
+import {ProductService} from './product.service';
 import {HouseFarm, IHouseFarm} from 'app/shared/model/house-farm.model';
-import { HouseFarmService } from 'app/entities/house-farm';
-import { IOrder } from 'app/shared/model/order.model';
-import { OrderService } from 'app/entities/order';
+import {HouseFarmService} from 'app/entities/house-farm';
+import {IOrder} from 'app/shared/model/order.model';
+import {OrderService} from 'app/entities/order';
 
 @Component({
   selector: 'jhi-product-update',
@@ -22,7 +22,7 @@ export class ProductUpdateComponent implements OnInit {
   housefarms: IHouseFarm[];
 
   houseFarm: IHouseFarm;
-
+  product: Product;
   orders: IOrder[];
 
   editForm = this.fb.group({
@@ -46,11 +46,24 @@ export class ProductUpdateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     protected route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.isSaving = false;
-    this.activatedRoute.data.subscribe(({ product }) => {
+    if (this.route.snapshot.params['houseFarmId']) {
+      this.houseFarmService.find(this.route.snapshot.params['houseFarmId']).pipe(
+        filter((response: HttpResponse<HouseFarm>) => response.ok),
+        map((product: HttpResponse<HouseFarm>) => product.body)
+      ).subscribe(
+        houseFarm => {
+          this.houseFarm = houseFarm;
+        }
+      );
+    }
+
+    this.activatedRoute.data.subscribe(({product}) => {
+      this.product = product;
       this.updateForm(product);
     });
     this.houseFarmService
@@ -67,16 +80,6 @@ export class ProductUpdateComponent implements OnInit {
         map((response: HttpResponse<IOrder[]>) => response.body)
       )
       .subscribe((res: IOrder[]) => (this.orders = res), (res: HttpErrorResponse) => this.onError(res.message));
-
-    this.houseFarmService.find(this.route.snapshot.params['houseFarmId']).pipe(
-      filter((response: HttpResponse<HouseFarm>) => response.ok),
-      map((product: HttpResponse<HouseFarm>) => product.body)
-    ).subscribe(
-      houseFarm => {
-        this.houseFarm = houseFarm;
-      }
-    );
-
   }
 
   updateForm(product: IProduct) {
@@ -136,6 +139,7 @@ export class ProductUpdateComponent implements OnInit {
   protected onSaveError() {
     this.isSaving = false;
   }
+
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }

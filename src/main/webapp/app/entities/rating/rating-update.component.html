@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-rating-heading">Create or edit a Rating for {{product.name}} ({{product.houseFarm.name}})</h2>
+            <h2 id="jhi-rating-heading"><span jhiTranslate="opgappApp.rating.home.createOrEditLabel"></span> {{product.name}} ({{product.houseFarm.name}})</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" hidden>

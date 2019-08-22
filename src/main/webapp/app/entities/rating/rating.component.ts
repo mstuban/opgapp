@@ -7,7 +7,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IRating } from 'app/shared/model/rating.model';
 import { AccountService } from 'app/core';
 import { RatingService } from './rating.service';
-import {IProduct} from "app/shared/model/product.model";
+import {IProduct} from 'app/shared/model/product.model';
 
 @Component({
   selector: 'jhi-rating',

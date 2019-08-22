@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IHouseFarm, HouseFarm } from 'app/shared/model/house-farm.model';
 import { HouseFarmService } from './house-farm.service';
 import { ILocation } from 'app/shared/model/location.model';
 import { LocationService } from 'app/entities/location';
-import {AccountService} from "app/core";
+import {AccountService} from 'app/core';
 
 @Component({
   selector: 'jhi-house-farm-update',

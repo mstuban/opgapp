@@ -1,0 +1,141 @@
+{
+  "global": {
+    "title": "Opgapp",
+    "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
+    "menu": {
+      "home": "Početna",
+      "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+      "entities": {
+        "main": "Entities",
+        "houseFarm": "OPG",
+        "product": "Proizvod",
+        "rating": "Ocjena",
+        "location": "Lokacija",
+        "region": "Regija",
+        "country": "Država",
+        "order": "Narudžba",
+        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+      },
+      "account": {
+        "main": "Račun",
+        "settings": "Postavke",
+        "password": "Lozinka",
+        "sessions": "Instance računa",
+        "login": "Prijavi se",
+        "logout": "Odjavi se",
+        "register": "Napravi račun"
+      },
+      "admin": {
+        "main": "Administracija",
+        "userManagement": "Upravljanje računima",
+        "tracker": "Praćenje korisnika",
+        "metrics": "Statistika",
+        "health": "Zdravlje aplikacije",
+        "configuration": "Konfiguracija",
+        "logs": "Zapisi",
+        "audits": "Audits",
+        "apidocs": "API",
+        "database": "Baza podataka",
+        "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+      },
+      "language": "Jezik"
+    },
+    "form": {
+      "username.label": "Korisničko ime",
+      "username.placeholder": "Vaše korisničko ime",
+      "currentpassword.label": "Trenutna lozinka",
+      "currentpassword.placeholder": "Trenutna lozinka",
+      "newpassword.label": "Nova lozinka",
+      "newpassword.placeholder": "Nova lozinka",
+      "confirmpassword.label": "Potvrda nove lozinke",
+      "confirmpassword.placeholder": "Potvrda nove lozinke",
+      "email.label": "Email",
+      "email.placeholder": "Vaš email"
+    },
+    "messages": {
+      "info": {
+        "authenticated": {
+          "prefix": "Ako želite ",
+          "link": "prijavu",
+          "suffix": ", možete pokušati s već kreiranim računima:<br/>- Administrator (login=\"admin\" i lozinka=\"admin\") <br/>- User (login=\"user\" i lozinka=\"user\")."
+        },
+        "register": {
+          "noaccount": "Još nemate račun?",
+          "link": "Napravite račun kupca ili vlasinka OPG-a"
+        }
+      },
+      "error": {
+        "dontmatch": "Lozinka i potvrda se ne podudaraju!"
+      },
+      "validate": {
+        "newpassword": {
+          "required": "Vaša lozinka je obavezna.",
+          "minlength": "Lozinka mora imati barem 4 znaka.",
+          "maxlength": "Vaša lozinka ne može biti duža od 50 znakova.",
+          "strength": "Snaga lozinke:"
+        },
+        "confirmpassword": {
+          "required": "Potvrda lozinke je potrebna",
+          "minlength": "Potvrda lozinke mora imati barem 4 znaka.",
+          "maxlength": "Potvrda lozinke ne može biti duža od 50 znakova."
+        },
+        "email": {
+          "required": "Vaš email je obavezan.",
+          "invalid": "Email nije valjan.",
+          "minlength": "Email mora imati barem 5 znakova.",
+          "maxlength": "Email ne može biti duži od 50 znakova."
+        }
+      }
+    },
+    "field": {
+      "id": "ID"
+    },
+    "ribbon": {
+      "dev": "Development"
+    },
+    "item-count": "Showing {{first}} - {{second}} of {{total}} items."
+  },
+  "entity": {
+    "action": {
+      "addblob": "Add blob",
+      "addimage": "Dodaj sliku",
+      "back": "Natrag",
+      "cancel": "Odustani",
+      "delete": "Izbriši",
+      "edit": "Uredi",
+      "open": "Otvori",
+      "save": "Spremi",
+      "view": "Vidi detalje"
+    },
+    "detail": {
+      "field": "Polje",
+      "value": "Vrijednost"
+    },
+    "delete": {
+      "title": "Potvrdi brisanje"
+    },
+    "validation": {
+      "required": "Ovo polje je obavezno.",
+      "minlength": "Ovo polje mora imati barem {{ min }} znakova.",
+      "maxlength": "Ovo polje ne može biti duže od {{ max }} znakova.",
+      "min": "Ovo polje mora imati barem {{ min }} znakova.",
+      "max": "Ovo polje ne može biti duže od {{ max }} znakova.",
+      "pattern": "Ovo polje mora imati ovakav uzorak: {{ pattern }}.",
+      "number": "Polje mora biti broj",
+      "datetimelocal": "Polje mora biti datum",
+      "patternLogin": "Polje mora sadržavati brojeve, slova i email adrese."
+    }
+  },
+  "error": {
+    "internalServerError": "Greška na serveru",
+    "server.not.reachable": "Server nije dostupan",
+    "url.not.found": "Nije pronađeno",
+    "NotNull": "Polje {{ fieldName }} ne može biti prazno!",
+    "Size": "Polje {{ fieldName }} ne odgovara zahtjevima za max i min duljinu!",
+    "userexists": "Korisničko ime se već koristi!",
+    "emailexists": "Email se već koristi!",
+    "idexists": "Nov {{ entityName }} ne može već imati ID",
+    "idnull": "Krivi ID"
+  },
+  "footer": "This is your footer"
+}

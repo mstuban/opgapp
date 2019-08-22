@@ -1,5 +1,5 @@
 import { IProduct } from 'app/shared/model/product.model';
-import {IUser} from "app/core";
+import {IUser} from 'app/core';
 
 export interface IRating {
   id?: number;

@@ -17,7 +17,6 @@ import com.mycompany.myapp.domain.enumeration.OrderStatus;
  */
 @Entity
 @Table(name = "jhi_order")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,13 +1,25 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="houseFarm">
-            <h2><span>{{houseFarm.name}}</span></h2>
+            <h2><span>{{houseFarm.name}}</span>
+                <span *ngIf="houseFarm.user && currentAccount">
+                <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                        [routerLink]="['/', 'house-farm', { outlets: { popup: houseFarm.id + '/delete'} }]"
+                        replaceUrl="true"
+                        queryParamsHandling="merge"
+                        class="btn btn-danger btn-sm">
+                    <fa-icon [icon]="'times'"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                </button>
+            </span>
+            </h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Licensed and verified</span></dt>
+                <dt><span jhiTranslate="opgappApp.houseFarm.hasLicense">Licensed and verified</span></dt>
                 <dd>
-                    <span>{{houseFarm.hasLicense ? 'Yes' : 'No'}}</span>
+                    <fa-icon *ngIf="houseFarm.hasLicense" [icon]="'check-square'"></fa-icon>
+                    <fa-icon *ngIf="!houseFarm.hasLicense" [icon]="'ban'"></fa-icon>
                 </dd>
                 <dt><span jhiTranslate="opgappApp.houseFarm.dateFounded">Date Founded</span></dt>
                 <dd>
@@ -31,7 +43,7 @@
                 <span jhiTranslate="opgappApp.product.home.notFound">No products found</span>
             </div>
             <div class="table-responsive" *ngIf="houseFarm.products?.length > 0">
-                <h4><span>Products available:</span></h4>
+                <h4><span jhiTranslate="opgappApp.product.home.title">Products available:</span></h4>
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -42,7 +54,7 @@
                         </th>
                         <th><span jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span>
                         </th>
-                        <th><span>Available</span></th>
+                        <th><span jhiTranslate="opgappApp.product.isAvailable">Available</span></th>
                         <th><span jhiTranslate="opgappApp.product.productType">Product Type</span></th>
                     </tr>
                     </thead>
@@ -52,7 +64,10 @@
                         <td>{{product.price}} kn</td>
                         <td>{{product.availableAmountInLiters}}</td>
                         <td>{{product.availableAmountInKilograms}}</td>
-                        <td>{{product.isAvailable ? 'Yes' : 'No'}}</td>
+                        <td>
+                            <fa-icon *ngIf="product.isAvailable" [icon]="'check-square'"></fa-icon>
+                            <fa-icon *ngIf="!product.isAvailable" [icon]="'ban'"></fa-icon>
+                        </td>
                         <td jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}
                         </td>
                         <td class="text-right" *jhiHasAnyAuthority="'ROLE_OWNER'">
@@ -66,7 +81,7 @@
 
                                 <span *ngIf="houseFarm.user && currentAccount">
                                     <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
-                                            [routerLink]="['/product', product.id, 'edit']"
+                                            [routerLink]="['/product', houseFarm.id, product.id, 'edit']"
                                             class="btn btn-primary btn-sm">
                                         <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                         <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>

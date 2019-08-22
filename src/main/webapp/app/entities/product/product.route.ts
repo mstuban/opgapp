@@ -63,7 +63,7 @@ export const productRoute: Routes = [
     canActivate: [UserRouteAccessService]
   },
   {
-    path: ':id/edit',
+    path: ':houseFarmId:/:id/edit',
     component: ProductUpdateComponent,
     resolve: {
       product: ProductResolve
