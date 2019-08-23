@@ -3,6 +3,7 @@ package com.mycompany.myapp.service.dto;
 import com.mycompany.myapp.config.Constants;
 
 import com.mycompany.myapp.domain.Authority;
+import com.mycompany.myapp.domain.HouseFarm;
 import com.mycompany.myapp.domain.User;
 
 import javax.validation.constraints.Email;
@@ -53,6 +54,8 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private HouseFarm houseFarm;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -73,6 +76,7 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        this.houseFarm = user.getHouseFarm();
     }
 
     public Long getId() {
@@ -195,5 +199,13 @@ public class UserDTO {
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
             "}";
+    }
+
+    public HouseFarm getHouseFarm() {
+        return houseFarm;
+    }
+
+    public void setHouseFarm(HouseFarm houseFarm) {
+        this.houseFarm = houseFarm;
     }
 }

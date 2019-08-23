@@ -4,11 +4,13 @@
             <h2 id="jhi-product-heading" jhiTranslate="opgappApp.product.home.createOrEditLabel">Create or edit a Product</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!editForm.get('id').value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
-                </div>
+                <span hidden>
+                    <div class="form-group" [hidden]="!editForm.get('id').value" >
+                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                            readonly />
+                    </div>
+                </span>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="opgappApp.product.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
@@ -59,12 +61,13 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group" hidden>
+<!--           <div class="form-group" hidden>
                 <label class="form-control-label" jhiTranslate="opgappApp.product.houseFarm" for="field_houseFarm">House Farm</label>
                 <select class="form-control" id="field_houseFarm" name="houseFarm" formControlName="houseFarm">
-                    <option [ngValue]="this.route.snapshot.params['houseFarmId']"></option>
+                    <option [ngValue]="houseFarmOption.id === editForm.get('houseFarm').value?.id ?
+                     editForm.get('houseFarm').value : houseFarmOption" *ngFor="let houseFarmOption of housefarms; trackBy: trackHouseFarmById">{{houseFarmOption.id}}</option>
                 </select>
-            </div>
+            </div>-->
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

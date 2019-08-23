@@ -5,8 +5,7 @@
             <button *jhiHasAnyAuthority="'ROLE_OWNER'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-house-farm"
                     [routerLink]="['/house-farm/new']">
                 <fa-icon *jhiHasAnyAuthority="'ROLE_OWNER'" [icon]="'plus'"></fa-icon>
-                <span *jhiHasAnyAuthority="'ROLE_OWNER'">
-                            Create new House Farm
+                <span *jhiHasAnyAuthority="'ROLE_OWNER'" jhiTranslate="opgappApp.houseFarm.home.createLabel">
                 </span>
             </button>
         </span>

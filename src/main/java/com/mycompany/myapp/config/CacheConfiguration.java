@@ -37,11 +37,11 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
-           createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_LOGIN_CACHE);
+      /*     createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_LOGIN_CACHE);
             createCache(cm, com.mycompany.myapp.repository.UserRepository.USERS_BY_EMAIL_CACHE);
             createCache(cm, com.mycompany.myapp.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Authority.class.getName());
-            createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");*/
             /*createCache(cm, com.mycompany.myapp.domain.HouseFarm.class.getName());
             createCache(cm, com.mycompany.myapp.domain.HouseFarm.class.getName() + ".products");
             createCache(cm, com.mycompany.myapp.domain.HouseFarm.class.getName() + ".orders");

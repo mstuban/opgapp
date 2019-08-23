@@ -47,6 +47,7 @@ public class Product implements Serializable {
     @Column(name = "product_type")
     private ProductType productType;
 
+    @JsonIgnoreProperties(value = "product", allowSetters = true)
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Rating> ratings = new HashSet<>();
@@ -58,6 +59,9 @@ public class Product implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("products")
     private Order order;
+
+    public Product() {
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -240,4 +244,5 @@ public class Product implements Serializable {
             ", productType='" + getProductType() + "'" +
             "}";
     }
+
 }

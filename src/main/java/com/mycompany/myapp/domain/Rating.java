@@ -30,7 +30,7 @@ public class Rating implements Serializable {
     private String comment;
 
     @ManyToOne
-    @JsonIgnoreProperties("ratings")
+    @JsonIgnoreProperties({"isAvailable, productType"})
     private Product product;
 
     @Column(name = "date_created")

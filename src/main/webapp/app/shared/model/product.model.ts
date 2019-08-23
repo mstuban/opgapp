@@ -25,6 +25,7 @@ export interface IProduct {
   imageUrl?: string;
   price?: number;
   availableAmountInLiters?: number;
+  averageRating?: number;
   availableAmountInKilograms?: number;
   isAvailable?: boolean;
   productType?: ProductType;

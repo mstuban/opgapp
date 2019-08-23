@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.OpgappApp;
 import com.mycompany.myapp.domain.HouseFarm;
 import com.mycompany.myapp.repository.HouseFarmRepository;
+import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;

@@ -1,5 +1,7 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mycompany.myapp.config.Constants;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,6 +40,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(min = 1, max = 50)
     @Column(length = 50, unique = true, nullable = false)
     private String login;
+
+    @OneToOne(mappedBy = "user")
+    @JsonBackReference
+    private HouseFarm houseFarm;
 
     @JsonIgnore
     @NotNull
@@ -93,6 +99,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Rating> ratings = new HashSet<>();
@@ -238,5 +245,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    public HouseFarm getHouseFarm() {
+        return houseFarm;
+    }
+
+    public void setHouseFarm(HouseFarm houseFarm) {
+        this.houseFarm = houseFarm;
     }
 }

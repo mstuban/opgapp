@@ -2,6 +2,8 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Product;
 import com.mycompany.myapp.repository.ProductRepository;
+import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -34,8 +36,11 @@ public class ProductResource {
 
     private final ProductRepository productRepository;
 
-    public ProductResource(ProductRepository productRepository) {
+    private final UserRepository userRepository;
+
+    public ProductResource(ProductRepository productRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -72,6 +77,10 @@ public class ProductResource {
         if (product.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        product.setHouseFarm(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get())
+            .get().getHouseFarm());
+
         Product result = productRepository.save(product);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, product.getId().toString()))

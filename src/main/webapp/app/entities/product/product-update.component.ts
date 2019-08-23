@@ -11,6 +11,7 @@ import {HouseFarm, IHouseFarm} from 'app/shared/model/house-farm.model';
 import {HouseFarmService} from 'app/entities/house-farm';
 import {IOrder} from 'app/shared/model/order.model';
 import {OrderService} from 'app/entities/order';
+import {AccountService} from 'app/core';
 
 @Component({
   selector: 'jhi-product-update',
@@ -22,6 +23,7 @@ export class ProductUpdateComponent implements OnInit {
   housefarms: IHouseFarm[];
   houseFarm: IHouseFarm;
   orders: IOrder[];
+  currentAccount: any;
 
   editForm = this.fb.group({
     id: [],
@@ -40,6 +42,7 @@ export class ProductUpdateComponent implements OnInit {
     protected jhiAlertService: JhiAlertService,
     protected productService: ProductService,
     protected houseFarmService: HouseFarmService,
+    protected accountService: AccountService,
     protected orderService: OrderService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
@@ -67,6 +70,16 @@ export class ProductUpdateComponent implements OnInit {
         map((response: HttpResponse<IOrder[]>) => response.body)
       )
       .subscribe((res: IOrder[]) => (this.orders = res), (res: HttpErrorResponse) => this.onError(res.message));
+
+    if (!!this.route.snapshot.params['houseFarmId']) {
+      this.houseFarmService
+        .find(this.route.snapshot.params['houseFarmId'])
+        .pipe(
+          filter((mayBeOk: HttpResponse<IHouseFarm>) => mayBeOk.ok),
+          map((response: HttpResponse<IHouseFarm>) => response.body)
+        )
+        .subscribe((res: IHouseFarm) => (this.houseFarm = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
   }
 
   updateForm(product: IProduct) {
@@ -109,7 +122,7 @@ export class ProductUpdateComponent implements OnInit {
       availableAmountInKilograms: this.editForm.get(['availableAmountInKilograms']).value,
       isAvailable: this.editForm.get(['isAvailable']).value,
       productType: this.editForm.get(['productType']).value,
-      houseFarm: this.editForm.get(['houseFarm']).value
+      houseFarm: this.houseFarm
     };
     return entity;
   }

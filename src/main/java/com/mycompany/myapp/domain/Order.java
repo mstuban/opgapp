@@ -39,6 +39,7 @@ public class Order implements Serializable {
     @Column(name = "order_status")
     private OrderStatus orderStatus;
 
+    @JsonIgnoreProperties(value = "order", allowSetters = true)
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Product> products = new HashSet<>();
