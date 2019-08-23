@@ -29,7 +29,7 @@ public class Rating implements Serializable {
     @Column(name = "comment")
     private String comment;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JsonIgnoreProperties("ratings")
     private Product product;
 

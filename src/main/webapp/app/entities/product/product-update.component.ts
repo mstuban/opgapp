@@ -20,7 +20,6 @@ export class ProductUpdateComponent implements OnInit {
   isSaving: boolean;
 
   housefarms: IHouseFarm[];
-
   houseFarm: IHouseFarm;
   product: Product;
   orders: IOrder[];

@@ -21,7 +21,16 @@
             <tbody>
             <tr *ngFor="let houseFarm of houseFarms ;trackBy: trackId">
                 <td><h5>{{houseFarm.name}} <h6>({{houseFarm.user.firstName + ' ' + houseFarm.user.lastName}})</h6></h5></td>
-                <td>{{houseFarm.products.length > 0 ? ( houseFarm.products.length  + ' product(s)' ): "No products"}} </td>
+                <td *ngIf="houseFarm.products.length > 0 && houseFarm.products.length !== 1">
+                   {{houseFarm.products.length}} <span jhiTranslate="opgappApp.product.home.title"></span>
+                </td>
+                <td *ngIf="houseFarm.products.length === 1">
+                   {{houseFarm.products.length}} <span jhiTranslate="opgappApp.product.detail.title"></span>
+                </td>
+
+                <td *ngIf="houseFarm.products.length === 0">
+                   {{houseFarm.products.length}} <span jhiTranslate="opgappApp.product.home.products"></span>
+                </td>
 
                 <td>
                     <span *ngIf="houseFarm.location">

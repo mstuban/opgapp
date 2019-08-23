@@ -45,7 +45,7 @@
             <jhi-alert></jhi-alert>
             <br/>
             <div class="alert alert-warning" *ngIf="product.ratings?.length === 0">
-                <span>No ratings found</span>
+                <span jhiTranslate="opgappApp.rating.home.notFound">No ratings found</span>
             </div>
             <div *ngIf="product.ratings?.length > 0">
                 <ul class="list-group">
