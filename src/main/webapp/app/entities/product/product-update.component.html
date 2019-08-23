@@ -59,6 +59,12 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group" hidden>
+                <label class="form-control-label" jhiTranslate="opgappApp.product.houseFarm" for="field_houseFarm">House Farm</label>
+                <select class="form-control" id="field_houseFarm" name="houseFarm" formControlName="houseFarm">
+                    <option [ngValue]="this.route.snapshot.params['houseFarmId']"></option>
+                </select>
+            </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

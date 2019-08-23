@@ -21,7 +21,6 @@ export class ProductUpdateComponent implements OnInit {
 
   housefarms: IHouseFarm[];
   houseFarm: IHouseFarm;
-  product: Product;
   orders: IOrder[];
 
   editForm = this.fb.group({
@@ -50,19 +49,8 @@ export class ProductUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.isSaving = false;
-    if (this.route.snapshot.params['houseFarmId']) {
-      this.houseFarmService.find(this.route.snapshot.params['houseFarmId']).pipe(
-        filter((response: HttpResponse<HouseFarm>) => response.ok),
-        map((product: HttpResponse<HouseFarm>) => product.body)
-      ).subscribe(
-        houseFarm => {
-          this.houseFarm = houseFarm;
-        }
-      );
-    }
 
     this.activatedRoute.data.subscribe(({product}) => {
-      this.product = product;
       this.updateForm(product);
     });
     this.houseFarmService
@@ -121,7 +109,7 @@ export class ProductUpdateComponent implements OnInit {
       availableAmountInKilograms: this.editForm.get(['availableAmountInKilograms']).value,
       isAvailable: this.editForm.get(['isAvailable']).value,
       productType: this.editForm.get(['productType']).value,
-      houseFarm: this.houseFarm
+      houseFarm: this.editForm.get(['houseFarm']).value
     };
     return entity;
   }

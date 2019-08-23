@@ -3,14 +3,17 @@
         <div *ngIf="houseFarm">
             <h2><span>{{houseFarm.name}}</span>
                 <span *ngIf="houseFarm.user && currentAccount">
-                <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
-                        [routerLink]="['/', 'house-farm', { outlets: { popup: houseFarm.id + '/delete'} }]"
-                        replaceUrl="true"
-                        queryParamsHandling="merge"
-                        class="btn btn-danger btn-sm">
-                    <fa-icon [icon]="'times'"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                </button>
+                    <small>({{houseFarm.user.firstName + ' ' + houseFarm.user.lastName}})</small>
+                </span>
+                <span *ngIf="houseFarm.user && currentAccount">
+                    <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                            [routerLink]="['/', 'house-farm', { outlets: { popup: houseFarm.id + '/delete'} }]"
+                            replaceUrl="true"
+                            queryParamsHandling="merge"
+                            class="btn btn-danger btn-sm">
+                        <fa-icon [icon]="'times'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                    </button>
             </span>
             </h2>
             <hr>

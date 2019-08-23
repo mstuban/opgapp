@@ -23,7 +23,8 @@
         "sessions": "Instance računa",
         "login": "Prijavi se",
         "logout": "Odjavi se",
-        "register": "Napravi račun"
+        "register": "Napravi račun",
+        "myHouseFarm": "Moj OPG"
       },
       "admin": {
         "main": "Administracija",
