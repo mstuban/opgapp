@@ -6,7 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { AccountService } from 'app/core';
 import { ProductService } from './product.service';
-import { IProduct } from "app/shared/model/house-farm.model";
+import {IProduct} from "app/shared/model/product.model";
 
 @Component({
   selector: 'jhi-product',

@@ -9,7 +9,7 @@ export interface IUser {
   email?: string;
   activated?: boolean;
   langKey?: string;
-  wantedAuthority: string;
+  wantedAuthority?: string;
   authorities?: any[];
   ratings?: IRating[];
   createdBy?: string;
