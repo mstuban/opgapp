@@ -4,6 +4,9 @@
     "form": {
       "button": "Register"
     },
+    "ownerRole": "Owner",
+    "userRole": "User",
+    "role": "Roles",
     "messages": {
       "validate": {
         "login": {

@@ -36,7 +36,9 @@
     "clientTheme": "none",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
-    "otherModules": []
+    "otherModules": [],
+    "herokuAppName": "opgapp",
+    "herokuDeployType": "git"
   },
   "entities": [
     "HouseFarm",

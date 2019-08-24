@@ -52,6 +52,8 @@ public class UserDTO {
 
     private Instant lastModifiedDate;
 
+    private String wantedAuthority;
+
     private Set<String> authorities;
 
     private HouseFarm houseFarm;
@@ -207,5 +209,13 @@ public class UserDTO {
 
     public void setHouseFarm(HouseFarm houseFarm) {
         this.houseFarm = houseFarm;
+    }
+
+    public String getWantedAuthority() {
+        return wantedAuthority;
+    }
+
+    public void setWantedAuthority(String wantedAuthority) {
+        this.wantedAuthority = wantedAuthority;
     }
 }

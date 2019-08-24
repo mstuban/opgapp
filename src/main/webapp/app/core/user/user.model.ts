@@ -9,6 +9,7 @@ export interface IUser {
   email?: string;
   activated?: boolean;
   langKey?: string;
+  wantedAuthority: string;
   authorities?: any[];
   ratings?: IRating[];
   createdBy?: string;
@@ -28,6 +29,7 @@ export class User implements IUser {
     public email?: string,
     public activated?: boolean,
     public langKey?: string,
+    public wantedAuthority?: string,
     public authorities?: any[],
     public createdBy?: string,
     public createdDate?: Date,
@@ -43,6 +45,7 @@ export class User implements IUser {
     this.email = email ? email : null;
     this.activated = activated ? activated : false;
     this.langKey = langKey ? langKey : null;
+    this.wantedAuthority = wantedAuthority ? wantedAuthority : null;
     this.authorities = authorities ? authorities : null;
     this.createdBy = createdBy ? createdBy : null;
     this.createdDate = createdDate ? createdDate : null;

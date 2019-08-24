@@ -4,6 +4,9 @@
     "form": {
       "button": "Registracija"
     },
+    "ownerRole": "Vlasnik OPG-a",
+    "userRole": "Kupac",
+    "role": "Vaša uloga u aplikaciji",
     "messages": {
       "validate": {
         "login": {

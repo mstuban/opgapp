@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { LoginModalService } from 'app/core';
 import { ActivateService } from './activate.service';
@@ -14,7 +14,9 @@ export class ActivateComponent implements OnInit {
   success: string;
   modalRef: NgbModalRef;
 
-  constructor(private activateService: ActivateService, private loginModalService: LoginModalService, private route: ActivatedRoute) {}
+  constructor(private activateService: ActivateService, private loginModalService: LoginModalService,
+              private route: ActivatedRoute,
+              private router: Router) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -32,6 +34,7 @@ export class ActivateComponent implements OnInit {
   }
 
   login() {
+    this.router.navigate(['/']);
     this.modalRef = this.loginModalService.open();
   }
 }

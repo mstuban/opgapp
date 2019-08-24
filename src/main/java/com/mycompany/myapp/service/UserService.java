@@ -11,6 +11,7 @@ import com.mycompany.myapp.service.dto.UserDTO;
 import com.mycompany.myapp.service.util.RandomUtil;
 import com.mycompany.myapp.web.rest.errors.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -113,9 +114,13 @@ public class UserService {
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key
-        newUser.setActivationKey(RandomUtil.generateActivationKey());
+        newUser .setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
+        if (!StringUtils.isEmpty(userDTO.getWantedAuthority())) {
+            authorityRepository.findById(userDTO.getWantedAuthority()).ifPresent(authorities::add);
+        }
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
@@ -166,8 +171,7 @@ public class UserService {
 
     /**
      * Update basic information (first name, last name, email, language) for the current user.
-     *
-     * @param firstName first name of user.
+     *  @param firstName first name of user.
      * @param lastName  last name of user.
      * @param email     email id of user.
      * @param langKey   language key.

@@ -112,6 +112,14 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="confirmPassword"
+                           jhiTranslate="register.role">New password confirmation</label>
+                    <select class="form-control" name="authority" formControlName="wantedAuthority">
+                        <option value="ROLE_OWNER"><span jhiTranslate="register.ownerRole"></span></option>
+                        <option value="ROLE_USER"><span jhiTranslate="register.userRole"></span></option>
+                    </select>
+                </div>
 
                 <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary" jhiTranslate="register.form.button">Register</button>
             </form>

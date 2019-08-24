@@ -1,6 +1,6 @@
 {
   "activate": {
-    "title": "Activation",
+    "title": "Aktivacija",
     "messages": {
       "success": "<strong>Vaš korisnički račun je kreiran.</strong> Molimo ",
       "error": "<strong>Došlo je do greške prilikom aktivacije Vašeg računa.</strong> Molimo ponovo ispunite formu za registraciju."
