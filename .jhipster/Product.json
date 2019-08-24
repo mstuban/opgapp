@@ -57,8 +57,8 @@
     "entityTableName": "product",
     "dto": "no",
     "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
+    "serviceClass": "no",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": [

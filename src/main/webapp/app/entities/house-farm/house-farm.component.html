@@ -2,7 +2,8 @@
     <h2 id="page-heading" class="col-md-8">
         <span jhiTranslate="opgappApp.houseFarm.home.title">House Farms</span>
         <span *ngIf="!userAlreadyHasFarm">
-            <button *jhiHasAnyAuthority="'ROLE_OWNER'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-house-farm"
+            <button *jhiHasAnyAuthority="'ROLE_OWNER'" id="jh-create-entity"
+                    class="btn btn-primary float-right jh-create-entity create-house-farm"
                     [routerLink]="['/house-farm/new']">
                 <fa-icon *jhiHasAnyAuthority="'ROLE_OWNER'" [icon]="'plus'"></fa-icon>
                 <span *jhiHasAnyAuthority="'ROLE_OWNER'" jhiTranslate="opgappApp.houseFarm.home.createLabel">
@@ -12,23 +13,36 @@
     </h2>
     <jhi-alert class="col-md-8"></jhi-alert>
     <br/>
-    <div class="alert alert-warning" *ngIf="houseFarms?.length === 0">
-        <span jhiTranslate="opgappApp.houseFarm.home.notFound">No house farns found</span>
+    <div class="form-group col-md-3">
+        <div class="input-group">
+            <input id="field_name" type="text" class="form-control" #nameFilterInput
+                   placeholder=""
+                   (keyup)="filterProducts()"/>
+            <div class="input-group-append">
+                <button class="btn btn-success"
+                        id="basic-addon2" (click)="resetFilters()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span
+                    jhiTranslate="opgappApp.product.home.deleteFilters"> Edit</span>
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="table-responsive col-md-8" *ngIf="houseFarms?.length > 0">
+    <div class="table-responsive">
         <table class="table table-striped">
             <tbody>
             <tr *ngFor="let houseFarm of houseFarms ;trackBy: trackId">
-                <td><h5>{{houseFarm.name}} <h6>({{houseFarm.user.firstName + ' ' + houseFarm.user.lastName}})</h6></h5></td>
+                <td>
+                    <h5>{{houseFarm.name}} <h6>({{houseFarm.user.firstName + ' ' + houseFarm.user.lastName}})</h6></h5>
+                </td>
                 <td *ngIf="houseFarm.products.length > 0 && houseFarm.products.length !== 1">
-                   {{houseFarm.products.length}} <span jhiTranslate="opgappApp.product.home.title"></span>
+                    {{houseFarm.products.length}} <span jhiTranslate="opgappApp.product.home.title"></span>
                 </td>
                 <td *ngIf="houseFarm.products.length === 1">
-                   {{houseFarm.products.length}} <span jhiTranslate="opgappApp.product.detail.title"></span>
+                    {{houseFarm.products.length}} <span jhiTranslate="opgappApp.product.detail.title"></span>
                 </td>
 
                 <td *ngIf="houseFarm.products.length === 0">
-                   {{houseFarm.products.length}} <span jhiTranslate="opgappApp.product.home.products"></span>
+                    {{houseFarm.products.length}} <span jhiTranslate="opgappApp.product.home.products"></span>
                 </td>
 
                 <td>
@@ -59,5 +73,8 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="alert alert-warning" *ngIf="houseFarms?.length === 0">
+        <span jhiTranslate="opgappApp.houseFarm.home.notFound">No house farms found</span>
     </div>
 </div>

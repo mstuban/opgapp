@@ -4,12 +4,52 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="alert alert-warning" *ngIf="products?.length === 0">
-        <span jhiTranslate="opgappApp.product.home.notFound">No products found</span>
-    </div>
-    <div class="table-responsive" *ngIf="products?.length > 0">
+    <div class="table-responsive">
         <table class="table table-striped">
             <thead>
+            <tr>
+                <th class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" #nameFilterInput
+                               (keyup)="filterProducts()" value=""/>
+                    </div>
+                </th>
+                <th></th>
+                <th></th>
+                <!--<th class="form-group">
+                    <input type="checkbox" class="form-control" name="isAvailableInput" id="field_isAvailableInput"
+                           [(ngModel)]="isAvailableInput"
+                           (change)="filterProducts()"/>
+                </th>-->
+                <th class="form-group">
+                    <select class="form-control" name="productType" id="field_productType" #productTypeInput
+                            (change)="filterProducts()" value="">
+                        <option value="" [selected]="true"></option>
+                        <option value="MEAT">{{'opgappApp.ProductType.MEAT' | translate}}</option>
+                        <option value="CHEESE">{{'opgappApp.ProductType.CHEESE' | translate}}</option>
+                        <option value="DAIRY">{{'opgappApp.ProductType.DAIRY' | translate}}</option>
+                        <option value="SEAFOOD">{{'opgappApp.ProductType.SEAFOOD' | translate}}</option>
+                        <option value="HONEY_AND_JAM">{{'opgappApp.ProductType.HONEY_AND_JAM' | translate}}</option>
+                        <option value="PASTA_AND_FLOUR">{{'opgappApp.ProductType.PASTA_AND_FLOUR' | translate}}</option>
+                        <option value="OIL_AND_VINEGAR">{{'opgappApp.ProductType.OIL_AND_VINEGAR' | translate}}</option>
+                        <option value="BREAD_AND_GRAINS">{{'opgappApp.ProductType.BREAD_AND_GRAINS' | translate}}</option>
+                        <option value="FRUIT_AND_VEGETABLES">{{'opgappApp.ProductType.FRUIT_AND_VEGETABLES' | translate}}</option>
+                        <option value="NON_ALCOHOLIC_DRINKS">{{'opgappApp.ProductType.NON_ALCOHOLIC_DRINKS' | translate}}</option>
+                        <option value="ALCOHOLIC_DRINKS">{{'opgappApp.ProductType.ALCOHOLIC_DRINKS' | translate}}</option>
+                        <option value="SWEETS">{{'opgappApp.ProductType.SWEETS' | translate}}</option>
+                        <option value="HERBS_TEAS_AND_SPICES">{{'opgappApp.ProductType.HERBS_TEAS_AND_SPICES' | translate}}</option>
+                        <option value="GIFT_AND_SOUVENIRS">{{'opgappApp.ProductType.GIFT_AND_SOUVENIRS' | translate}}</option>
+                    </select>
+                </th>
+                <th class="form-group">
+                    <button type="submit"
+                            class="btn btn-success btn-md"
+                            (click)="resetFilters()">
+                        <fa-icon [icon]="'ban'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="opgappApp.product.home.deleteFilters">Delete</span>
+                    </button>
+                </th>
+            </tr>
                 <tr jhiSort>
                     <th jhiSortBy="name"><span jhiTranslate="opgappApp.product.name">Name</span></th>
                     <th jhiSortBy="price"><span jhiTranslate="opgappApp.product.price">Price</span></th>
@@ -19,7 +59,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="products?.length > 0">
             <tr *ngFor="let product of products ;trackBy: trackId">
                 <td><h6>{{product.name}}</h6></td>
                 <td>{{product.price}} kn</td>
@@ -55,5 +95,8 @@
             </tr>
             </tbody>
         </table>
+        <div class="alert alert-warning" *ngIf="products?.length === 0">
+            <span jhiTranslate="opgappApp.product.home.notFound">No products found</span>
+        </div>
     </div>
 </div>

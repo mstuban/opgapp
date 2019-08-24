@@ -2,8 +2,9 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.HouseFarm;
 import com.mycompany.myapp.repository.HouseFarmRepository;
+import com.mycompany.myapp.service.HouseFarmQueryService;
+import com.mycompany.myapp.service.dto.HouseFarmCriteria;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +34,11 @@ public class HouseFarmResource {
 
     private final HouseFarmRepository houseFarmRepository;
 
-    public HouseFarmResource(HouseFarmRepository houseFarmRepository) {
+    private final HouseFarmQueryService houseFarmQueryService;
+
+    public HouseFarmResource(HouseFarmRepository houseFarmRepository, HouseFarmQueryService houseFarmQueryService) {
         this.houseFarmRepository = houseFarmRepository;
+        this.houseFarmQueryService = houseFarmQueryService;
     }
 
     /**
@@ -81,12 +84,26 @@ public class HouseFarmResource {
     /**
      * {@code GET  /house-farms} : get all the houseFarms.
      *
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of houseFarms in body.
      */
     @GetMapping("/house-farms")
-    public List<HouseFarm> getAllHouseFarms() {
-        log.debug("REST request to get all HouseFarms");
-        return houseFarmRepository.findAll();
+    public ResponseEntity<List<HouseFarm>> getAllHouseFarms(HouseFarmCriteria criteria) {
+        log.debug("REST request to get HouseFarms by criteria: {}", criteria);
+        List<HouseFarm> entityList = houseFarmQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+    * {@code GET  /house-farms/count} : count all the houseFarms.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/house-farms/count")
+    public ResponseEntity<Long> countHouseFarms(HouseFarmCriteria criteria) {
+        log.debug("REST request to count HouseFarms by criteria: {}", criteria);
+        return ResponseEntity.ok().body(houseFarmQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -112,6 +129,7 @@ public class HouseFarmResource {
     public ResponseEntity<Void> deleteHouseFarm(@PathVariable Long id) {
         log.debug("REST request to delete HouseFarm : {}", id);
         houseFarmRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName,
+            true, ENTITY_NAME, id.toString())).build();
     }
 }

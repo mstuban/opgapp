@@ -1,23 +1,25 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-rating-heading"><span jhiTranslate="opgappApp.rating.home.createOrEditLabel"></span> {{product.name}} ({{product.houseFarm.name}})</h2>
+            <h2 id="jhi-rating-heading">
+                <span jhiTranslate="opgappApp.rating.home.createOrEditLabel"></span>
+            </h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" hidden>
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                        readonly/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="opgappApp.rating.stars" for="field_stars">Stars</label>
-                    <input type="number" class="form-control" name="stars" id="field_stars"
-                           formControlName="stars"/>
+                    <label class="form-control-label" jhiTranslate="opgappApp.rating.stars" for="field_stars">Stars</label><span> (1-5)</span>
+                    <input type="number" class="form-control  col-md-2" name="stars" id="field_stars"
+                           formControlName="stars" [min]="1" [max]="5" (keydown)="onKeyDown()"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="opgappApp.rating.comment" for="field_comment">Comment</label>
-                    <input type="text" class="form-control" name="comment" id="field_comment"
-                           formControlName="comment"/>
+                    <textarea type="text" class="form-control" name="comment" id="field_comment"
+                           formControlName="comment"></textarea>
                 </div>
             </div>
             <div>
@@ -31,3 +33,11 @@
         </form>
     </div>
 </div>
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+
+        opacity: 1;
+
+    }
+</style>

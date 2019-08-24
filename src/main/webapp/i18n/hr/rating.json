@@ -5,7 +5,8 @@
         "title": "Ocjene",
         "createLabel": "Dodaj ocjenu",
         "createOrEditLabel": "Dodaj ocjenu",
-        "notFound": "Još nema ocjena!"
+        "notFound": "Još nema ocjena!",
+        "averageRating": "Prosječna ocjena"
       },
       "created": "Dodali ste ocjenu!",
       "updated": "Promjenili ste ocjenu!",

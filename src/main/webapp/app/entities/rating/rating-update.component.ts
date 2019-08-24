@@ -10,6 +10,7 @@ import { RatingService } from './rating.service';
 import {IProduct, Product} from 'app/shared/model/product.model';
 import { ProductService } from 'app/entities/product';
 import {AccountService} from "app/core";
+import {StarRatingComponent} from "ng-starrating";
 
 @Component({
   selector: 'jhi-rating-update',
@@ -65,6 +66,13 @@ export class RatingUpdateComponent implements OnInit {
     });
   }
 
+  onRate($event:{oldValue:number, newValue:number, starRating: StarRatingComponent}) {
+    alert(`Old Value:${$event.oldValue}, 
+      New Value: ${$event.newValue}, 
+      Checked Color: ${$event.starRating.checkedcolor}, 
+      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+  }
+
   updateForm(rating: IRating) {
     this.editForm.patchValue({
       id: rating.id,
@@ -114,6 +122,10 @@ export class RatingUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  onKeyDown() {
+    return false;
   }
 
   trackProductById(index: number, item: IProduct) {

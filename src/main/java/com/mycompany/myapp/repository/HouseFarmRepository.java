@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface HouseFarmRepository extends JpaRepository<HouseFarm, Long> {
+public interface HouseFarmRepository extends JpaRepository<HouseFarm, Long>, JpaSpecificationExecutor<HouseFarm> {
 
 }

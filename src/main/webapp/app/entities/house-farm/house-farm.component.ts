@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
-import { IHouseFarm } from 'app/shared/model/house-farm.model';
+import {IHouseFarm} from 'app/shared/model/house-farm.model';
 import { AccountService } from 'app/core';
 import { HouseFarmService } from './house-farm.service';
 
@@ -17,6 +17,9 @@ export class HouseFarmComponent implements OnInit, OnDestroy {
   currentAccount: any;
   eventSubscriber: Subscription;
   userAlreadyHasFarm: boolean;
+  searchCriteria: any;
+
+  @ViewChild("nameFilterInput", {static: false}) nameFilterInput: ElementRef;
 
   constructor(
     protected houseFarmService: HouseFarmService,
@@ -49,6 +52,21 @@ export class HouseFarmComponent implements OnInit, OnDestroy {
       );
   }
 
+  loadByCriteria() {
+    this.houseFarmService
+      .query(this.searchCriteria)
+      .pipe(
+        filter((res: HttpResponse<IHouseFarm[]>) => res.ok),
+        map((res: HttpResponse<IHouseFarm[]>) => res.body)
+      )
+      .subscribe(
+        (res: IHouseFarm[]) => {
+          this.houseFarms = res;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      )
+  }
+
   ngOnInit() {
     this.loadAll();
     this.accountService.identity().then(account => {
@@ -72,6 +90,18 @@ export class HouseFarmComponent implements OnInit, OnDestroy {
 
   registerChangeInProducts() {
     this.eventSubscriber = this.eventManager.subscribe('productListModification', response => this.loadAll());
+  }
+
+  filterProducts() {
+    this.searchCriteria = {
+      'name.contains': this.nameFilterInput.nativeElement.value
+    };
+    this.loadByCriteria();
+  }
+
+  resetFilters() {
+    this.loadAll();
+    this.nameFilterInput.nativeElement.value = '';
   }
 
   protected onError(errorMessage: string) {

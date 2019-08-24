@@ -2,10 +2,12 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.OpgappApp;
 import com.mycompany.myapp.domain.HouseFarm;
+import com.mycompany.myapp.domain.Location;
+import com.mycompany.myapp.domain.Order;
+import com.mycompany.myapp.domain.Product;
 import com.mycompany.myapp.repository.HouseFarmRepository;
-import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.service.HouseFarmQueryService;
 import com.mycompany.myapp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -52,6 +54,9 @@ public class HouseFarmResourceIT {
     private HouseFarmRepository houseFarmRepository;
 
     @Autowired
+    private HouseFarmQueryService houseFarmQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -73,7 +78,7 @@ public class HouseFarmResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final HouseFarmResource houseFarmResource = new HouseFarmResource(houseFarmRepository);
+        final HouseFarmResource houseFarmResource = new HouseFarmResource(houseFarmRepository, houseFarmQueryService);
         this.restHouseFarmMockMvc = MockMvcBuilders.standaloneSetup(houseFarmResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -190,6 +195,283 @@ public class HouseFarmResourceIT {
             .andExpect(jsonPath("$.dateFounded").value(DEFAULT_DATE_FOUNDED.toString()))
             .andExpect(jsonPath("$.contactNumber").value(DEFAULT_CONTACT_NUMBER.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where name equals to DEFAULT_NAME
+        defaultHouseFarmShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the houseFarmList where name equals to UPDATED_NAME
+        defaultHouseFarmShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultHouseFarmShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the houseFarmList where name equals to UPDATED_NAME
+        defaultHouseFarmShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where name is not null
+        defaultHouseFarmShouldBeFound("name.specified=true");
+
+        // Get all the houseFarmList where name is null
+        defaultHouseFarmShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByHasLicenseIsEqualToSomething() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where hasLicense equals to DEFAULT_HAS_LICENSE
+        defaultHouseFarmShouldBeFound("hasLicense.equals=" + DEFAULT_HAS_LICENSE);
+
+        // Get all the houseFarmList where hasLicense equals to UPDATED_HAS_LICENSE
+        defaultHouseFarmShouldNotBeFound("hasLicense.equals=" + UPDATED_HAS_LICENSE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByHasLicenseIsInShouldWork() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where hasLicense in DEFAULT_HAS_LICENSE or UPDATED_HAS_LICENSE
+        defaultHouseFarmShouldBeFound("hasLicense.in=" + DEFAULT_HAS_LICENSE + "," + UPDATED_HAS_LICENSE);
+
+        // Get all the houseFarmList where hasLicense equals to UPDATED_HAS_LICENSE
+        defaultHouseFarmShouldNotBeFound("hasLicense.in=" + UPDATED_HAS_LICENSE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByHasLicenseIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where hasLicense is not null
+        defaultHouseFarmShouldBeFound("hasLicense.specified=true");
+
+        // Get all the houseFarmList where hasLicense is null
+        defaultHouseFarmShouldNotBeFound("hasLicense.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByDateFoundedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where dateFounded equals to DEFAULT_DATE_FOUNDED
+        defaultHouseFarmShouldBeFound("dateFounded.equals=" + DEFAULT_DATE_FOUNDED);
+
+        // Get all the houseFarmList where dateFounded equals to UPDATED_DATE_FOUNDED
+        defaultHouseFarmShouldNotBeFound("dateFounded.equals=" + UPDATED_DATE_FOUNDED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByDateFoundedIsInShouldWork() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where dateFounded in DEFAULT_DATE_FOUNDED or UPDATED_DATE_FOUNDED
+        defaultHouseFarmShouldBeFound("dateFounded.in=" + DEFAULT_DATE_FOUNDED + "," + UPDATED_DATE_FOUNDED);
+
+        // Get all the houseFarmList where dateFounded equals to UPDATED_DATE_FOUNDED
+        defaultHouseFarmShouldNotBeFound("dateFounded.in=" + UPDATED_DATE_FOUNDED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByDateFoundedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where dateFounded is not null
+        defaultHouseFarmShouldBeFound("dateFounded.specified=true");
+
+        // Get all the houseFarmList where dateFounded is null
+        defaultHouseFarmShouldNotBeFound("dateFounded.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByDateFoundedIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where dateFounded greater than or equals to DEFAULT_DATE_FOUNDED
+        defaultHouseFarmShouldBeFound("dateFounded.greaterOrEqualThan=" + DEFAULT_DATE_FOUNDED);
+
+        // Get all the houseFarmList where dateFounded greater than or equals to UPDATED_DATE_FOUNDED
+        defaultHouseFarmShouldNotBeFound("dateFounded.greaterOrEqualThan=" + UPDATED_DATE_FOUNDED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByDateFoundedIsLessThanSomething() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where dateFounded less than or equals to DEFAULT_DATE_FOUNDED
+        defaultHouseFarmShouldNotBeFound("dateFounded.lessThan=" + DEFAULT_DATE_FOUNDED);
+
+        // Get all the houseFarmList where dateFounded less than or equals to UPDATED_DATE_FOUNDED
+        defaultHouseFarmShouldBeFound("dateFounded.lessThan=" + UPDATED_DATE_FOUNDED);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByContactNumberIsEqualToSomething() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where contactNumber equals to DEFAULT_CONTACT_NUMBER
+        defaultHouseFarmShouldBeFound("contactNumber.equals=" + DEFAULT_CONTACT_NUMBER);
+
+        // Get all the houseFarmList where contactNumber equals to UPDATED_CONTACT_NUMBER
+        defaultHouseFarmShouldNotBeFound("contactNumber.equals=" + UPDATED_CONTACT_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByContactNumberIsInShouldWork() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where contactNumber in DEFAULT_CONTACT_NUMBER or UPDATED_CONTACT_NUMBER
+        defaultHouseFarmShouldBeFound("contactNumber.in=" + DEFAULT_CONTACT_NUMBER + "," + UPDATED_CONTACT_NUMBER);
+
+        // Get all the houseFarmList where contactNumber equals to UPDATED_CONTACT_NUMBER
+        defaultHouseFarmShouldNotBeFound("contactNumber.in=" + UPDATED_CONTACT_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByContactNumberIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        houseFarmRepository.saveAndFlush(houseFarm);
+
+        // Get all the houseFarmList where contactNumber is not null
+        defaultHouseFarmShouldBeFound("contactNumber.specified=true");
+
+        // Get all the houseFarmList where contactNumber is null
+        defaultHouseFarmShouldNotBeFound("contactNumber.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByLocationIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Location location = LocationResourceIT.createEntity(em);
+        em.persist(location);
+        em.flush();
+        houseFarm.setLocation(location);
+        houseFarmRepository.saveAndFlush(houseFarm);
+        Long locationId = location.getId();
+
+        // Get all the houseFarmList where location equals to locationId
+        defaultHouseFarmShouldBeFound("locationId.equals=" + locationId);
+
+        // Get all the houseFarmList where location equals to locationId + 1
+        defaultHouseFarmShouldNotBeFound("locationId.equals=" + (locationId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByProductIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Product product = ProductResourceIT.createEntity(em);
+        em.persist(product);
+        em.flush();
+        houseFarm.addProduct(product);
+        houseFarmRepository.saveAndFlush(houseFarm);
+        Long productId = product.getId();
+
+        // Get all the houseFarmList where product equals to productId
+        defaultHouseFarmShouldBeFound("productId.equals=" + productId);
+
+        // Get all the houseFarmList where product equals to productId + 1
+        defaultHouseFarmShouldNotBeFound("productId.equals=" + (productId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllHouseFarmsByOrderIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Order order = OrderResourceIT.createEntity(em);
+        em.persist(order);
+        em.flush();
+        houseFarm.addOrder(order);
+        houseFarmRepository.saveAndFlush(houseFarm);
+        Long orderId = order.getId();
+
+        // Get all the houseFarmList where order equals to orderId
+        defaultHouseFarmShouldBeFound("orderId.equals=" + orderId);
+
+        // Get all the houseFarmList where order equals to orderId + 1
+        defaultHouseFarmShouldNotBeFound("orderId.equals=" + (orderId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned.
+     */
+    private void defaultHouseFarmShouldBeFound(String filter) throws Exception {
+        restHouseFarmMockMvc.perform(get("/api/house-farms?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(houseFarm.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].hasLicense").value(hasItem(DEFAULT_HAS_LICENSE.booleanValue())))
+            .andExpect(jsonPath("$.[*].dateFounded").value(hasItem(DEFAULT_DATE_FOUNDED.toString())))
+            .andExpect(jsonPath("$.[*].contactNumber").value(hasItem(DEFAULT_CONTACT_NUMBER)));
+
+        // Check, that the count call also returns 1
+        restHouseFarmMockMvc.perform(get("/api/house-farms/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned.
+     */
+    private void defaultHouseFarmShouldNotBeFound(String filter) throws Exception {
+        restHouseFarmMockMvc.perform(get("/api/house-farms?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restHouseFarmMockMvc.perform(get("/api/house-farms/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

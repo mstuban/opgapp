@@ -1,8 +1,7 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center product-detail-container">
     <div class="col-8">
         <div *ngIf="product">
-            <h2><span>{{product.name}}</span>
-            </h2>
+            <h2><span>{{product.name}}</span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -43,12 +42,14 @@
             </h2>
             <hr>
             <jhi-alert></jhi-alert>
-            <br/>
             <div class="alert alert-warning" *ngIf="product.ratings?.length === 0">
                 <span jhiTranslate="opgappApp.rating.home.notFound">No ratings found</span>
             </div>
-            <div *ngIf="product.ratings?.length > 0">
-                <ul class="list-group">
+            <div *ngIf="product.ratings?.length > 0" class="rating-container">
+                <b jhiTranslate="opgappApp.rating.home.averageRating"></b>:
+                <small>({{averageRating | number : '1.2-2'}})</small>
+                <hr/>
+                <ul class="list-group rating-list">
                     <li class="list-group-item col-md-3" *ngFor="let rating of product.ratings ;trackBy: trackId">
                         <h6 *ngIf="rating.user">{{rating.user.firstName + ' ' + rating.user.lastName}}</h6>
                         {{rating.comment}} ({{rating.stars}} stars)
@@ -78,3 +79,24 @@
         </div>
     </div>
 </div>
+<style>
+    .rating-container {
+        max-height: 30vh;
+    }
+
+    .rating-list {
+        max-height: 20vh;
+        overflow-y: scroll;
+    }
+
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 7px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, .5);
+        -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
+</style>

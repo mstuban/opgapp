@@ -107,27 +107,28 @@
             </div>
 
             <span *ngIf="houseFarm.user && currentAccount">
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
+                <button type="submit"
+                        (click)="previousState()"
+                        class="btn btn-info">
+                    <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                </button>
+                <span *ngIf="houseFarm.user.id === currentAccount.id">
+                <button type="button"
+                        [routerLink]="['/house-farm', houseFarm.id, 'edit']"
+                        class="btn btn-primary">
+                    <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                </button>
 
-            <button type="button"
-                    [routerLink]="['/house-farm', houseFarm.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
-
-            <button *ngIf="currentAccount.id === houseFarm.user.id" id="jh-create-entity"
-                    class="btn btn-primary float-right jh-create-entity create-product" [routerLink]="['/product',
-                     houseFarm.id, 'new']">
-                <fa-icon [icon]="'plus'"></fa-icon>
-                <span jhiTranslate="opgappApp.product.home.createLabel">
-            Create new Product
-            </span>
-            </button>
+                <button *ngIf="currentAccount.id === houseFarm.user.id" id="jh-create-entity"
+                        class="btn btn-primary float-right jh-create-entity create-product" [routerLink]="['/product',
+                         houseFarm.id, 'new']">
+                    <fa-icon [icon]="'plus'"></fa-icon>
+                    <span jhiTranslate="opgappApp.product.home.createLabel">
+                Create new Product
                 </span>
+                </button>
+                </span>
+            </span>
         </div>
     </div>
 </div>

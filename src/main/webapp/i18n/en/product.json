@@ -6,7 +6,7 @@
         "createLabel": "Create a new Product",
         "createOrEditLabel": "Create or edit a Product",
         "notFound": "No Product found",
-        "products": "products"
+        "deleteFilters": "Delete filters"
       },
       "created": "A new Product is created with identifier {{ param }}",
       "updated": "A Product is updated with identifier {{ param }}",

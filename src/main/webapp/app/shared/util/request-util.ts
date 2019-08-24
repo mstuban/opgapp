@@ -8,9 +8,14 @@ export const createRequestOption = (req?: any): HttpParams => {
         options = options.set(key, req[key]);
       }
     });
-    if (req.sort) {
+    /*if (req.sort) {
       req.sort.forEach(val => {
         options = options.append('sort', val);
+      });
+    }*/
+    if (req.criteria && req.criteria.length > 0) {
+      req.criteria.forEach((criterion) => {
+        options.append(criterion.key, criterion.value);
       });
     }
   }

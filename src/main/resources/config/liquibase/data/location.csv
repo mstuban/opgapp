@@ -1,7 +1,7 @@
 id;street_address;postal_code;city;province;country_id
 1;Brace Radica 120 C;10410;Velika Gorica;Zagreb;1
-2;Domovinskog rata 25;21230;Sinj;Split-Dalmatia;1
-3;Trg Tome Gamulina;21450;Hvar;Split-Dalmatia;1
-4;Creska 38;52440;Novigrad;Istria;1
-5;Stjepana Radica 2;49214;Zabok;Krapina-Zagorje;1
-6;Josipa Kozarca 33;31220;Osijek;Osjek-Baranja;1
+2;Domovinskog rata 25;21230;Sinj;Splitsko-dalmatinska;1
+3;Trg Tome Gamulina;21450;Hvar;Splitsko-dalmatinska;1
+4;Creska 38;52440;Novigrad;Istra;1
+5;Stjepana Radica 2;49214;Zabok;Krapinsko-zagorska;1
+6;Josipa Kozarca 33;31220;Osijek;Osječko-baranjska;1

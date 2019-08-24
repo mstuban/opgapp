@@ -1,11 +1,15 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.OpgappApp;
+import com.mycompany.myapp.domain.HouseFarm;
+import com.mycompany.myapp.domain.Order;
 import com.mycompany.myapp.domain.Product;
+import com.mycompany.myapp.domain.Rating;
+import com.mycompany.myapp.domain.enumeration.ProductType;
 import com.mycompany.myapp.repository.ProductRepository;
 import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.service.ProductQueryService;
 import com.mycompany.myapp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -27,8 +31,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import com.mycompany.myapp.domain.enumeration.ProductType;
 /**
  * Integration tests for the {@Link ProductResource} REST controller.
  */
@@ -60,6 +62,9 @@ public class ProductResourceIT {
     private ProductRepository productRepository;
 
     @Autowired
+    private ProductQueryService productQueryService;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -84,7 +89,8 @@ public class ProductResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProductResource productResource = new ProductResource(productRepository, userRepository);
+        final ProductResource productResource = new ProductResource(productRepository, userRepository,
+            productQueryService);
         this.restProductMockMvc = MockMvcBuilders.standaloneSetup(productResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -216,6 +222,376 @@ public class ProductResourceIT {
             .andExpect(jsonPath("$.isAvailable").value(DEFAULT_IS_AVAILABLE.booleanValue()))
             .andExpect(jsonPath("$.productType").value(DEFAULT_PRODUCT_TYPE.toString()));
     }
+
+    @Test
+    @Transactional
+    public void getAllProductsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where name equals to DEFAULT_NAME
+        defaultProductShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the productList where name equals to UPDATED_NAME
+        defaultProductShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultProductShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the productList where name equals to UPDATED_NAME
+        defaultProductShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where name is not null
+        defaultProductShouldBeFound("name.specified=true");
+
+        // Get all the productList where name is null
+        defaultProductShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByImageUrlIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where imageUrl equals to DEFAULT_IMAGE_URL
+        defaultProductShouldBeFound("imageUrl.equals=" + DEFAULT_IMAGE_URL);
+
+        // Get all the productList where imageUrl equals to UPDATED_IMAGE_URL
+        defaultProductShouldNotBeFound("imageUrl.equals=" + UPDATED_IMAGE_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByImageUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where imageUrl in DEFAULT_IMAGE_URL or UPDATED_IMAGE_URL
+        defaultProductShouldBeFound("imageUrl.in=" + DEFAULT_IMAGE_URL + "," + UPDATED_IMAGE_URL);
+
+        // Get all the productList where imageUrl equals to UPDATED_IMAGE_URL
+        defaultProductShouldNotBeFound("imageUrl.in=" + UPDATED_IMAGE_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByImageUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where imageUrl is not null
+        defaultProductShouldBeFound("imageUrl.specified=true");
+
+        // Get all the productList where imageUrl is null
+        defaultProductShouldNotBeFound("imageUrl.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByPriceIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where price equals to DEFAULT_PRICE
+        defaultProductShouldBeFound("price.equals=" + DEFAULT_PRICE);
+
+        // Get all the productList where price equals to UPDATED_PRICE
+        defaultProductShouldNotBeFound("price.equals=" + UPDATED_PRICE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByPriceIsInShouldWork() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where price in DEFAULT_PRICE or UPDATED_PRICE
+        defaultProductShouldBeFound("price.in=" + DEFAULT_PRICE + "," + UPDATED_PRICE);
+
+        // Get all the productList where price equals to UPDATED_PRICE
+        defaultProductShouldNotBeFound("price.in=" + UPDATED_PRICE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByPriceIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where price is not null
+        defaultProductShouldBeFound("price.specified=true");
+
+        // Get all the productList where price is null
+        defaultProductShouldNotBeFound("price.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByAvailableAmountInLitersIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where availableAmountInLiters equals to DEFAULT_AVAILABLE_AMOUNT_IN_LITERS
+        defaultProductShouldBeFound("availableAmountInLiters.equals=" + DEFAULT_AVAILABLE_AMOUNT_IN_LITERS);
+
+        // Get all the productList where availableAmountInLiters equals to UPDATED_AVAILABLE_AMOUNT_IN_LITERS
+        defaultProductShouldNotBeFound("availableAmountInLiters.equals=" + UPDATED_AVAILABLE_AMOUNT_IN_LITERS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByAvailableAmountInLitersIsInShouldWork() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where availableAmountInLiters in DEFAULT_AVAILABLE_AMOUNT_IN_LITERS or UPDATED_AVAILABLE_AMOUNT_IN_LITERS
+        defaultProductShouldBeFound("availableAmountInLiters.in=" + DEFAULT_AVAILABLE_AMOUNT_IN_LITERS + "," + UPDATED_AVAILABLE_AMOUNT_IN_LITERS);
+
+        // Get all the productList where availableAmountInLiters equals to UPDATED_AVAILABLE_AMOUNT_IN_LITERS
+        defaultProductShouldNotBeFound("availableAmountInLiters.in=" + UPDATED_AVAILABLE_AMOUNT_IN_LITERS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByAvailableAmountInLitersIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where availableAmountInLiters is not null
+        defaultProductShouldBeFound("availableAmountInLiters.specified=true");
+
+        // Get all the productList where availableAmountInLiters is null
+        defaultProductShouldNotBeFound("availableAmountInLiters.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByAvailableAmountInKilogramsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where availableAmountInKilograms equals to DEFAULT_AVAILABLE_AMOUNT_IN_KILOGRAMS
+        defaultProductShouldBeFound("availableAmountInKilograms.equals=" + DEFAULT_AVAILABLE_AMOUNT_IN_KILOGRAMS);
+
+        // Get all the productList where availableAmountInKilograms equals to UPDATED_AVAILABLE_AMOUNT_IN_KILOGRAMS
+        defaultProductShouldNotBeFound("availableAmountInKilograms.equals=" + UPDATED_AVAILABLE_AMOUNT_IN_KILOGRAMS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByAvailableAmountInKilogramsIsInShouldWork() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where availableAmountInKilograms in DEFAULT_AVAILABLE_AMOUNT_IN_KILOGRAMS or UPDATED_AVAILABLE_AMOUNT_IN_KILOGRAMS
+        defaultProductShouldBeFound("availableAmountInKilograms.in=" + DEFAULT_AVAILABLE_AMOUNT_IN_KILOGRAMS + "," + UPDATED_AVAILABLE_AMOUNT_IN_KILOGRAMS);
+
+        // Get all the productList where availableAmountInKilograms equals to UPDATED_AVAILABLE_AMOUNT_IN_KILOGRAMS
+        defaultProductShouldNotBeFound("availableAmountInKilograms.in=" + UPDATED_AVAILABLE_AMOUNT_IN_KILOGRAMS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByAvailableAmountInKilogramsIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where availableAmountInKilograms is not null
+        defaultProductShouldBeFound("availableAmountInKilograms.specified=true");
+
+        // Get all the productList where availableAmountInKilograms is null
+        defaultProductShouldNotBeFound("availableAmountInKilograms.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByIsAvailableIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where isAvailable equals to DEFAULT_IS_AVAILABLE
+        defaultProductShouldBeFound("isAvailable.equals=" + DEFAULT_IS_AVAILABLE);
+
+        // Get all the productList where isAvailable equals to UPDATED_IS_AVAILABLE
+        defaultProductShouldNotBeFound("isAvailable.equals=" + UPDATED_IS_AVAILABLE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByIsAvailableIsInShouldWork() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where isAvailable in DEFAULT_IS_AVAILABLE or UPDATED_IS_AVAILABLE
+        defaultProductShouldBeFound("isAvailable.in=" + DEFAULT_IS_AVAILABLE + "," + UPDATED_IS_AVAILABLE);
+
+        // Get all the productList where isAvailable equals to UPDATED_IS_AVAILABLE
+        defaultProductShouldNotBeFound("isAvailable.in=" + UPDATED_IS_AVAILABLE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByIsAvailableIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where isAvailable is not null
+        defaultProductShouldBeFound("isAvailable.specified=true");
+
+        // Get all the productList where isAvailable is null
+        defaultProductShouldNotBeFound("isAvailable.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByProductTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where productType equals to DEFAULT_PRODUCT_TYPE
+        defaultProductShouldBeFound("productType.equals=" + DEFAULT_PRODUCT_TYPE);
+
+        // Get all the productList where productType equals to UPDATED_PRODUCT_TYPE
+        defaultProductShouldNotBeFound("productType.equals=" + UPDATED_PRODUCT_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByProductTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where productType in DEFAULT_PRODUCT_TYPE or UPDATED_PRODUCT_TYPE
+        defaultProductShouldBeFound("productType.in=" + DEFAULT_PRODUCT_TYPE + "," + UPDATED_PRODUCT_TYPE);
+
+        // Get all the productList where productType equals to UPDATED_PRODUCT_TYPE
+        defaultProductShouldNotBeFound("productType.in=" + UPDATED_PRODUCT_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByProductTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productRepository.saveAndFlush(product);
+
+        // Get all the productList where productType is not null
+        defaultProductShouldBeFound("productType.specified=true");
+
+        // Get all the productList where productType is null
+        defaultProductShouldNotBeFound("productType.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByRatingIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Rating rating = RatingResourceIT.createEntity(em);
+        em.persist(rating);
+        em.flush();
+        product.addRating(rating);
+        productRepository.saveAndFlush(product);
+        Long ratingId = rating.getId();
+
+        // Get all the productList where rating equals to ratingId
+        defaultProductShouldBeFound("ratingId.equals=" + ratingId);
+
+        // Get all the productList where rating equals to ratingId + 1
+        defaultProductShouldNotBeFound("ratingId.equals=" + (ratingId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductsByHouseFarmIsEqualToSomething() throws Exception {
+        // Initialize the database
+        HouseFarm houseFarm = HouseFarmResourceIT.createEntity(em);
+        em.persist(houseFarm);
+        em.flush();
+        product.setHouseFarm(houseFarm);
+        productRepository.saveAndFlush(product);
+        Long houseFarmId = houseFarm.getId();
+
+        // Get all the productList where houseFarm equals to houseFarmId
+        defaultProductShouldBeFound("houseFarmId.equals=" + houseFarmId);
+
+        // Get all the productList where houseFarm equals to houseFarmId + 1
+        defaultProductShouldNotBeFound("houseFarmId.equals=" + (houseFarmId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductsByOrderIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Order order = OrderResourceIT.createEntity(em);
+        em.persist(order);
+        em.flush();
+        product.setOrder(order);
+        productRepository.saveAndFlush(product);
+        Long orderId = order.getId();
+
+        // Get all the productList where order equals to orderId
+        defaultProductShouldBeFound("orderId.equals=" + orderId);
+
+        // Get all the productList where order equals to orderId + 1
+        defaultProductShouldNotBeFound("orderId.equals=" + (orderId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned.
+     */
+    private void defaultProductShouldBeFound(String filter) throws Exception {
+        restProductMockMvc.perform(get("/api/products?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL)))
+            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
+            .andExpect(jsonPath("$.[*].availableAmountInLiters").value(hasItem(DEFAULT_AVAILABLE_AMOUNT_IN_LITERS.doubleValue())))
+            .andExpect(jsonPath("$.[*].availableAmountInKilograms").value(hasItem(DEFAULT_AVAILABLE_AMOUNT_IN_KILOGRAMS.doubleValue())))
+            .andExpect(jsonPath("$.[*].isAvailable").value(hasItem(DEFAULT_IS_AVAILABLE.booleanValue())))
+            .andExpect(jsonPath("$.[*].productType").value(hasItem(DEFAULT_PRODUCT_TYPE.toString())));
+
+        // Check, that the count call also returns 1
+        restProductMockMvc.perform(get("/api/products/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned.
+     */
+    private void defaultProductShouldNotBeFound(String filter) throws Exception {
+        restProductMockMvc.perform(get("/api/products?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restProductMockMvc.perform(get("/api/products/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

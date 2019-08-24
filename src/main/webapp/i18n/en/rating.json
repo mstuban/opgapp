@@ -5,7 +5,8 @@
         "title": "Ratings",
         "createLabel": "Create a new Rating",
         "createOrEditLabel": "Create or edit a Rating",
-        "notFound": "No Rating found"
+        "notFound": "No Rating found",
+        "averageRating": "Average rating"
       },
       "created": "A new Rating is created with identifier {{ param }}",
       "updated": "A Rating is updated with identifier {{ param }}",
