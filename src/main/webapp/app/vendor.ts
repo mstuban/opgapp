@@ -44,6 +44,7 @@ import {
   faBreadSlice,
   faCheckSquare
 } from '@fortawesome/free-solid-svg-icons';
+import {faStar} from "@fortawesome/free-solid-svg-icons/faStar";
 
 // Adds the SVG icon to the library so you can use it in your page
 library.add(faUser);
@@ -83,5 +84,6 @@ library.add(faAsterisk);
 library.add(faSeedling);
 library.add(faBreadSlice);
 library.add(faCheckSquare);
+library.add(faStar);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

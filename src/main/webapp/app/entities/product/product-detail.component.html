@@ -52,7 +52,7 @@
                 <ul class="list-group rating-list">
                     <li class="list-group-item col-md-3" *ngFor="let rating of product.ratings ;trackBy: trackId">
                         <h6 *ngIf="rating.user">{{rating.user.firstName + ' ' + rating.user.lastName}}</h6>
-                        {{rating.comment}} ({{rating.stars}} stars)
+                        {{rating.comment}} ({{rating.stars}} <fa-icon [icon]="'star'"></fa-icon>)
                     </li>
                 </ul>
             </div>
