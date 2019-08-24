@@ -9,7 +9,7 @@
       },
       "created": "Novi OPG je kreiran s identifikatorom {{ param }}",
       "updated": "Promijenjen je OPG s identifikatorom {{ param }}",
-      "deleted": "Promijenjen je OPG s identifikatorom {{ param }}",
+      "deleted": "Izbrisan je OPG s identifikatorom {{ param }}",
       "delete": {
         "question": "Jeste li sigurni da želite izbrisati OPG s identifikatorom {{ id }}?"
       },

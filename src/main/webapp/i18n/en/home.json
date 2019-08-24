@@ -1,6 +1,9 @@
 {
   "home": {
     "title": "Welcome to OPG online!",
+    "findHouseFarms": "Search for house farms",
+    "findProducts": "Search for products",
+    "myHouseFarm": "My House Farm",
     "subtitle": "This is your homepage",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."

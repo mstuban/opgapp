@@ -1,6 +1,9 @@
 {
   "home": {
     "title": "Dobrodošli na OPG online!",
+    "findHouseFarms": "Pretraga OPG-ova",
+    "findProducts": "Pretraga proizvoda",
+    "myHouseFarm": "Moj OPG",
     "subtitle": "This is your homepage",
     "logged": {
       "message": "Prijavljeni ste kao \"{{username}}\"."

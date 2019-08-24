@@ -6,6 +6,29 @@
                 <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
                     [translateValues]="{username: account.login}"> You are logged in as user "{{account.login}}". </span>
             </div>
+            <div class="btn-group" role="group" *ngIf="isAuthenticated()">
+                <button type="button" [routerLink]="['/product']"
+                        class="btn btn-secondary btn-md gray-button">
+                    <fa-icon icon="seedling" fixedWidth="true"></fa-icon>
+                    <span jhiTranslate="home.findProducts"></span>
+                </button>
+                <button type="button" [routerLink]="['/house-farm']" class="btn btn-secondary btn-md gray-button">
+                    <fa-icon icon="home" fixedWidth="true"></fa-icon>
+                    <span jhiTranslate="home.findHouseFarms"></span>
+                </button>
+                <button type="button" *ngIf="!userAlreadyHasFarm" [routerLink]="['/house-farm/new']"
+                        class="btn btn-secondary btn-md gray-button">
+                    <fa-icon icon="plus" fixedWidth="true"></fa-icon>
+                    <span jhiTranslate="opgappApp.houseFarm.home.createLabel"></span>
+                </button>
+                <button type="button" *ngIf="userAlreadyHasFarm" [routerLink]="['/house-farm/', account.houseFarm.id,
+                 'view']"
+                        class="btn btn-secondary btn-md gray-button">
+                    <fa-icon icon="eye" fixedWidth="true"></fa-icon>
+                    <span jhiTranslate="home.myHouseFarm"></span>
+                </button>
+            </div>
+
             <div class="alert alert-warning" *ngSwitchCase="false">
                 <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
                 <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>

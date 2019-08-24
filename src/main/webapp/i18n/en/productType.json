@@ -2,20 +2,20 @@
   "opgappApp": {
     "ProductType": {
       "null": "",
-      "MEAT": "MEAT",
-      "CHEESE": "CHEESE",
-      "DAIRY": "DAIRY",
-      "SEAFOOD": "SEAFOOD",
-      "HONEY_AND_JAM": "HONEY_AND_JAM",
-      "PASTA_AND_FLOUR": "PASTA_AND_FLOUR",
-      "OIL_AND_VINEGAR": "OIL_AND_VINEGAR",
-      "BREAD_AND_GRAINS": "BREAD_AND_GRAINS",
-      "FRUIT_AND_VEGETABLES": "FRUIT_AND_VEGETABLES",
-      "NON_ALCOHOLIC_DRINKS": "NON_ALCOHOLIC_DRINKS",
-      "ALCOHOLIC_DRINKS": "ALCOHOLIC_DRINKS",
-      "SWEETS": "SWEETS",
-      "HERBS_TEAS_AND_SPICES": "HERBS_TEAS_AND_SPICES",
-      "GIFT_AND_SOUVENIRS": "GIFT_AND_SOUVENIRS"
+      "MEAT": "Meat",
+      "CHEESE": "Cheese",
+      "DAIRY": "Dairy",
+      "SEAFOOD": "Seafood",
+      "HONEY_AND_JAM": "Honey and jam",
+      "PASTA_AND_FLOUR": "Pasta and flour",
+      "OIL_AND_VINEGAR": "Oil and vinegar",
+      "BREAD_AND_GRAINS": "Bread and grains",
+      "FRUIT_AND_VEGETABLES": "Fruit and vegetables",
+      "NON_ALCOHOLIC_DRINKS": "Non alcoholic drinks",
+      "ALCOHOLIC_DRINKS": "Alcoholic drinks",
+      "SWEETS": "Sweets",
+      "HERBS_TEAS_AND_SPICES": "Herbs, teas and spices",
+      "GIFT_AND_SOUVENIRS": "Gifts and souvenirs"
     }
   }
 }

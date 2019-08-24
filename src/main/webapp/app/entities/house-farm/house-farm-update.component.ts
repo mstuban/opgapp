@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
@@ -37,7 +37,8 @@ export class HouseFarmUpdateComponent implements OnInit {
     protected locationService: LocationService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    protected accountService: AccountService
+    protected accountService: AccountService,
+    protected router: Router
   ) {}
 
   ngOnInit() {
@@ -117,12 +118,12 @@ export class HouseFarmUpdateComponent implements OnInit {
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IHouseFarm>>) {
-    result.subscribe((res: HttpResponse<IHouseFarm>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe((res: HttpResponse<IHouseFarm>) => this.onSaveSuccess(res), (res: HttpErrorResponse) => this.onSaveError());
   }
 
-  protected onSaveSuccess() {
+  protected onSaveSuccess(res: HttpResponse<IHouseFarm>) {
     this.isSaving = false;
-    this.previousState();
+    this.router.navigate(['/house-farm/', res.body.id, 'view'])
   }
 
   protected onSaveError() {
