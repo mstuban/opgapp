@@ -20,7 +20,6 @@ import { OpgappEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
-import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   imports: [
@@ -39,8 +38,7 @@ import {NgxSpinnerModule} from "ngx-spinner";
     OpgappAccountModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     OpgappEntityModule,
-    OpgappAppRoutingModule,
-    NgxSpinnerModule
+    OpgappAppRoutingModule
   ],
   declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
   providers: [
