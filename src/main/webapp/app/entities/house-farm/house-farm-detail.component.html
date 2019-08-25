@@ -48,7 +48,7 @@
                     </dd>
                 </dl>
             </div>
-            <div class="col-6 text-center">
+            <div class="col-6 text-center" *ngIf="houseFarm.image">
                 <img class="img-fluid rounded img-thumbnail" [src]="'data:image/png;base64,' +
                  houseFarm.image.byteArray"/>
             </div>

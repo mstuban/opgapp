@@ -49,7 +49,7 @@
                     </dd>
                 </dl>
             </div>
-            <div class="col-6 text-center">
+            <div class="col-6 text-center" *ngIf="product.image">
                 <img class="img-fluid rounded img-thumbnail" [src]="'data:image/png;base64,' +
                  product.image.byteArray"/>
             </div>
