@@ -95,10 +95,6 @@ public class HouseFarmQueryService extends QueryService<HouseFarm> {
             if (criteria.getContactNumber() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getContactNumber(), HouseFarm_.contactNumber));
             }
-            if (criteria.getLocationId() != null) {
-                specification = specification.and(buildSpecification(criteria.getLocationId(),
-                    root -> root.join(HouseFarm_.location, JoinType.LEFT).get(Location_.id)));
-            }
             if (criteria.getProductId() != null) {
                 specification = specification.and(buildSpecification(criteria.getProductId(),
                     root -> root.join(HouseFarm_.products, JoinType.LEFT).get(Product_.id)));
