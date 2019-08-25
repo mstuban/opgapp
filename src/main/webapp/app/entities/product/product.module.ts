@@ -13,11 +13,12 @@ import {
   productRoute,
   productPopupRoute
 } from './';
+import {ImageUploadModule} from "angular2-image-upload";
 
 const ENTITY_STATES = [...productRoute, ...productPopupRoute];
 
 @NgModule({
-  imports: [OpgappSharedModule, RouterModule.forChild(ENTITY_STATES)],
+  imports: [OpgappSharedModule, RouterModule.forChild(ENTITY_STATES), ImageUploadModule.forRoot()],
   declarations: [
     ProductComponent,
     ProductDetailComponent,

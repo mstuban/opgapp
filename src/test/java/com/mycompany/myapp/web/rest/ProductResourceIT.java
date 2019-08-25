@@ -108,7 +108,6 @@ public class ProductResourceIT {
     public static Product createEntity(EntityManager em) {
         Product product = new Product()
             .name(DEFAULT_NAME)
-            .imageUrl(DEFAULT_IMAGE_URL)
             .price(DEFAULT_PRICE)
             .availableAmountInLiters(DEFAULT_AVAILABLE_AMOUNT_IN_LITERS)
             .availableAmountInKilograms(DEFAULT_AVAILABLE_AMOUNT_IN_KILOGRAMS)
@@ -125,7 +124,6 @@ public class ProductResourceIT {
     public static Product createUpdatedEntity(EntityManager em) {
         Product product = new Product()
             .name(UPDATED_NAME)
-            .imageUrl(UPDATED_IMAGE_URL)
             .price(UPDATED_PRICE)
             .availableAmountInLiters(UPDATED_AVAILABLE_AMOUNT_IN_LITERS)
             .availableAmountInKilograms(UPDATED_AVAILABLE_AMOUNT_IN_KILOGRAMS)
@@ -155,7 +153,6 @@ public class ProductResourceIT {
         assertThat(productList).hasSize(databaseSizeBeforeCreate + 1);
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testProduct.getImageUrl()).isEqualTo(DEFAULT_IMAGE_URL);
         assertThat(testProduct.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testProduct.getAvailableAmountInLiters()).isEqualTo(DEFAULT_AVAILABLE_AMOUNT_IN_LITERS);
         assertThat(testProduct.getAvailableAmountInKilograms()).isEqualTo(DEFAULT_AVAILABLE_AMOUNT_IN_KILOGRAMS);
@@ -615,7 +612,6 @@ public class ProductResourceIT {
         em.detach(updatedProduct);
         updatedProduct
             .name(UPDATED_NAME)
-            .imageUrl(UPDATED_IMAGE_URL)
             .price(UPDATED_PRICE)
             .availableAmountInLiters(UPDATED_AVAILABLE_AMOUNT_IN_LITERS)
             .availableAmountInKilograms(UPDATED_AVAILABLE_AMOUNT_IN_KILOGRAMS)
@@ -632,7 +628,6 @@ public class ProductResourceIT {
         assertThat(productList).hasSize(databaseSizeBeforeUpdate);
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testProduct.getImageUrl()).isEqualTo(UPDATED_IMAGE_URL);
         assertThat(testProduct.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testProduct.getAvailableAmountInLiters()).isEqualTo(UPDATED_AVAILABLE_AMOUNT_IN_LITERS);
         assertThat(testProduct.getAvailableAmountInKilograms()).isEqualTo(UPDATED_AVAILABLE_AMOUNT_IN_KILOGRAMS);

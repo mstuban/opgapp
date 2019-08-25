@@ -16,10 +16,10 @@
       "detail": {
         "title": "Location"
       },
-      "streetAddress": "Street Address",
-      "postalCode": "Postal Code",
-      "city": "City",
-      "province": "Province",
+      "streetAddress": "Adresa",
+      "postalCode": "Poštanski broj",
+      "city": "Grad",
+      "province": "Županija",
       "country": "Country"
     }
   }

@@ -1,12 +1,9 @@
 package com.mycompany.myapp.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -31,6 +28,10 @@ public class HouseFarm implements Serializable {
 
     @Column(name = "has_license")
     private Boolean hasLicense;
+
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(unique = true)
+    private Image image;
 
     @Column(name = "date_founded")
     private LocalDate dateFounded;
@@ -245,5 +246,13 @@ public class HouseFarm implements Serializable {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

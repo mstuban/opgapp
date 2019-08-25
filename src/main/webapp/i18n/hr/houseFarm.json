@@ -22,7 +22,12 @@
       "contactNumber": "Kontakt broj",
       "location": "Lokacija",
       "product": "Proizvod",
-      "order": "Narudžba"
+      "order": "Narudžba",
+      "selectImage": "Odaberite sliku",
+      "dropImage": "Dovucite sliku ovdje",
+      "fileTooLarge": "Slika je prevelika! (max. 1 MB)",
+      "clearImage": "Resetiraj sliku",
+      "createOrUpdate": "Dodaj ili uredi sliku"
     }
   }
 }

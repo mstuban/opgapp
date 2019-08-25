@@ -28,8 +28,9 @@ public class Product implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(unique = true)
+    private Image image;
 
     @Column(name = "price")
     private Double price;
@@ -83,19 +84,6 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public Product imageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-        return this;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public Double getPrice() {
@@ -236,7 +224,6 @@ public class Product implements Serializable {
         return "Product{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", imageUrl='" + getImageUrl() + "'" +
             ", price=" + getPrice() +
             ", availableAmountInLiters=" + getAvailableAmountInLiters() +
             ", availableAmountInKilograms=" + getAvailableAmountInKilograms() +
@@ -245,4 +232,19 @@ public class Product implements Serializable {
             "}";
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
+    }
 }

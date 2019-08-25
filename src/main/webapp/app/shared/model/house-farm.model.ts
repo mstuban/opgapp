@@ -2,6 +2,7 @@ import {Moment} from 'moment';
 import {IProduct} from 'app/shared/model/product.model';
 import {IOrder} from 'app/shared/model/order.model';
 import {IUser} from 'app/core';
+import {IImage} from "app/shared/model/image.model";
 
 export interface IHouseFarm {
   id?: number;
@@ -17,6 +18,7 @@ export interface IHouseFarm {
   products?: IProduct[];
   orders?: IOrder[];
   user?: IUser;
+  image?: IImage
 }
 
 export class HouseFarm implements IHouseFarm {
@@ -32,6 +34,7 @@ export class HouseFarm implements IHouseFarm {
     public province?: string,
     public country?: string,
     public products?: IProduct[],
+    public image?: IImage,
     public orders?: IOrder[],
     public user?: IUser
   ) {

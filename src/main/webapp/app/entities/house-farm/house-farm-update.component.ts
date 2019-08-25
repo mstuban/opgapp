@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IHouseFarm, HouseFarm } from 'app/shared/model/house-farm.model';
 import { HouseFarmService } from './house-farm.service';
 import { ILocation } from 'app/shared/model/location.model';
-import { LocationService } from 'app/entities/location';
 import {AccountService} from 'app/core';
+import {SERVER_API_URL} from "app/app.constants";
 
 @Component({
   selector: 'jhi-house-farm-update',
@@ -20,6 +19,8 @@ export class HouseFarmUpdateComponent implements OnInit {
 
   locations: ILocation[];
   currentAccount: any;
+  apiUrl: string = SERVER_API_URL;
+  image: any;
 
   editForm = this.fb.group({
     id: [],
@@ -30,6 +31,7 @@ export class HouseFarmUpdateComponent implements OnInit {
     streetAddress: [],
     postalCode: [],
     city: [],
+    image: [],
     province: [],
     country: []
   });
@@ -65,6 +67,7 @@ export class HouseFarmUpdateComponent implements OnInit {
       city: houseFarm.city,
       province: houseFarm.province,
       country: houseFarm.country,
+      image: this.image,
       user: this.currentAccount
     });
   }
@@ -96,6 +99,7 @@ export class HouseFarmUpdateComponent implements OnInit {
       city: this.editForm.get(['city']).value,
       province: this.editForm.get(['province']).value,
       country: this.editForm.get(['country']).value,
+      image: this.image,
       user: this.currentAccount
     };
     return entity;
@@ -120,5 +124,9 @@ export class HouseFarmUpdateComponent implements OnInit {
 
   trackLocationById(index: number, item: ILocation) {
     return item.id;
+  }
+
+  onUploadFinished(event) {
+      this.image = event.serverResponse.response.body;
   }
 }

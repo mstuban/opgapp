@@ -1,5 +1,5 @@
-id;name;image_url;price;available_amount_in_liters;available_amount_in_kilograms;is_available;product_type;house_farm_id
-1;Vrcani med;;100;100;;true;HONEY_AND_JAM;1
-2;Pršut;;350;100;;true;MEAT;2
-3;Ekstra djevičansko maslinovo ulje;;200;50;;false;OIL_AND_VINEGAR;3
-4;Graševina;;200;50;;false;ALCOHOLIC_DRINKS;6
+id;name;price;available_amount_in_liters;available_amount_in_kilograms;is_available;product_type;house_farm_id
+1;Vrcani med;100;100;;true;HONEY_AND_JAM;1
+2;Pršut;350;100;;true;MEAT;2
+3;Ekstra djevičansko maslinovo ulje;200;50;;false;OIL_AND_VINEGAR;3
+4;Graševina;200;50;;false;ALCOHOLIC_DRINKS;6

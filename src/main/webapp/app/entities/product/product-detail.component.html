@@ -1,8 +1,9 @@
-<div class="row justify-content-center product-detail-container">
+<div class="row justify-content-left product-detail-container">
     <div class="col-12">
-        <div *ngIf="product">
-            <h2><span>{{product.name}}</span></h2>
-            <span>
+        <div *ngIf="product" class="row">
+            <div class="col-6">
+                <h2><span>{{product.name}}</span></h2>
+                <span>
             <button type="submit"
                     [routerLink]="['/', 'house-farm']"
                     replaceUrl="true"
@@ -12,41 +13,48 @@
                 <span jhiTranslate="opgappApp.product.order"></span>
             </button>
                 </span>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="opgappApp.product.name">Name</span></dt>
-                <dd>
-                    <span>{{product.name}}</span>
-                </dd>
-                <dt><span jhiTranslate="opgappApp.product.price">Price</span></dt>
-                <dd>
-                    <span>{{product.price}} kn</span>
-                </dd>
-                <dt><span jhiTranslate="opgappApp.product.availableAmountInLiters">Available Amount In Liters</span>
-                </dt>
-                <dd>
-                    <span>{{product.availableAmountInLiters}}</span>
-                </dd>
-                <dt><span
-                    jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span>
-                </dt>
-                <dd>
-                    <span>{{product.availableAmountInKilograms}}</span>
-                </dd>
-                <dt><span jhiTranslate="opgappApp.product.isAvailable">In Stock</span></dt>
-                <dd>
+                <hr>
+                <jhi-alert-error></jhi-alert-error>
+                <dl class="row-md jh-entity-details">
+                    <dt><span jhiTranslate="opgappApp.product.name">Name</span></dt>
+                    <dd>
+                        <span>{{product.name}}</span>
+                    </dd>
+                    <dt><span jhiTranslate="opgappApp.product.price">Price</span></dt>
+                    <dd>
+                        <span>{{product.price}} kn</span>
+                    </dd>
+                    <dt><span jhiTranslate="opgappApp.product.availableAmountInLiters">Available Amount In Liters</span>
+                    </dt>
+                    <dd>
+                        <span>{{product.availableAmountInLiters}}</span>
+                    </dd>
+                    <dt><span
+                        jhiTranslate="opgappApp.product.availableAmountInKilograms">Available Amount In Kilograms</span>
+                    </dt>
+                    <dd>
+                        <span>{{product.availableAmountInKilograms}}</span>
+                    </dd>
+                    <dt><span jhiTranslate="opgappApp.product.isAvailable">In Stock</span></dt>
+                    <dd>
                     <span>
                         <fa-icon *ngIf="product.isAvailable" [icon]="'check-square'"></fa-icon>
                         <fa-icon *ngIf="!product.isAvailable" [icon]="'ban'"></fa-icon>
                     </span>
-                </dd>
-                <dt><span jhiTranslate="opgappApp.product.productType">Product Type</span></dt>
-                <dd>
+                    </dd>
+                    <dt><span jhiTranslate="opgappApp.product.productType">Product Type</span></dt>
+                    <dd>
                     <span
                         jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}</span>
-                </dd>
-            </dl>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-6 text-center">
+                <img class="img-fluid rounded img-thumbnail" [src]="'data:image/png;base64,' +
+                 product.image.byteArray"/>
+            </div>
+        </div>
+        <div class="col-12">
             <h2 id="page-heading">
                 <span jhiTranslate="opgappApp.rating.home.title"></span>
             </h2>
@@ -62,7 +70,9 @@
                 <ul class="list-group rating-list">
                     <li class="list-group-item col-md-3" *ngFor="let rating of product.ratings ;trackBy: trackId">
                         <h6 *ngIf="rating.user">{{rating.user.firstName + ' ' + rating.user.lastName}}</h6>
-                        {{rating.comment}} ({{rating.stars}} <fa-icon [icon]="'star'"></fa-icon>)
+                        {{rating.comment}} ({{rating.stars}}
+                        <fa-icon [icon]="'star'"></fa-icon>
+                        )
                     </li>
                 </ul>
             </div>
@@ -83,11 +93,13 @@
                     <button type="button" *ngIf="product.houseFarm.user.id !== currentAccount.id"
                             [routerLink]="['/rating', product.id, 'new']"
                             class="btn btn-danger">
-                        <fa-icon [icon]="'heart'"></fa-icon>&nbsp;<span jhiTranslate="opgappApp.rating.home.createLabel"> Add rating</span>
+                        <fa-icon [icon]="'heart'"></fa-icon>&nbsp;<span
+                        jhiTranslate="opgappApp.rating.home.createLabel"> Add rating</span>
                     </button>
                 </span>
         </div>
     </div>
+</div>
 </div>
 <style>
     .rating-container {

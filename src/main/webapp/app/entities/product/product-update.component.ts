@@ -12,6 +12,7 @@ import {HouseFarmService} from 'app/entities/house-farm';
 import {IOrder} from 'app/shared/model/order.model';
 import {OrderService} from 'app/entities/order';
 import {AccountService} from 'app/core';
+import {SERVER_API_URL} from "app/app.constants";
 
 @Component({
   selector: 'jhi-product-update',
@@ -19,11 +20,13 @@ import {AccountService} from 'app/core';
 })
 export class ProductUpdateComponent implements OnInit {
   isSaving: boolean;
+  apiUrl: string = SERVER_API_URL;
 
   housefarms: IHouseFarm[];
   houseFarm: IHouseFarm;
   orders: IOrder[];
   currentAccount: any;
+  image: any;
 
   editForm = this.fb.group({
     id: [],
@@ -122,6 +125,7 @@ export class ProductUpdateComponent implements OnInit {
       availableAmountInKilograms: this.editForm.get(['availableAmountInKilograms']).value,
       isAvailable: this.editForm.get(['isAvailable']).value,
       productType: this.editForm.get(['productType']).value,
+      image: this.image,
       houseFarm: this.houseFarm
     };
     return entity;
@@ -150,5 +154,9 @@ export class ProductUpdateComponent implements OnInit {
 
   trackOrderById(index: number, item: IOrder) {
     return item.id;
+  }
+
+  onUploadFinished(event) {
+    this.image = event.serverResponse.response.body;
   }
 }

@@ -13,11 +13,12 @@ import {
   houseFarmRoute,
   houseFarmPopupRoute
 } from './';
+import {ImageUploadModule} from 'angular2-image-upload';
 
 const ENTITY_STATES = [...houseFarmRoute, ...houseFarmPopupRoute];
 
 @NgModule({
-  imports: [OpgappSharedModule, RouterModule.forChild(ENTITY_STATES)],
+  imports: [OpgappSharedModule, RouterModule.forChild(ENTITY_STATES), ImageUploadModule.forRoot()],
   declarations: [
     HouseFarmComponent,
     HouseFarmDetailComponent,

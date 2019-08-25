@@ -1,6 +1,7 @@
 import { IRating } from 'app/shared/model/rating.model';
 import { IHouseFarm } from 'app/shared/model/house-farm.model';
 import { IOrder } from 'app/shared/model/order.model';
+import {IImage} from "app/shared/model/image.model";
 
 export const enum ProductType {
   MEAT = 'MEAT',
@@ -29,6 +30,7 @@ export interface IProduct {
   isAvailable?: boolean;
   productType?: ProductType;
   ratings?: IRating[];
+  image?: IImage;
   houseFarm?: IHouseFarm;
   order?: IOrder;
 }
@@ -44,6 +46,7 @@ export class Product implements IProduct {
     public isAvailable?: boolean,
     public productType?: ProductType,
     public ratings?: IRating[],
+    public image?: IImage,
     public houseFarm?: IHouseFarm,
     public order?: IOrder
   ) {

@@ -22,7 +22,12 @@
       "contactNumber": "Contact Number",
       "location": "Location",
       "product": "Product",
-      "order": "Order"
+      "order": "Order",
+      "selectImage": "Select image",
+      "dropImage": "Drag and drop image here",
+      "fileTooLarge": "File too large",
+      "clearImage": "Clear image",
+      "createOrUpdate": "Add or update image"
     }
   }
 }

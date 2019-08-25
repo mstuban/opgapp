@@ -19,7 +19,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="image_url" type="varchar(255)">
+            <column name="image_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -75,13 +75,13 @@
                   tableName="product">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="image_url" type="string"/>
             <column name="price" type="numeric"/>
             <column name="available_amount_in_liters" type="numeric"/>
             <column name="available_amount_in_kilograms" type="numeric"/>
             <column name="is_available" type="boolean"/>
             <column name="product_type" type="string"/>
             <column name="house_farm_id" type="numeric"/>
+            <column name="image_id" type="numeric"/>
         </loadData>
     </changeSet>
 
