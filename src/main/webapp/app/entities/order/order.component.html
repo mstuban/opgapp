@@ -1,9 +1,10 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="opgappApp.order.home.title">Orders</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-order" [routerLink]="['/order/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-order"
+                [routerLink]="['/order/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="opgappApp.order.home.createLabel">
+            <span jhiTranslate="opgappApp.order.home.createLabel">
             Create new Order
             </span>
         </button>
@@ -17,13 +18,14 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="opgappApp.order.number">Number</span></th>
-            <th><span jhiTranslate="opgappApp.order.dateSubmitted">Date Submitted</span></th>
-            <th><span jhiTranslate="opgappApp.order.totalPrice">Total Price</span></th>
-            <th><span jhiTranslate="opgappApp.order.orderStatus">Order Status</span></th>
-            <th><span jhiTranslate="opgappApp.order.houseFarm">House Farm</span></th>
-            <th></th>
+                <th><span jhiTranslate="global.field.id">ID</span></th>
+                <th><span jhiTranslate="opgappApp.order.number">Number</span></th>
+                <th><span jhiTranslate="opgappApp.order.dateSubmitted">Date Submitted</span></th>
+                <th><span jhiTranslate="opgappApp.order.totalPrice">Total Price</span></th>
+                <th><span jhiTranslate="opgappApp.order.orderStatus">Order Status</span></th>
+                <th><span jhiTranslate="opgappApp.order.houseFarm">House Farm</span></th>
+                <th><span>Products</span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -35,35 +37,82 @@
                 <td jhiTranslate="{{'opgappApp.OrderStatus.' + order.orderStatus}}">{{order.orderStatus}}</td>
                 <td>
                     <div *ngIf="order.houseFarm">
-                        <a [routerLink]="['../house-farm', order.houseFarm?.id, 'view' ]" >{{order.houseFarm?.id}}</a>
+                        <a [routerLink]="['../house-farm', order.houseFarm?.id, 'view' ]">{{order.houseFarm?.id}}</a>
                     </div>
                 </td>
-                <td class="text-right">
+                <td>
+                    <div *ngIf="order.products">
+                        <div class="alert alert-warning" *ngIf="houseFarm.products?.length === 0">
+                            <span jhiTranslate="opgappApp.product.home.notFound">No products found</span>
+                        </div>
+            <tr *ngFor="let product of houseFarm.products ;trackBy: trackId">
+                <td>{{product.name}}</td>
+                <td>{{product.price}} kn</td>
+                <td>{{product.availableAmountInLiters}}</td>
+                <td>{{product.availableAmountInKilograms}}</td>
+                <td>
+                    <fa-icon *ngIf="product.isAvailable" [icon]="'check-square'"></fa-icon>
+                    <fa-icon *ngIf="!product.isAvailable" [icon]="'ban'"></fa-icon>
+                </td>
+                <td jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}
+                </td>
+                <td class="text-right" *jhiHasAnyAuthority="'ROLE_OWNER'">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/order', order.id, 'view' ]"
+                                [routerLink]="['/product', product.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/order', order.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'order', { outlets: { popup: order.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+
+                        <span *ngIf="houseFarm.user && currentAccount">
+                                    <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                                            [routerLink]="['/product', houseFarm.id, product.id, 'edit']"
+                                            class="btn btn-primary btn-sm">
+                                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                    </button>
+                                    <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                                            [routerLink]="['/', 'product', { outlets: { popup: product.id + '/delete'} }]"
+                                            replaceUrl="true"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-danger btn-sm">
+                                        <fa-icon [icon]="'times'"></fa-icon>
+                                        <span class="d-none d-md-inline"
+                                              jhiTranslate="entity.action.delete">Delete</span>
+                                    </button>
+                                </span>
                     </div>
                 </td>
             </tr>
-            </tbody>
-        </table>
-    </div>
+    </td>
+
+    <td class="text-right">
+        <div class="btn-group">
+            <button type="submit"
+                    [routerLink]="['/order', order.id, 'view' ]"
+                    class="btn btn-info btn-sm">
+                <fa-icon [icon]="'eye'"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+            </button>
+            <button type="submit"
+                    [routerLink]="['/order', order.id, 'edit']"
+                    class="btn btn-primary btn-sm">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+            <button type="submit"
+                    [routerLink]="['/', 'order', { outlets: { popup: order.id + '/delete'} }]"
+                    replaceUrl="true"
+                    queryParamsHandling="merge"
+                    class="btn btn-danger btn-sm">
+                <fa-icon [icon]="'times'"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+            </button>
+        </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+</div>
 </div>

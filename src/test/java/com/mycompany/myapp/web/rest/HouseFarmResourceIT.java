@@ -386,7 +386,6 @@ public class HouseFarmResourceIT {
         Location location = LocationResourceIT.createEntity(em);
         em.persist(location);
         em.flush();
-        houseFarm.setLocation(location);
         houseFarmRepository.saveAndFlush(houseFarm);
         Long locationId = location.getId();
 

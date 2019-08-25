@@ -19,7 +19,6 @@ export class HouseFarmUpdateComponent implements OnInit {
   isSaving: boolean;
 
   locations: ILocation[];
-  dateFoundedDp: any;
   currentAccount: any;
 
   editForm = this.fb.group({
@@ -28,13 +27,16 @@ export class HouseFarmUpdateComponent implements OnInit {
     hasLicense: [],
     dateFounded: [],
     contactNumber: [],
-    location: []
+    streetAddress: [],
+    postalCode: [],
+    city: [],
+    province: [],
+    country: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected houseFarmService: HouseFarmService,
-    protected locationService: LocationService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     protected accountService: AccountService,
@@ -46,32 +48,6 @@ export class HouseFarmUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ houseFarm }) => {
       this.updateForm(houseFarm);
     });
-    this.locationService
-      .query({ filter: 'housefarm-is-null' })
-      .pipe(
-        filter((mayBeOk: HttpResponse<ILocation[]>) => mayBeOk.ok),
-        map((response: HttpResponse<ILocation[]>) => response.body)
-      )
-      .subscribe(
-        (res: ILocation[]) => {
-          if (!this.editForm.get('location').value || !this.editForm.get('location').value.id) {
-            this.locations = res;
-          } else {
-            this.locationService
-              .find(this.editForm.get('location').value.id)
-              .pipe(
-                filter((subResMayBeOk: HttpResponse<ILocation>) => subResMayBeOk.ok),
-                map((subResponse: HttpResponse<ILocation>) => subResponse.body)
-              )
-              .subscribe(
-                (subRes: ILocation) => (this.locations = [subRes].concat(res)),
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-
     this.accountService.identity().then(account => {
       this.currentAccount = account;
     });
@@ -84,7 +60,11 @@ export class HouseFarmUpdateComponent implements OnInit {
       hasLicense: houseFarm.hasLicense,
       dateFounded: houseFarm.dateFounded,
       contactNumber: houseFarm.contactNumber,
-      location: houseFarm.location,
+      streetAddress: houseFarm.streetAddress,
+      postalCode: houseFarm.postalCode,
+      city: houseFarm.city,
+      province: houseFarm.province,
+      country: houseFarm.country,
       user: this.currentAccount
     });
   }
@@ -111,19 +91,24 @@ export class HouseFarmUpdateComponent implements OnInit {
       hasLicense: this.editForm.get(['hasLicense']).value,
       dateFounded: this.editForm.get(['dateFounded']).value,
       contactNumber: this.editForm.get(['contactNumber']).value,
-      location: this.editForm.get(['location']).value,
+      streetAddress: this.editForm.get(['streetAddress']).value,
+      postalCode: this.editForm.get(['postalCode']).value,
+      city: this.editForm.get(['city']).value,
+      province: this.editForm.get(['province']).value,
+      country: this.editForm.get(['country']).value,
       user: this.currentAccount
     };
     return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IHouseFarm>>) {
-    result.subscribe((res: HttpResponse<IHouseFarm>) => this.onSaveSuccess(res), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe((res: HttpResponse<IHouseFarm>) => this.onSaveSuccess(res),
+      (res: HttpErrorResponse) => this.onSaveError());
   }
 
   protected onSaveSuccess(res: HttpResponse<IHouseFarm>) {
     this.isSaving = false;
-    this.router.navigate(['/house-farm/', res.body.id, 'view'])
+    this.router.navigate(['/house-farm/', res.body.id, 'view']);
   }
 
   protected onSaveError() {

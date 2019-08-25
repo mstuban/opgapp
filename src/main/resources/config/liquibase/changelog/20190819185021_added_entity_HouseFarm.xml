@@ -30,9 +30,23 @@
             <column name="contact_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="location_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_house_farm_location_id" />
+
+            <column name="street_address" type="varchar(255)">
+                <constraints nullable="true" />
             </column>
+
+            <column name="city" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="postal_code" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="province" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="user_id" type="bigint">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_house_farm_user_id" />
             </column>
@@ -59,7 +73,10 @@
             <column name="has_license" type="boolean"/>
             <column name="date_founded" type="date"/>
             <column name="contact_number" type="string"/>
-            <column name="location_id" type="numeric"/>
+            <column name="street_address" type="string"/>
+            <column name="city" type="string"/>
+            <column name="postal_code" type="string"/>
+            <column name="province" type="string"/>
             <column name="user_id" type="numeric"/>
         </loadData>
     </changeSet>

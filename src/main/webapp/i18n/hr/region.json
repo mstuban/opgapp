@@ -14,7 +14,7 @@
         "question": "Are you sure you want to delete Region {{ id }}?"
       },
       "detail": {
-        "title": "Region"
+        "title": "Županija"
       },
       "regionName": "Region Name"
     }

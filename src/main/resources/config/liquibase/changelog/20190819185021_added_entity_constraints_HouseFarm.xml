@@ -7,12 +7,6 @@
         Added the constraints for entity HouseFarm.
     -->
     <changeSet id="20190819185021-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="location_id"
-                                 baseTableName="house_farm"
-                                 constraintName="fk_house_farm_location_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="location"/>
 
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="house_farm"

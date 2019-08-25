@@ -2,6 +2,16 @@
     <div class="col-12">
         <div *ngIf="product">
             <h2><span>{{product.name}}</span></h2>
+            <span>
+            <button type="submit"
+                    [routerLink]="['/', 'house-farm']"
+                    replaceUrl="true"
+                    queryParamsHandling="merge"
+                    class="btn btn-success btn-sm">
+                <fa-icon [icon]="'plus'"></fa-icon>
+                <span jhiTranslate="opgappApp.product.order"></span>
+            </button>
+                </span>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">

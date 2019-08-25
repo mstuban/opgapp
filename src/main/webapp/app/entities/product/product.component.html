@@ -12,20 +12,17 @@
                 <th class="form-group">
                     <div class="input-group">
                         <input type="text" class="form-control" #nameFilterInput
+                               placeholder="{{'opgappApp.product.name' | translate}}"
                                (keyup)="filterProducts()" value=""/>
                     </div>
                 </th>
                 <th></th>
                 <th></th>
-                <!--<th class="form-group">
-                    <input type="checkbox" class="form-control" name="isAvailableInput" id="field_isAvailableInput"
-                           [(ngModel)]="isAvailableInput"
-                           (change)="filterProducts()"/>
-                </th>-->
                 <th class="form-group">
                     <select class="form-control" name="productType" id="field_productType" #productTypeInput
                             (change)="filterProducts()" value="">
-                        <option value="" [selected]="true"></option>
+                        <option value="" disabled [selected]="true" hidden>{{'opgappApp.ProductType.selectAValue'
+                            | translate}}</option>
                         <option value="MEAT">{{'opgappApp.ProductType.MEAT' | translate}}</option>
                         <option value="CHEESE">{{'opgappApp.ProductType.CHEESE' | translate}}</option>
                         <option value="DAIRY">{{'opgappApp.ProductType.DAIRY' | translate}}</option>

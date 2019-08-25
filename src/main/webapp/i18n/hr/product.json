@@ -7,7 +7,8 @@
         "createOrEditLabel": "Dodaj ili uredi proizvod",
         "notFound": "Nema proizvoda",
         "products": "proizvoda",
-        "deleteFilters": "Izbriši filtere"
+        "deleteFilters": "Izbriši filtere",
+        "order": "Naruči"
       },
       "created": "Novi proizvod je keiran s identifikatorom {{ param }}",
       "updated": "Proizvod je promijenjen s identifikatorom {{ param }}",

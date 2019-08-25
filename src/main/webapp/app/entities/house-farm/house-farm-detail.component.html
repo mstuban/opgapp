@@ -32,11 +32,17 @@
                 <dd>
                     <span>{{houseFarm.contactNumber}}</span>
                 </dd>
-                <dt>Location</span></dt>
+                <dt><span jhiTranslate="opgappApp.houseFarm.location">Location</span></dt>
                 <dd>
-                    <div *ngIf="houseFarm.location">
-                        {{houseFarm.location.streetAddress}}, {{houseFarm.location?.postalCode}},
-                        {{houseFarm.location?.city}}
+                    <div *ngIf="houseFarm">
+                        {{houseFarm.streetAddress}}, {{houseFarm.postalCode}},
+                        {{houseFarm.city}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="opgappApp.region.detail.title">Location</span></dt>
+                <dd>
+                    <div>
+                        {{houseFarm.province}}
                     </div>
                 </dd>
             </dl>
@@ -73,7 +79,7 @@
                         </td>
                         <td jhiTranslate="{{'opgappApp.ProductType.' + product.productType}}">{{product.productType}}
                         </td>
-                        <td class="text-right" *jhiHasAnyAuthority="'ROLE_OWNER'">
+                        <td class="text-right">
                             <div class="btn-group">
                                 <button type="submit"
                                         [routerLink]="['/product', product.id, 'view' ]"
@@ -82,22 +88,24 @@
                                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                                 </button>
 
-                                <span *ngIf="houseFarm.user && currentAccount">
-                                    <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
-                                            [routerLink]="['/product', houseFarm.id, product.id, 'edit']"
-                                            class="btn btn-primary btn-sm">
-                                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                                    </button>
-                                    <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
-                                            [routerLink]="['/', 'product', { outlets: { popup: product.id + '/delete'} }]"
-                                            replaceUrl="true"
-                                            queryParamsHandling="merge"
-                                            class="btn btn-danger btn-sm">
-                                        <fa-icon [icon]="'times'"></fa-icon>
-                                        <span class="d-none d-md-inline"
-                                              jhiTranslate="entity.action.delete">Delete</span>
-                                    </button>
+                                <span *jhiHasAnyAuthority="'ROLE_OWNER'">
+                                    <span *ngIf="houseFarm.user && currentAccount">
+                                        <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                                                [routerLink]="['/product', houseFarm.id, product.id, 'edit']"
+                                                class="btn btn-primary btn-sm">
+                                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                        </button>
+                                        <button type="submit" *ngIf="houseFarm.user.id === currentAccount.id"
+                                                [routerLink]="['/', 'product', { outlets: { popup: product.id + '/delete'} }]"
+                                                replaceUrl="true"
+                                                queryParamsHandling="merge"
+                                                class="btn btn-danger btn-sm">
+                                            <fa-icon [icon]="'times'"></fa-icon>
+                                            <span class="d-none d-md-inline"
+                                                  jhiTranslate="entity.action.delete">Delete</span>
+                                        </button>
+                                    </span>
                                 </span>
                             </div>
                         </td>

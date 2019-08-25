@@ -38,9 +38,17 @@ public class HouseFarm implements Serializable {
     @Column(name = "contact_number")
     private String contactNumber;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Location location;
+    @Column(name = "street_address")
+    private String streetAddress;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "postal_code")
+    private String postalCode;
+
+    @Column(name = "province")
+    private String province;
 
     @JsonIgnoreProperties(value = {"houseFarm"}, allowSetters = true)
     @OneToMany(mappedBy = "houseFarm", orphanRemoval = true, fetch = FetchType.EAGER)
@@ -115,19 +123,6 @@ public class HouseFarm implements Serializable {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public HouseFarm location(Location location) {
-        this.location = location;
-        return this;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
     public Set<Product> getProducts() {
@@ -214,5 +209,41 @@ public class HouseFarm implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Boolean getHasLicense() {
+        return hasLicense;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }
