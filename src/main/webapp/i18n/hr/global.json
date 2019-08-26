@@ -58,7 +58,7 @@
         "authenticated": {
           "prefix": "Ako želite ",
           "link": "prijavu",
-          "suffix": ", možete pokušati s već kreiranim računima:<br/>- Administrator (login=\"admin\" i lozinka=\"admin\") <br/>- User (login=\"user\" i lozinka=\"user\")."
+          "suffix": ", možete pokušati s već kreiranim računima:<br/>- OPG owner (login=\"skoromir\" i lozinka=\"secret\") <br/>- Buyer (login=\"buyer\" i lozinka=\"secret\")."
         },
         "register": {
           "noaccount": "Još nemate račun?",
