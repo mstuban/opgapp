@@ -28,11 +28,13 @@ public class ImageResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private static final String ENTITY_NAME = "image";
+
     @Autowired
     private ImageRepository imageRepository;
 
     @PostMapping(value = "/images/uploadImage", consumes = "multipart/form-data")
-    public ResponseEntity<Image> uploadHouseFarmImage(@RequestBody MultipartFile image) throws IOException, URISyntaxException {
+    public ResponseEntity<Image> uploadImage(@RequestBody MultipartFile image) throws IOException, URISyntaxException {
 
         Image imageEntity = new Image(image.getBytes());
         Image result = imageRepository.save(imageEntity);

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import {JhiAlertService} from 'ng-jhipster';
@@ -27,11 +27,12 @@ export class ProductUpdateComponent implements OnInit {
   orders: IOrder[];
   currentAccount: any;
   image: any;
+  product: IProduct;
 
   editForm = this.fb.group({
     id: [],
     name: [],
-    imageUrl: [],
+    image: [],
     price: [],
     availableAmountInLiters: [],
     availableAmountInKilograms: [],
@@ -49,7 +50,8 @@ export class ProductUpdateComponent implements OnInit {
     protected orderService: OrderService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    protected router: Router
   ) {
   }
 
@@ -96,6 +98,7 @@ export class ProductUpdateComponent implements OnInit {
       isAvailable: product.isAvailable,
       productType: product.productType,
       houseFarm: product.houseFarm,
+      image: product.image,
       order: product.order
     });
   }
@@ -119,25 +122,24 @@ export class ProductUpdateComponent implements OnInit {
       ...new Product(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
-      imageUrl: this.editForm.get(['imageUrl']).value,
       price: this.editForm.get(['price']).value,
       availableAmountInLiters: this.editForm.get(['availableAmountInLiters']).value,
       availableAmountInKilograms: this.editForm.get(['availableAmountInKilograms']).value,
       isAvailable: this.editForm.get(['isAvailable']).value,
       productType: this.editForm.get(['productType']).value,
-      image: this.image,
+      image: this.image !== undefined ? this.image : this.product.image,
       houseFarm: this.houseFarm
     };
     return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProduct>>) {
-    result.subscribe((res: HttpResponse<IProduct>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe((res: HttpResponse<IProduct>) => this.onSaveSuccess(res), (res: HttpErrorResponse) => this.onSaveError());
   }
 
-  protected onSaveSuccess() {
+  protected onSaveSuccess(res: HttpResponse<IProduct>) {
     this.isSaving = false;
-    this.previousState();
+    this.router.navigate(['/product/', res.body.id, 'view']);
   }
 
   protected onSaveError() {

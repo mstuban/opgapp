@@ -16,19 +16,6 @@
                     <fa-icon icon="home" fixedWidth="true"></fa-icon>
                     <span jhiTranslate="home.findHouseFarms"></span>
                 </button>
-                <span *jhiHasAnyAuthority="'ROLE_OWNER'">
-                    <button type="button" *ngIf="!userAlreadyHasFarm" [routerLink]="['/house-farm/new']"
-                            class="btn btn-secondary btn-md gray-button">
-                        <fa-icon icon="plus" fixedWidth="true"></fa-icon>
-                        <span jhiTranslate="opgappApp.houseFarm.home.createLabel"></span>
-                    </button>
-                    <button type="button" *ngIf="userAlreadyHasFarm" [routerLink]="['/house-farm/', account.houseFarm.id,
-                     'view']"
-                            class="btn btn-secondary btn-md gray-button">
-                        <fa-icon icon="eye" fixedWidth="true"></fa-icon>
-                        <span jhiTranslate="home.myHouseFarm"></span>
-                    </button>
-                </span>
             </div>
 
             <div class="alert alert-warning" *ngSwitchCase="false">

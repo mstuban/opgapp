@@ -16,7 +16,6 @@ import {HouseFarmService} from "app/entities/house-farm";
 export class HomeComponent implements OnInit {
   account: any;
   modalRef: NgbModalRef;
-  userAlreadyHasFarm: boolean;
   houseFarms: IHouseFarm[];
 
   constructor(
@@ -28,7 +27,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   loadAll() {
-    this.userAlreadyHasFarm = false;
     this.houseFarmService
       .query()
       .pipe(
@@ -38,14 +36,6 @@ export class HomeComponent implements OnInit {
       .subscribe(
         (res: IHouseFarm[]) => {
           this.houseFarms = res;
-
-          this.houseFarms.forEach(houseFarm =>
-            {
-              if (houseFarm.user.id === this.account.id) {
-                this.userAlreadyHasFarm = true;
-              }
-            }
-          );
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );

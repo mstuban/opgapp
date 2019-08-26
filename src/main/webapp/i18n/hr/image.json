@@ -1,0 +1,12 @@
+{
+  "opgappApp": {
+    "image": {
+      "created": "Dodana je slika s identifikatorom {{ param }}",
+      "updated": "Promijenjena je slika s identifikatorom {{ param }}",
+      "deleted": "Izbrisana je slika s identifikatorom {{ param }}",
+      "detail": {
+        "title": "Slika"
+      }
+    }
+  }
+}

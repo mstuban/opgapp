@@ -35,6 +35,7 @@ export class HouseFarmUpdateComponent implements OnInit {
     province: [],
     country: []
   });
+   houseFarm: IHouseFarm;
 
   constructor(
     protected jhiAlertService: JhiAlertService,
@@ -49,6 +50,7 @@ export class HouseFarmUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ houseFarm }) => {
       this.updateForm(houseFarm);
+      this.houseFarm = houseFarm;
     });
     this.accountService.identity().then(account => {
       this.currentAccount = account;
@@ -56,6 +58,7 @@ export class HouseFarmUpdateComponent implements OnInit {
   }
 
   updateForm(houseFarm: IHouseFarm) {
+    debugger
     this.editForm.patchValue({
       id: houseFarm.id,
       name: houseFarm.name,
@@ -67,7 +70,7 @@ export class HouseFarmUpdateComponent implements OnInit {
       city: houseFarm.city,
       province: houseFarm.province,
       country: houseFarm.country,
-      image: this.image,
+      image: houseFarm.image,
       user: this.currentAccount
     });
   }
@@ -99,7 +102,7 @@ export class HouseFarmUpdateComponent implements OnInit {
       city: this.editForm.get(['city']).value,
       province: this.editForm.get(['province']).value,
       country: this.editForm.get(['country']).value,
-      image: this.image,
+      image: this.image !== undefined ? this.image : this.houseFarm.image,
       user: this.currentAccount
     };
     return entity;
