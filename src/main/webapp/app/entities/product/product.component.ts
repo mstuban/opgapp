@@ -16,7 +16,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   products: IProduct[];
   currentAccount: any;
   eventSubscriber: Subscription;
-  isAvailableInput: boolean = true;
   searchCriteria: any;
 
   @ViewChild("nameFilterInput", {static: false}) nameFilterInput: ElementRef;
@@ -82,7 +81,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   filterProducts() {
     this.searchCriteria = {
       'name.contains': this.nameFilterInput.nativeElement.value,
-      'isAvailable.equals': this.isAvailableInput,
       'productType.equals': this.productTypeInput.nativeElement.value
     };
     this.loadByCriteria();
