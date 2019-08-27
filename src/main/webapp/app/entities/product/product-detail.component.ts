@@ -1,12 +1,12 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 import {IProduct} from 'app/shared/model/product.model';
-import {AccountService} from "app/core";
-import {IRating} from "app/shared/model/rating.model";
-import {SessionStorageService} from "ngx-webstorage";
-import {EventService} from "app/core/event/event.service";
-import {JhiAlertService} from "ng-jhipster";
+import {AccountService} from 'app/core';
+import {IRating} from 'app/shared/model/rating.model';
+import {SessionStorageService} from 'ngx-webstorage';
+import {EventService} from 'app/core/event/event.service';
+import {JhiAlertService} from 'ng-jhipster';
 
 @Component({
   selector: 'jhi-product-detail',
@@ -42,7 +42,7 @@ export class ProductDetailComponent implements OnInit {
       this.currentAccount = account;
     });
 
-    this.cartProducts = this.sessionStorage.retrieve("cartProducts");
+    this.cartProducts = this.sessionStorage.retrieve('cartProducts');
 
     if (this.cartProducts == null) {
       this.cartProducts = [];
@@ -50,16 +50,16 @@ export class ProductDetailComponent implements OnInit {
 
     this.eventService.loginCompleted.subscribe(
       () => {
-        this.sessionStorage.clear("cartProducts");
-        this.sessionStorage.store("cartProducts", []);
+        this.sessionStorage.clear('cartProducts');
+        this.sessionStorage.store('cartProducts', []);
         this.cartProducts = [];
       }
     );
 
     this.eventService.cartEmptied.subscribe(
       () => {
-        this.sessionStorage.clear("cartProducts");
-        this.sessionStorage.store("cartProducts", []);
+        this.sessionStorage.clear('cartProducts');
+        this.sessionStorage.store('cartProducts', []);
         this.cartProducts = [];
       }
     );
@@ -71,7 +71,7 @@ export class ProductDetailComponent implements OnInit {
 
   addProductToCart() {
     let cartProducts: any[];
-    cartProducts  = this.sessionStorage.retrieve("cartProducts");
+    cartProducts  = this.sessionStorage.retrieve('cartProducts');
 
     if (cartProducts === null || cartProducts.length === 0) {
       cartProducts = [];
@@ -101,7 +101,7 @@ export class ProductDetailComponent implements OnInit {
       }
     }
 
-    this.sessionStorage.store("cartProducts", cartProducts);
+    this.sessionStorage.store('cartProducts', cartProducts);
     this.eventService.addItemToCart.emit();
   }
 }

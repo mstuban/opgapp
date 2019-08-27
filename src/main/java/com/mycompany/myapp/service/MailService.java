@@ -100,6 +100,8 @@ public class MailService {
         log.debug("Sending order email to '{}'", order.getProducts().get(0).getHouseFarm().getUser().getEmail());
         sendEmailFromTemplate(order.getProducts().get(0).getHouseFarm().getUser(),
             "mail/orderEmail", "email.order.title", order);
+        sendEmailFromTemplate(order.getUser(),
+            "mail/orderDetails", "email.order.title", order);
     }
 
     @Async

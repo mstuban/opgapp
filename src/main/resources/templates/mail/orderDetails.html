@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{email.order.title}">JHipster creation</title>
+    <title th:text="#{email.orderDetails.title}">JHipster creation</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
 </head>
 <body>
-<p th:text="#{email.order.greeting(${user.login})}">
+<p th:text="#{email.orderDetails.greeting(${user.login})}">
     Dear
 </p>
-<p th:text="#{email.order.text1(${order.products[0].houseFarm.name})}">
+<p th:text="#{email.orderDetails.text1(${order.products[0].houseFarm.name})}">
     Your JHipster account has been created, please click on the URL below to access it:
 </p>
-<span th:text="#{email.order.text3}"></span><span th:text="${order.user.firstName + ' ' + order.user.lastName + ' (' + order.user.email + ')'}"></span>
 
 <p>
 <table>
     <th:block th:each="product : ${order.products}">
         <th>
-           Naziv proizvoda
+            Naziv proizvoda
         </th>
         <th>
             Cijena
@@ -40,7 +39,7 @@
 </table>
 </p>
 <p>
-    <span th:text="#{email.order.text2}">Regards, </span>
+    <span th:text="#{email.orderDetails.text2}">Regards, </span>
     <br/>
     <em th:text="#{email.signature}">JHipster.</em>
 </p>

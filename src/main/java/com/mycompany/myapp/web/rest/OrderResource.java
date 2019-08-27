@@ -65,14 +65,13 @@ public class OrderResource {
      * {@code POST  /orders} : Create a new order.
      *
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new order, or with status {@code 400 (Bad Request)} if the order has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/orders/sendOrderMail")
-    public ResponseEntity<Order> sendOrderMail(@RequestBody Order order) throws URISyntaxException {
+    public ResponseEntity<Order> sendOrderMail(@RequestBody Order order) {
 
         mailService.sendOrderMail(order);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, order.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, ""))
             .body(order);
     }
 
