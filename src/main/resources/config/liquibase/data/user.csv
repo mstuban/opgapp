@@ -1,7 +1,7 @@
 id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;created_by;last_modified_by
 1;system;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;System;System;system@localhost;;true;hr;system;system
 2;anonymous;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Anonymous;User;anonymous@localhost;;true;hr;system;system
-3;stubanmar;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Marko;Stuban;marko.stuban@mail.com;;true;hr;system;system
+3;stubanmar;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Marko;Stuban;stuban.marko@gmail.com;;true;hr;system;system
 4;bundalomir;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Miro;Bundalo;miro.bundalo@mail.com;;true;hr;system;system
 5;buljansim;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Sime;Buljan;sime.buljan@mail.com;;true;hr;system;system
 6;zubcicgian;$2a$10$J3.VbnX8NLd4uOQ406uRuepIijKlAn08dXY0EO30TmVxmYgnjwBHq;Gianfranco;Zubcic;gianfranco.zubcic@mail.com;;true;hr;system;system
