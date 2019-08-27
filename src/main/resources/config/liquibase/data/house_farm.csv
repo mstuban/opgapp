@@ -1,7 +1,7 @@
 id;name;has_license;date_founded;street_address;postal_code;city;province;contact_number;user_id
-1;OPG Mraclin;true;2013-07-19;Brace Radica 120 C;10410;Velika Gorica;Zagreb;0981789833;3
-2;OPG Miro i sinovi;true;1989-07-19;Brace Radica 120 C;10410;Velika Gorica;Zagreb;0982324234;4
-3;OPG Šime;true;1975-07-19;Brace Radica 120 C;10410;Velika Gorica;Zagreb;0953454334;5
-4;OPG Šjor Gianfranco;true;2010-07-19;Brace Radica 120 C;10410;Velika Gorica;Zagreb;0934444343;6
-5;OPG Obitelj Budinščak;true;2005-07-19;Brace Radica 120 C;10410;Velika Gorica;Zagreb;094734443;7
-6;OPG Škoro;true;2004-07-19;Brace Radica 120 C;10410;Velika Gorica;Zagreb;0953343334;8
+1;OPG Mraclin;true;2013-07-19;Brace Radica 120 C;10410;Velika Gorica;Zagrebačka;0981789833;3
+2;OPG Miro i sinovi;true;1989-07-19;Domovinska ulica;10410;Sinj;Ličko-senjska;0982324234;4
+3;OPG Šime;true;1975-07-19;Velika ulica;10410;Hvar;Splitsko-dalmatinska;0953454334;5
+4;OPG Šjor Gianfranco;true;2010-07-19;Brace Radica 120 B;10410;Rijeka;Istarska;0934444343;6
+5;OPG Obitelj Budinščak;true;2005-07-19;Brace Radica 120 A;10410;Krapina;Krapinsko-zagorska;094734443;7
+6;OPG Škoro;true;2004-07-19;Ulica Franje Tuđmana;10410;Osijek;Osječko-baranjska;0953343334;8
