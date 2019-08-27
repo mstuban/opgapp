@@ -42,7 +42,10 @@ import {
   faHome,
   faSeedling,
   faBreadSlice,
-  faCheckSquare
+  faCheckSquare,
+  faShoppingCart,
+  faArrowRight,
+  faCartPlus
 } from '@fortawesome/free-solid-svg-icons';
 import {faStar} from "@fortawesome/free-solid-svg-icons/faStar";
 
@@ -56,6 +59,7 @@ library.add(faEye);
 library.add(faBan);
 library.add(faTimes);
 library.add(faArrowLeft);
+library.add(faArrowRight);
 library.add(faSave);
 library.add(faPlus);
 library.add(faPencilAlt);
@@ -85,5 +89,7 @@ library.add(faSeedling);
 library.add(faBreadSlice);
 library.add(faCheckSquare);
 library.add(faStar);
+library.add(faShoppingCart);
+library.add(faCartPlus);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

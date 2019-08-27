@@ -4,12 +4,12 @@
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
-                    [translateValues]="{username: account.login}"> You are logged in as user "{{account.login}}". </span>
+                      [translateValues]="{username: account.login}"> You are logged in as user "{{account.login}}". </span>
             </div>
             <div class="btn-group" role="group" *ngIf="isAuthenticated()">
                 <button type="button" [routerLink]="['/product']"
                         class="btn btn-secondary btn-md gray-button">
-                    <fa-icon icon="seedling" fixedWidth="true"></fa-icon>
+                    <fa-icon icon="bread-slice" fixedWidth="true"></fa-icon>
                     <span jhiTranslate="home.findProducts"></span>
                 </button>
                 <button type="button" [routerLink]="['/house-farm']" class="btn btn-secondary btn-md gray-button">

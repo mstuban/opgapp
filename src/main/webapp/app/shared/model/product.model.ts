@@ -33,6 +33,7 @@ export interface IProduct {
   image?: IImage;
   houseFarm?: IHouseFarm;
   order?: IOrder;
+  amount?: number;
 }
 
 export class Product implements IProduct {
@@ -48,7 +49,8 @@ export class Product implements IProduct {
     public ratings?: IRating[],
     public image?: IImage,
     public houseFarm?: IHouseFarm,
-    public order?: IOrder
+    public order?: IOrder,
+    public amount?: number
   ) {
     this.isAvailable = this.isAvailable || false;
   }

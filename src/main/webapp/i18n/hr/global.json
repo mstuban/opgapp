@@ -138,5 +138,15 @@
     "idexists": "Nov {{ entityName }} ne može već imati ID",
     "idnull": "Krivi ID"
   },
-  "footer": "This is your footer"
+  "footer": "This is your footer",
+  "addToCart": "Dodaj u košaricu",
+  "cart": "Košarica",
+  "cartEmpty": "Vaša košarica je prazna!",
+  "checkout": "Idi na narudžbu",
+  "addItemsToCart": "Vaša košarica je prazna! Dodajte proizvode u nju!",
+  "sendOrderRequest": "Pošalji zahtjev za narudžbu",
+  "yourOrderFor": "Vaša narudžba za ",
+  "onlyFromSameHouseFarm": "U košaricu možete dodavati proizvode samo za jedan OPG!",
+  "onlyOneProduct": "U košaricu možete dodati samo jedan proizvod ovog tipa!",
+  "orderSent": "Vaša narudžba je poslana!"
 }

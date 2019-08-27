@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.OpgappApp;
 import com.mycompany.myapp.domain.Order;
 import com.mycompany.myapp.repository.OrderRepository;
+import com.mycompany.myapp.service.MailService;
 import com.mycompany.myapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -52,6 +53,9 @@ public class OrderResourceIT {
     private OrderRepository orderRepository;
 
     @Autowired
+    private MailService mailService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -73,7 +77,7 @@ public class OrderResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final OrderResource orderResource = new OrderResource(orderRepository);
+        final OrderResource orderResource = new OrderResource(orderRepository, mailService);
         this.restOrderMockMvc = MockMvcBuilders.standaloneSetup(orderResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

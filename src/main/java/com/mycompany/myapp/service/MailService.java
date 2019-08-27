@@ -1,5 +1,6 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.domain.Order;
 import com.mycompany.myapp.domain.User;
 
 import io.github.jhipster.config.JHipsterProperties;
@@ -74,11 +75,15 @@ public class MailService {
     }
 
     @Async
-    public void sendEmailFromTemplate(User user, String templateName, String titleKey) {
+    public void sendEmailFromTemplate(User user, String templateName, String titleKey, Order order) {
         Locale locale = Locale.forLanguageTag("hr");
         Context context = new Context(locale);
         context.setVariable(USER, user);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        if (order != null) {
+            context.setVariable("totalPrice", order.getTotalPrice());
+            context.setVariable("order", order);
+        }
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
@@ -87,18 +92,25 @@ public class MailService {
     @Async
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
+        sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title",null);
+    }
+
+    @Async
+    public void sendOrderMail(Order order) {
+        log.debug("Sending order email to '{}'", order.getProducts().get(0).getHouseFarm().getUser().getEmail());
+        sendEmailFromTemplate(order.getProducts().get(0).getHouseFarm().getUser(),
+            "mail/orderEmail", "email.order.title", order);
     }
 
     @Async
     public void sendCreationEmail(User user) {
         log.debug("Sending creation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/creationEmail", "email.activation.title");
+        sendEmailFromTemplate(user, "mail/creationEmail", "email.activation.title", null);
     }
 
     @Async
     public void sendPasswordResetMail(User user) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
+        sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title", null);
     }
 }

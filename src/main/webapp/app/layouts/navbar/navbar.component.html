@@ -94,6 +94,49 @@
                     </li>
                 </ul>
             </li>
+            <li ngbDropdown class="nav-item dropdown pointer" *ngIf="isAuthenticated()"
+                #cartDropdown="ngbDropdown" [autoClose]="false">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="cartnavBarDropdown">
+                    <span>
+                        <fa-icon [icon]="'shopping-cart'"></fa-icon>
+                        <span *ngIf="cartProducts !== null">
+                            <span jhiTranslate="cart">Cart</span> ({{(cartProducts.length)}})
+                        </span>
+                    </span>
+                </a>
+                <ul *ngIf="currentAccount" class="cart-menu" ngbDropdownMenu
+                    aria-labelledby="cartnavBarDropdown">
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let product of cartProducts">
+                            <span *ngIf="product">
+                                <span class="dropdown-item float-left" [jhiActiveMenu]="language" href="javascript:void(0);"
+                                ><b>{{product.name}}</b>
+                                <button class="float-right btn-danger btn-sm" *ngIf="product"
+                                             (click)="removeFromCart(product.id);">
+                                    <fa-icon icon="times"></fa-icon>
+                                </button>
+                                <span class="float-right" style="margin-right: 1rem;">{{product.price}} kn</span>
+                                </span>
+                            </span>
+                        </li>
+                        <li class="list-group-item" *ngIf="cartProducts.length === 0">
+                            <span jhiTranslate="cartEmpty"></span>
+                            <button class="btn-success btn-sm float-right" type="button" (click)="cartDropdown.close()"
+                                    [routerLink]="['/product']">
+                                <fa-icon icon="bread-slice"></fa-icon>
+                                <span jhiTranslate="opgappApp.product.home.title"></span>
+                            </button>
+                        </li>
+                    </ul>
+                    <hr/>
+                    <button *ngIf="cartProducts.length > 0" type="button" (click)="cartDropdown.close()"
+                            [routerLink]="['/order']"
+                            class="btn btn-success btn-md float-right gray-button checkout-button">
+                        <fa-icon icon="arrow-right" fixedWidth="true"></fa-icon>
+                        <span jhiTranslate="checkout">Checkout</span>
+                    </button>
+                </ul>
+            </li>
             <li ngbDropdown class="nav-item dropdown pointer" placement="bottom-right" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">
@@ -140,3 +183,13 @@
         </ul>
     </div>
 </nav>
+
+<style>
+    .cart-menu {
+        min-width: 20rem;
+    }
+
+    .checkout-button {
+        margin: 1rem;
+    }
+</style>

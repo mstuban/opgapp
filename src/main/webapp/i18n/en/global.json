@@ -140,5 +140,15 @@
     "idexists": "A new {{ entityName }} cannot already have an ID",
     "idnull": "Invalid ID"
   },
-  "footer": "This is your footer"
+  "footer": "This is your footer",
+  "addToCart": "Add to cart",
+  "cart": "Cart",
+  "cartEmpty": "Your cart is empty!",
+  "checkout": "Checkout",
+  "addItemsToCart": "Your cart is empty! Add some products!",
+  "sendOrderRequest": "Send order request",
+  "yourOrderFor": "Your order for",
+  "onlyFromSameHouseFarm": "You can only add products from one House farm!",
+  "onlyOneProduct": "You can only add one product of this type!",
+  "orderSent": "Your order was sent!"
 }

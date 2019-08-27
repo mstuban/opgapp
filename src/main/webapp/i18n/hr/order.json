@@ -18,7 +18,7 @@
       },
       "number": "Number",
       "dateSubmitted": "Date Submitted",
-      "totalPrice": "Total Price",
+      "totalPrice": "Ukupna cijena narudžbe",
       "orderStatus": "Order Status",
       "product": "Product",
       "houseFarm": "House Farm"

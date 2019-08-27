@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { IProduct } from 'app/shared/model/product.model';
 import { IHouseFarm } from 'app/shared/model/house-farm.model';
+import {IUser} from "app/core";
 
 export const enum OrderStatus {
   IN_CREATION = 'IN_CREATION',
@@ -16,6 +17,7 @@ export interface IOrder {
   orderStatus?: OrderStatus;
   products?: IProduct[];
   houseFarm?: IHouseFarm;
+  user?: any;
 }
 
 export class Order implements IOrder {
@@ -26,6 +28,7 @@ export class Order implements IOrder {
     public totalPrice?: number,
     public orderStatus?: OrderStatus,
     public products?: IProduct[],
-    public houseFarm?: IHouseFarm
+    public houseFarm?: IHouseFarm,
+    public user?: any
   ) {}
 }

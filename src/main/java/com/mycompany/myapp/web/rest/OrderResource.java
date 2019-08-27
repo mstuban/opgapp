@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Order;
 import com.mycompany.myapp.repository.OrderRepository;
+import com.mycompany.myapp.service.MailService;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -34,8 +35,11 @@ public class OrderResource {
 
     private final OrderRepository orderRepository;
 
-    public OrderResource(OrderRepository orderRepository) {
+    private final MailService mailService;
+
+    public OrderResource(OrderRepository orderRepository, MailService mailService) {
         this.orderRepository = orderRepository;
+        this.mailService = mailService;
     }
 
     /**
@@ -55,6 +59,21 @@ public class OrderResource {
         return ResponseEntity.created(new URI("/api/orders/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    /**
+     * {@code POST  /orders} : Create a new order.
+     *
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new order, or with status {@code 400 (Bad Request)} if the order has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/orders/sendOrderMail")
+    public ResponseEntity<Order> sendOrderMail(@RequestBody Order order) throws URISyntaxException {
+
+        mailService.sendOrderMail(order);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, order.getId().toString()))
+            .body(order);
     }
 
     /**

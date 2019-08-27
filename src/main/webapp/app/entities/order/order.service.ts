@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IOrder } from 'app/shared/model/order.model';
+import {IProduct} from "app/shared/model/product.model";
 
 type EntityResponseType = HttpResponse<IOrder>;
 type EntityArrayResponseType = HttpResponse<IOrder[]>;
@@ -15,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IOrder[]>;
 @Injectable({ providedIn: 'root' })
 export class OrderService {
   public resourceUrl = SERVER_API_URL + 'api/orders';
+  public sendOrderMailUrl = SERVER_API_URL + 'api/orders/sendOrderMail';
 
   constructor(protected http: HttpClient) {}
 
@@ -47,6 +49,11 @@ export class OrderService {
 
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  sendOrderMail(order: IOrder): Observable<EntityResponseType> {
+    return this.http.post<IOrder>(`${this.sendOrderMailUrl}`, order,{ observe: 'response' })
+    .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   protected convertDateFromClient(order: IOrder): IOrder {

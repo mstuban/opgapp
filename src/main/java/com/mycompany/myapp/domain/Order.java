@@ -1,16 +1,15 @@
 package com.mycompany.myapp.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mycompany.myapp.domain.enumeration.OrderStatus;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-
-import com.mycompany.myapp.domain.enumeration.OrderStatus;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Order.
@@ -40,13 +39,18 @@ public class Order implements Serializable {
     private OrderStatus orderStatus;
 
     @JsonIgnoreProperties(value = "order", allowSetters = true)
+    @JsonProperty("products")
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Product> products = new HashSet<>();
+    private List<Product> products = new ArrayList<>();
 
     @ManyToOne
     @JsonIgnoreProperties("orders")
     private HouseFarm houseFarm;
+
+    @JsonProperty("user")
+    @Transient
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -109,11 +113,11 @@ public class Order implements Serializable {
         this.orderStatus = orderStatus;
     }
 
-    public Set<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public Order products(Set<Product> products) {
+    public Order products(List<Product> products) {
         this.products = products;
         return this;
     }
@@ -130,7 +134,7 @@ public class Order implements Serializable {
         return this;
     }
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
@@ -173,5 +177,13 @@ public class Order implements Serializable {
             ", totalPrice=" + getTotalPrice() +
             ", orderStatus='" + getOrderStatus() + "'" +
             "}";
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

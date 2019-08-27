@@ -13,6 +13,7 @@ import {IOrder} from 'app/shared/model/order.model';
 import {OrderService} from 'app/entities/order';
 import {AccountService} from 'app/core';
 import {SERVER_API_URL} from "app/app.constants";
+import {SessionStorageService} from "ngx-webstorage";
 
 @Component({
   selector: 'jhi-product-update',
@@ -49,6 +50,7 @@ export class ProductUpdateComponent implements OnInit {
     protected accountService: AccountService,
     protected orderService: OrderService,
     protected activatedRoute: ActivatedRoute,
+    private sessionStorage: SessionStorageService,
     private fb: FormBuilder,
     protected route: ActivatedRoute,
     protected router: Router
@@ -85,6 +87,8 @@ export class ProductUpdateComponent implements OnInit {
         )
         .subscribe((res: IHouseFarm) => (this.houseFarm = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
+
+    sessionStorage.getItem("cartProducts");
   }
 
   updateForm(product: IProduct) {
@@ -127,7 +131,7 @@ export class ProductUpdateComponent implements OnInit {
       availableAmountInKilograms: this.editForm.get(['availableAmountInKilograms']).value,
       isAvailable: this.editForm.get(['isAvailable']).value,
       productType: this.editForm.get(['productType']).value,
-      image: this.image !== undefined ? this.image : this.product.image,
+      image: this.getImage(),
       houseFarm: this.houseFarm
     };
     return entity;
@@ -160,5 +164,19 @@ export class ProductUpdateComponent implements OnInit {
 
   onUploadFinished(event) {
     this.image = event.serverResponse.response.body;
+  }
+
+  private getImage() {
+    if (this.image !== undefined) {
+      return this.image;
+    }
+    else {
+      if (this.product) {
+        return this.product.image;
+      }
+      else {
+        return null;
+      }
+    }
   }
 }
