@@ -16,14 +16,14 @@
 
 <p>
 <table>
-    <th:block th:each="product : ${order.products}">
+    <th:block>
         <th>
            Naziv proizvoda
         </th>
         <th>
             Cijena
         </th>
-        <tr>
+        <tr th:each="product : ${order.products}">
             <td th:text="${product.name}">...</td>
             <td th:text="${product.price + ' kn'}">...</td>
         </tr>
